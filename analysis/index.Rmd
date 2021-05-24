@@ -8,4 +8,14 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+$~$
+
+This website presents the R code required to run the analysis for Experiments 1-3 (see Empirical analysis), as well as the code to build and run the population genetic model included in the currently in development manuscript: _Sexual selection and the population genetics of a selfish gene_.
+
+$~$
+
+## [Empirical analysis](Empirical_analysis.html)
+
+$~$
+
+## [Population genetic model](Population_genetic_model.html)
