@@ -1,17 +1,24 @@
-name: "SD_sexual_selection"
+name: Sexual selection & the population genetics of a selfish gene
 output_dir: ../docs
 navbar:
-  title: "SD_sexual_selection"
+  title: Sexual selection & the population genetics of a selfish gene
   left:
   - text: Home
     href: index.html
-  - text: About
-    href: about.html
+  - text: Empirical analysis
+    href: Empirical_analysis.html
+  - text: Population genetic model
+    href: Population_genetic_model.html
   - text: License
     href: license.html
+  right:
+  - icon: fa-github
+    text: Source code
+    href: https://github.com/tomkeaney/SD_sexual_selection
 output:
   workflowr::wflow_html:
     toc: yes
     toc_float: yes
-    theme: cosmo
+    theme: simplex
     highlight: textmate
+    code_folding: hide
