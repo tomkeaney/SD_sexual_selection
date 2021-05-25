@@ -14,11 +14,9 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE, cache = FALSE, warning = FALSE, message = FALSE, fig.align = "center")
 ```
 
-Click **[here](https://tomkeaney.github.io/SD_sexual_selection_wflowr/)** to view the HTML report, which serves as online supplementary material for the associated manuscript (DOI here if accepted...), submitted to _Proceedings of the Royal Society B_. The report is split into two parts. The first documents our empirical analysis, while the second provides an in-depth explanation for how we coded our population genetic model. Together, the report includes all supplementary figures and tables, the R script required to produce the analysis, figures and tables, and the raw data.
+Click **[here](https://tomkeaney.github.io/SD_sexual_selection/)** to view the HTML report, which serves as online supplementary material for the associated manuscript (DOI here if accepted...), submitted to _Proceedings of the Royal Society B_. The report is split into two parts. The first documents our empirical analysis, while the second provides an in-depth explanation for how we coded our population genetic model. Together, the report includes all supplementary figures and tables, the R script required to produce the analysis, figures and tables, and the raw data.
 
-Our data has also been desposited in the Dryad database **[here](...)** (this will be supplied if accepted).
-
-In an attempt to future proof the availability of our supplementary material, we also include Table S1-12 and Figures S1-8 in this document.
+In an attempt to future proof the availability of our supplementary material, we also include Table S1-12 and Figures S1-8 in this document. Additionally, our data will also be deposited in the Dryad database **[here](...)** (this link will be supplied if the manuscript is accepted).
 
 ```{r, include=FALSE}
 library(png) # to load images
@@ -32,6 +30,7 @@ library(kableExtra) # for scrolling tables
 library(lubridate) # working with times and durations
 library(rcartocolor) # for nice colour palettes
 library(patchwork) # for creating figures with multiple panels
+library(stickylabeller) # for adding annotations to facets
 
 ```
 
@@ -40,7 +39,7 @@ library(patchwork) # for creating figures with multiple panels
 img <- readPNG("SD_crossing_scheme.png")
  grid.raster(img)
 ```
-**Figure S1.** Crossing scheme used to standardise the genetic background across the _SD-5/+_, _SD-72/+_, _SD-Mad/+_ and _SD+/+_ lines. The _SD+/+_ line was created in identical fashion except that we subsituted the  _SD_ bearing chromosome with chromosome 2 from the _w^1118^_ isogenic line. Note that at step four there are three possible options 1) the leftmost genotype can be backcrossed to maintain it in the laboratory, 2) the leftmost genotype can be crossed to a _bw_ stock to produce the experimental flies used in Experiment 1 or 3) the leftmost genotype can be crossed to _w^1118^_ to create the experimental flies used in Experiments 2 and 3.  
+**Figure S1.** Crossing scheme used to standardise the genetic background across the _SD-5/+_, _SD-72/+_, _SD-Mad/+_ and _SD+/+_ lines. The _SD+/+_ line was created in identical fashion except that we substituted the  _SD_ bearing chromosome with chromosome 2 from the _w^1118^_ isogenic line. Note that at step four there are three possible options 1) the leftmost genotype can be backcrossed to maintain it in the laboratory, 2) the leftmost genotype can be crossed to a _bw_ stock to produce the experimental flies used in Experiment 1 or 3) the leftmost genotype can be crossed to _w^1118^_ to create the experimental flies used in Experiments 2 and 3.  
 
 $~$
 
@@ -48,8 +47,8 @@ $~$
 
 ```{r, food recipe}
 
-tibble("Ingredients" = c("Soy flour", "Cornmeal", "Yeast", "Dextrose", "Agar", "Water", "Tegosept", "Acid mix (4ml orthophosphoric acid, 41ml propionic acid, 55mL water to make 100mls)"),
-       "Quantity" = c("20 g", "73 g", "35 g", "75 g", "6 g", "1000 mls", "17 mls", "14 mls")) %>% 
+tibble("Ingredients" = c("Soy flour", "Cornmeal", "Yeast", "Dextrose", "Agar", "Water", "Tegosept", "Acid mix (4 mL orthophosphoric acid, 41 mL propionic acid, 55 mL water to make 100 mL)"),
+       "Quantity" = c("20 g", "73 g", "35 g", "75 g", "6 g", "1000 mL", "17 mL", "14 mL")) %>% 
   pander(split.cell = 40, split.table = Inf)
 
 ```
@@ -1044,7 +1043,7 @@ post_diff_r <- post_r %>%
   
 ```
 
-**Table S9b**: the mean proportion of mates remating with _LH~m~^UBI^_ males for _SD/+_ males relative to the _w^1118^_ control males. A value of 2 means that remating was twice as likely when females intially mated with a _SD/+_ male compared with a _w^1118^_ male.
+**Table S9b**: the mean proportion of mates remating with _LH~m~^UBI^_ males for _SD/+_ males relative to the _w^1118^_ control males. A value of 2 means that remating was twice as likely when females initially mated with a _SD/+_ male compared with a _w^1118^_ male.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -1195,7 +1194,7 @@ post_diff_l <- post_l %>%
   
 ```
 
-**Table S10b**: the mean remating latency of females that initially mated with _SD/+_ males, relative to the _w^1118^_ control males. A value of 0.5 means that females remated in half the time of females that intially mated with a _w^1118^_ male.
+**Table S10b**: the mean remating latency of females that initially mated with _SD/+_ males, relative to the _w^1118^_ control males. A value of 0.5 means that females remated in half the time of females that initially mated with a _w^1118^_ male.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -1717,27 +1716,28 @@ empirical_estimates_0.5 <-
 # Make Figure S8
 
 (p2 <-
-    plotting_data %>% 
-    rename(`Wildtype P1` = normalP1,
-           `Relative risk of sperm competition` = remating_ratio,
-           `Relative mating success` = S_precop_WSD_male) %>% 
-    filter(k == 0.942, `Wildtype P1` == 0.5) %>% 
-    ggplot(aes(x = P1_actual, y = P2_actual, fill = 100 * prop_SD)) +
-    geom_blank() +
-    geom_raster() + 
-    stat_contour(aes(z = 100 * prop_SD), colour = "grey10", binwidth = 5) +
-    geom_point(data = empirical_estimates_0.5,
-               aes(x = P1_actual, y = P2_actual), 
-               pch = 21, fill = "#eb7f86", colour = "grey10", size = 2.5) +
-    facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
-               scales = "free", nrow = 3, labeller = "label_both", strip.position = c("top")) +
-    labs(x = "% offspring sired by SD/+ male in the first mating role (P1)", 
-         y = "% offspring sired by SD/+ male in the second mating role (P2)") +
-    scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
-    scale_x_continuous(expand = c(0, 0)) + 
-    scale_y_continuous(expand = c(0, 0)) +   # , labels = c(0, 0.25, 0.5, 0.75, 1)
-    theme(panel.border = element_rect(fill = NA, colour = "black", size = .8),
-          strip.background = element_rect(colour = "black", fill = "Aliceblue", size = .8)))
+  plotting_data %>% 
+  rename(`Wildtype P1` = normalP1,
+         `Relative risk of sperm competition` = remating_ratio,
+         `Relative mating success` = S_precop_WSD_male) %>% 
+  filter(k == 0.942, `Wildtype P1` == 0.5) %>% 
+  ggplot(aes(x = P1_actual, y = P2_actual, fill = 100 * prop_SD)) +
+  geom_blank() +
+  geom_raster() + 
+  stat_contour(aes(z = 100 * prop_SD), colour = "grey10", binwidth = 5) +
+  geom_point(data = empirical_estimates_0.5,
+             aes(x = P1_actual, y = P2_actual), 
+             pch = 21, fill = "#eb7f86", colour = "grey10", size = 2.5) +
+  facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
+               scales = "free", nrow = 3, strip.position = c("top"),
+               labeller = label_glue('({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}')) +
+  labs(x = "% offspring sired by SD/+ male in the first mating role (P1)", 
+       y = "% offspring sired by SD/+ male in the second mating role (P2)") +
+  scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
+  scale_x_continuous(expand = c(0, 0)) + 
+  scale_y_continuous(expand = c(0, 0)) +   # , labels = c(0, 0.25, 0.5, 0.75, 1)
+  theme(panel.border = element_rect(fill = NA, colour = "black", size = .8),
+        strip.background = element_rect(colour = "black", fill = "Aliceblue", size = .8)))
 ```
 
 **Figure S8**: Predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 5% contour lines). The plot is split into nine panels, with varying levels of _SD/+_ male mating success across the rows and increasing likelihoods of a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the columns. The three orange points in each panel represent males carrying the _SD-5_ (leftmost point), and _SD-72_ and _SD-Mad_ (rightmost points) alleles; these points show where males carrying these alleles fall in the figure’s parameter space, as measured in Experiment 2. In the parameter space presented here, $k$ = 0.944 (our highest estimated value), $P1_{normal}$ = 0.5, _SD_ homozygotes are non-viable and _SD_ heterozygotes suffer no fitness costs outside of mating success and sperm competition.
