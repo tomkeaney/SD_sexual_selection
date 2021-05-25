@@ -489,16 +489,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontreee36fca1914b9dfa4787672d34fbf2107c28d6456targetblanke36fca1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/e36fca1914b9dfa4787672d34fbf2107c28d6456" target="_blank">e36fca1</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree877c09b4c442811e7ffc734deea113689bd61bd1targetblank877c09ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/877c09b4c442811e7ffc734deea113689bd61bd1" target="_blank">877c09b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontreee36fca1914b9dfa4787672d34fbf2107c28d6456targetblanke36fca1a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree877c09b4c442811e7ffc734deea113689bd61bd1targetblank877c09ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/e36fca1914b9dfa4787672d34fbf2107c28d6456" target="_blank">e36fca1</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/877c09b4c442811e7ffc734deea113689bd61bd1" target="_blank">877c09b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -510,6 +510,14 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.Rapp.history
+
+Untracked files:
+    Untracked:  Figure_2.pdf
+
+Unstaged changes:
+    Deleted:    Figure_4.pdf
+    Modified:   Supplementary_material.Rmd
+    Modified:   Supplementary_material.pdf
 
 </code></pre>
 <p>
@@ -548,6 +556,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/877c09b4c442811e7ffc734deea113689bd61bd1/analysis/Population_genetic_model.Rmd" target="_blank">877c09b</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-05-25
+</td>
+<td>
+final updates before submission
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tomkeaney/SD_sexual_selection/e28d4c6ee418b8caa4ad46c3e2b7ef2f67dc9932/docs/Population_genetic_model.html" target="_blank">e28d4c6</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-05-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -598,8 +640,7 @@ library(patchwork) # for combining plots
 library(rcartocolor) # for cool colours
 library(ggpubr) # for combining plots
 library(kableExtra) # scrolling tables
-library(future) # so we can multi-core
-library(future.apply) # so we can multi-core</code></pre>
+library(stickylabeller) # for labelling ggplot facets</code></pre>
 </div>
 <div id="enter-empirical-data-from-present-study" class="section level1">
 <h1>Enter empirical data from present study</h1>
@@ -3482,7 +3523,7 @@ WW_male
 <p>This is a two-step process. First we determine the frequencies of each genotype in the mating population, then we calculate the frequencies of each potential mating combination between these genotypes.</p>
 <p><span class="math inline">\(~\)</span></p>
 <p><strong>Step 1 - finding the genotype frequencies in the mating population</strong></p>
-<p>While not measured in our study, we assume individuals with the genotype SDSD do not survive to adulthood (<code>egg_adult_viability</code> = 0), and that the viability of WSD indivduals is unaffected.</p>
+<p>While not measured in our study, we assume individuals with the genotype SDSD do not survive to adulthood (<code>egg_adult_viability</code> = 0), and that the viability of WSD individuals is unaffected.</p>
 <pre class="r"><code># viability of each genotype
 
 egg_adult_viability_WSD_female &lt;- 1
@@ -3695,7 +3736,7 @@ parameters &lt;- rbind(
 <pre class="r"><code># We run the simulation if the results don&#39;t already exist. The output is very large, which causes my mac to run out of memory before the simulation can finish. Therefore we break the simulation into 33 chunks to accomodate my 16gB of ram. After each chunk finishes, its output is saved to the hard disk and is then deleted from local memory, allowing the simulation to finish. We then combine the 33 chunks into a single object and save this as output.rds
 
 if(!file.exists(&quot;simulation_results/output1.rds&quot;)){
-  output1 &lt;- future_lapply(1:1000, run_simulation, parameters = parameters)
+  output1 &lt;- lapply(1:1000, run_simulation, parameters = parameters)
   saveRDS(output1, &quot;simulation_results/output1.rds&quot;)
 }
 
@@ -3703,7 +3744,7 @@ rm(output1)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output2.rds&quot;)){
-  output2 &lt;- future_lapply(1001:2000, run_simulation, parameters = parameters)
+  output2 &lt;- lapply(1001:2000, run_simulation, parameters = parameters)
   saveRDS(output2, &quot;simulation_results/output2.rds&quot;)
 }
 
@@ -3711,7 +3752,7 @@ rm(output2)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output3.rds&quot;)){
-  output3 &lt;- future_lapply(2001:3000, run_simulation, parameters = parameters)
+  output3 &lt;- lapply(2001:3000, run_simulation, parameters = parameters)
   saveRDS(output3, &quot;simulation_results/output3.rds&quot;)
 }
 
@@ -3719,7 +3760,7 @@ rm(output3)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output4.rds&quot;)){
-  output4 &lt;- future_lapply(3001:4000, run_simulation, parameters = parameters)
+  output4 &lt;- lapply(3001:4000, run_simulation, parameters = parameters)
   saveRDS(output4, &quot;simulation_results/output4.rds&quot;)
 }
 
@@ -3727,7 +3768,7 @@ rm(output4)
 #gc()
   
 if(!file.exists(&quot;simulation_results/output5.rds&quot;)){
-  output5 &lt;- future_lapply(4001:5000, run_simulation, parameters = parameters)
+  output5 &lt;- lapply(4001:5000, run_simulation, parameters = parameters)
   saveRDS(output5, &quot;simulation_results/output5.rds&quot;)
 }
 
@@ -3735,7 +3776,7 @@ rm(output5)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output6.rds&quot;)){
-  output6 &lt;- future_lapply(5001:6000, run_simulation, parameters = parameters)
+  output6 &lt;- lapply(5001:6000, run_simulation, parameters = parameters)
   saveRDS(output6, &quot;simulation_results/output6.rds&quot;)
 }
 
@@ -3743,7 +3784,7 @@ rm(output6)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output7.rds&quot;)){
-  output7 &lt;- future_lapply(6001:7000, run_simulation, parameters = parameters)
+  output7 &lt;- lapply(6001:7000, run_simulation, parameters = parameters)
   saveRDS(output7, &quot;simulation_results/output7.rds&quot;)
 }
 
@@ -3751,7 +3792,7 @@ rm(output7)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output8.rds&quot;)){
-  output8 &lt;- future_lapply(7001:8000, run_simulation, parameters = parameters)
+  output8 &lt;- lapply(7001:8000, run_simulation, parameters = parameters)
   saveRDS(output8, &quot;simulation_results/output8.rds&quot;)
 }
 
@@ -3759,7 +3800,7 @@ rm(output8)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output9.rds&quot;)){
-  output9 &lt;- future_lapply(8001:9000, run_simulation, parameters = parameters)
+  output9 &lt;- lapply(8001:9000, run_simulation, parameters = parameters)
   saveRDS(output9, &quot;simulation_results/output9.rds&quot;)
 }
 
@@ -3767,7 +3808,7 @@ rm(output9)
 #gc()
   
 if(!file.exists(&quot;simulation_results/output10.rds&quot;)){
-  output10 &lt;- future_lapply(9001:10000, run_simulation, parameters = parameters)
+  output10 &lt;- lapply(9001:10000, run_simulation, parameters = parameters)
   saveRDS(output10, &quot;simulation_results/output10.rds&quot;)
 }
 
@@ -3775,7 +3816,7 @@ rm(output10)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output11.rds&quot;)){
-  output11 &lt;- future_lapply(10001:11000, run_simulation, parameters = parameters)
+  output11 &lt;- lapply(10001:11000, run_simulation, parameters = parameters)
   saveRDS(output11, &quot;simulation_results/output11.rds&quot;)
 }
 
@@ -3783,7 +3824,7 @@ rm(output11)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output12.rds&quot;)){
-  output12 &lt;- future_lapply(11001:12000, run_simulation, parameters = parameters)
+  output12 &lt;- lapply(11001:12000, run_simulation, parameters = parameters)
   saveRDS(output12, &quot;simulation_results/output12.rds&quot;)
 }
 
@@ -3791,7 +3832,7 @@ rm(output12)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output13.rds&quot;)){
-  output13 &lt;- future_lapply(12001:13000, run_simulation, parameters = parameters)
+  output13 &lt;- lapply(12001:13000, run_simulation, parameters = parameters)
   saveRDS(output13, &quot;simulation_results/output13.rds&quot;)
 }
 
@@ -3799,7 +3840,7 @@ rm(output13)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output14.rds&quot;)){
-  output14 &lt;- future_lapply(13001:14000, run_simulation, parameters = parameters)
+  output14 &lt;- lapply(13001:14000, run_simulation, parameters = parameters)
   saveRDS(output14, &quot;simulation_results/output14.rds&quot;)
 }
 
@@ -3807,7 +3848,7 @@ rm(output14)
 #gc()
   
 if(!file.exists(&quot;simulation_results/output15.rds&quot;)){
-  output15 &lt;- future_lapply(14001:15000, run_simulation, parameters = parameters)
+  output15 &lt;- lapply(14001:15000, run_simulation, parameters = parameters)
   saveRDS(output15, &quot;simulation_results/output15.rds&quot;)
 }
 
@@ -3815,7 +3856,7 @@ rm(output15)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output16.rds&quot;)){
-  output16 &lt;- future_lapply(15001:16000, run_simulation, parameters = parameters)
+  output16 &lt;- lapply(15001:16000, run_simulation, parameters = parameters)
   saveRDS(output16, &quot;simulation_results/output16.rds&quot;)
 }
 
@@ -3823,7 +3864,7 @@ rm(output16)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output17.rds&quot;)){
-  output17 &lt;- future_lapply(16001:17000, run_simulation, parameters = parameters)
+  output17 &lt;- lapply(16001:17000, run_simulation, parameters = parameters)
   saveRDS(output17, &quot;simulation_results/output17.rds&quot;)
 }
 
@@ -3831,7 +3872,7 @@ rm(output17)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output18.rds&quot;)){
-  output18 &lt;- future_lapply(17001:18000, run_simulation, parameters = parameters)
+  output18 &lt;- lapply(17001:18000, run_simulation, parameters = parameters)
   saveRDS(output18, &quot;simulation_results/output18.rds&quot;)
 }
 
@@ -3839,7 +3880,7 @@ rm(output18)
 #gc()
 
 if(!file.exists(&quot;simulation_results/output19.rds&quot;)){
-  output19 &lt;- future_lapply(18001:19000, run_simulation, parameters = parameters)
+  output19 &lt;- lapply(18001:19000, run_simulation, parameters = parameters)
   saveRDS(output19, &quot;simulation_results/output19.rds&quot;)
 }
 
@@ -4058,9 +4099,10 @@ empirical_estimates_0.1 &lt;-
                aes(x = P1_actual, y = P2_actual), 
                pch = 21, fill = &quot;#eb7f86&quot;, colour = &quot;grey10&quot;, size = 2.5) +
     facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
-               scales = &quot;free&quot;, nrow = 3, labeller = &quot;label_both&quot;, strip.position = c(&quot;top&quot;)) +
-     #annotate(&quot;text&quot;, label = c(&quot;italic(SD-5)&quot;, &quot;italic(SD-Mad)&quot;, &quot;italic(SD-72)&quot;),
-             #x = c(1.5, 3, 5.2), y = c(80, 90, 88), size = 5, colour = &quot;black&quot;, parse = TRUE) +
+               scales = &quot;free&quot;, nrow = 3, strip.position = c(&quot;top&quot;),
+               labeller = label_glue(&#39;({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}&#39;)) +
+    #annotate(&quot;text&quot;, label = c(&quot;italic(SD-5)&quot;, &quot;italic(SD-Mad)&quot;, &quot;italic(SD-72)&quot;),
+    #x = c(1.5, 3, 5.2), y = c(80, 90, 88), size = 5, colour = &quot;black&quot;, parse = TRUE) +
     labs(x = &quot;% offspring sired by SD/+ male in the first mating role (P1)&quot;,
          y = &quot;% offspring sired by SD/+ male in the second mating role (P2)&quot;) +
     scale_fill_carto_c(type = &quot;sequential&quot;, palette = &quot;BluYl&quot;, direction = 1, name = &quot;% SD at equilibrium&quot;) +
@@ -4137,7 +4179,8 @@ empirical_estimates_0.5 &lt;-
              aes(x = P1_actual, y = P2_actual), 
              pch = 21, fill = &quot;#eb7f86&quot;, colour = &quot;grey10&quot;, size = 2.5) +
   facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
-             scales = &quot;free&quot;, nrow = 3, labeller = &quot;label_both&quot;, strip.position = c(&quot;top&quot;)) +
+               scales = &quot;free&quot;, nrow = 3, strip.position = c(&quot;top&quot;),
+               labeller = label_glue(&#39;({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}&#39;)) +
   labs(x = &quot;% offspring sired by SD/+ male in the first mating role (P1)&quot;, 
        y = &quot;% offspring sired by SD/+ male in the second mating role (P2)&quot;) +
   scale_fill_carto_c(type = &quot;sequential&quot;, palette = &quot;BluYl&quot;, direction = 1, name = &quot;% SD at equilibrium&quot;) +
@@ -4207,10 +4250,14 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] future.apply_1.7.0 future_1.21.0      kableExtra_1.3.4   ggpubr_0.4.0      
- [5] rcartocolor_2.0.0  patchwork_1.1.1    forcats_0.5.1      stringr_1.4.0     
- [9] dplyr_1.0.5        purrr_0.3.4        readr_1.4.0        tidyr_1.1.3       
-[13] tibble_3.1.1       ggplot2_3.3.3      tidyverse_1.3.1    workflowr_1.6.2   
+ [1] stickylabeller_0.0.0.9100 kableExtra_1.3.4         
+ [3] ggpubr_0.4.0              rcartocolor_2.0.0        
+ [5] patchwork_1.1.1           forcats_0.5.1            
+ [7] stringr_1.4.0             dplyr_1.0.5              
+ [9] purrr_0.3.4               readr_1.4.0              
+[11] tidyr_1.1.3               tibble_3.1.1             
+[13] ggplot2_3.3.3             tidyverse_1.3.1          
+[15] workflowr_1.6.2          
 
 loaded via a namespace (and not attached):
  [1] fs_1.5.0          lubridate_1.7.10  webshot_0.5.2     httr_1.4.2       
@@ -4221,19 +4268,18 @@ loaded via a namespace (and not attached):
 [21] isoband_0.2.4     labeling_0.4.2    sass_0.3.1        scales_1.1.1     
 [25] systemfonts_1.0.1 digest_0.6.27     foreign_0.8-81    rmarkdown_2.7    
 [29] svglite_2.0.0     rio_0.5.26        pkgconfig_2.0.3   htmltools_0.5.1.1
-[33] parallelly_1.24.0 highr_0.9         dbplyr_2.1.1      rlang_0.4.10     
-[37] readxl_1.3.1      rstudioapi_0.13   farver_2.1.0      jquerylib_0.1.3  
-[41] generics_0.1.0    jsonlite_1.7.2    zip_2.1.1         car_3.0-10       
-[45] magrittr_2.0.1    Rcpp_1.0.6        munsell_0.5.0     fansi_0.4.2      
-[49] abind_1.4-5       lifecycle_1.0.0   stringi_1.5.3     whisker_0.4      
-[53] yaml_2.2.1        carData_3.0-4     grid_4.0.5        parallel_4.0.5   
-[57] listenv_0.8.0     promises_1.2.0.1  crayon_1.4.1      haven_2.4.0      
-[61] hms_1.0.0         knitr_1.32        pillar_1.6.0      ggsignif_0.6.1   
-[65] codetools_0.2-18  reprex_2.0.0      glue_1.4.2        evaluate_0.14    
-[69] data.table_1.14.0 modelr_0.1.8      vctrs_0.3.7       httpuv_1.5.5     
-[73] cellranger_1.1.0  gtable_0.3.0      assertthat_0.2.1  xfun_0.22        
-[77] openxlsx_4.2.3    broom_0.7.6       rstatix_0.7.0     later_1.1.0.1    
-[81] viridisLite_0.4.0 globals_0.14.0    ellipsis_0.3.1   </code></pre>
+[33] dbplyr_2.1.1      highr_0.9         rlang_0.4.10      readxl_1.3.1     
+[37] rstudioapi_0.13   jquerylib_0.1.3   generics_0.1.0    farver_2.1.0     
+[41] jsonlite_1.7.2    zip_2.1.1         car_3.0-10        magrittr_2.0.1   
+[45] Rcpp_1.0.6        munsell_0.5.0     fansi_0.4.2       abind_1.4-5      
+[49] lifecycle_1.0.0   stringi_1.5.3     whisker_0.4       yaml_2.2.1       
+[53] carData_3.0-4     grid_4.0.5        promises_1.2.0.1  crayon_1.4.1     
+[57] haven_2.4.0       hms_1.0.0         knitr_1.32        pillar_1.6.0     
+[61] ggsignif_0.6.1    reprex_2.0.0      glue_1.4.2        evaluate_0.14    
+[65] data.table_1.14.0 modelr_0.1.8      vctrs_0.3.7       httpuv_1.5.5     
+[69] cellranger_1.1.0  gtable_0.3.0      assertthat_0.2.1  xfun_0.22        
+[73] openxlsx_4.2.3    broom_0.7.6       rstatix_0.7.0     later_1.1.0.1    
+[77] viridisLite_0.4.0 ellipsis_0.3.1   </code></pre>
 </div>
 </div>
 
