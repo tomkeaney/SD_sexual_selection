@@ -42,7 +42,7 @@ img <- readPNG("SD_crossing_scheme.png")
  grid.raster(img)
 ```
 
-**Figure S1.** Crossing scheme used to standardise the genetic background across the _SD-5/+_, _SD-72/+_, _SD-Mad/+_ and _SD+/+_ lines. The _SD+/+_ line was created in identical fashion except that we subsituted the  _SD_ bearing chromosome with chromosome 2 from the _w^1118^_ isogenic line. Note that at step four there are three possible options 1) the leftmost genotype can be backcrossed to maintain it in the laboratory, 2) the leftmost genotype can be crossed to a _bw_ stock to produce the experimental flies used in Experiment 1 or 3) the leftmost genotype can be crossed to _w^1118^_ to create the experimental flies used in Experiments 2 and 3.   
+**Figure S1.** Crossing scheme used to standardise the genetic background across the _SD-5/+_, _SD-72/+_, _SD-Mad/+_ and _SD+/+_ lines. The _SD+/+_ line was created in identical fashion except that we substituted the  _SD_ bearing chromosome with chromosome 2 from the _w^1118^_ isogenic line. Note that at step four there are three possible options 1) the leftmost genotype can be backcrossed to maintain it in the laboratory, 2) the leftmost genotype can be crossed to a _bw_ stock to produce the experimental flies used in Experiment 1 or 3) the leftmost genotype can be crossed to _w^1118^_ to create the experimental flies used in Experiments 2 and 3.   
 
 $~$
 
@@ -50,8 +50,8 @@ $~$
 
 ```{r, food recipe}
 
-tibble("Ingredients" = c("Soy flour", "Cornmeal", "Yeast", "Dextrose", "Agar", "Water", "Tegosept", "Acid mix (4ml orthophosphoric acid, 41ml propionic acid, 55mL water to make 100mls)"),
-       "Quantity" = c("20 g", "73 g", "35 g", "75 g", "6 g", "1000 mls", "17 mls", "14 mls")) %>% 
+tibble("Ingredients" = c("Soy flour", "Cornmeal", "Yeast", "Dextrose", "Agar", "Water", "Tegosept", "Acid mix (4 mL orthophosphoric acid, 41 mL propionic acid, 55 mL water to make 100 mL)"),
+       "Quantity" = c("20 g", "73 g", "35 g", "75 g", "6 g", "1000 mL", "17 mL", "14 mL")) %>% 
   pander(split.cell = 40, split.table = Inf)
 
 ```
@@ -217,7 +217,7 @@ bw.FEMALE: the number of adult female offspring with brown eyes - indicating inh
 
 bw.MALE: the number of adult male offspring with brown eyes - indicating inheritance of the _bw_ allele
 
-white.MALE: the number of adult male offspring with white eyes (inheritance of the _SD_ allele is unkown for these offspring when the experimental individual was female)
+white.MALE: the number of adult male offspring with white eyes (inheritance of the _SD_ allele is unknown for these offspring when the experimental individual was female)
 
 total_female: the total number of female offspring sired by the experimental individual.
 
@@ -469,7 +469,7 @@ ID: individual flies.
 
 SD: the variant of the SD allele (or control allele) the experimental individual carried, homologous to the second chromosome carrying the _bw_ mutation.
 
-Rearing_vial: the vial the individual male developed in. This variable is included to capture variation explained by the rearing enviornment e.g. small differences in food moisture content or quantity. 
+Rearing_vial: the vial the individual male developed in. This variable is included to capture variation explained by the rearing environment e.g. small differences in food moisture content or quantity. 
 
 Experiment_start: I started data collection for Experiment 2 on the 10/12/2020 at 09:42 AEDT - lights were turned on at 07:00 AEDT.
 
@@ -674,7 +674,7 @@ $~$
 
 Here we take a more in depth look at mating success by looking at mating latency - the duration between a female's introduction to the competing males' vial and the onset of copulation.
 
-Fit the model using mating latency as the response variable and specifiyng a *weibull distribution* (a time-to-event model).
+Fit the model using mating latency as the response variable and specifying a *weibull distribution* (a time-to-event model).
 
 Fixed effects are shown on the odds scale **(the weibull model uses a log-link function rather than a logit-link function)**
 
@@ -868,7 +868,7 @@ $~$
 
 Here we take a more in depth look at mating success by looking at copulation duration - an indicator of male investment in mating.
 
-Fit the model using copulation duration as the response variable and specifiyng a *weibull distribution* (a time-to-event model).
+Fit the model using copulation duration as the response variable and specifying a *weibull distribution* (a time-to-event model).
 
 Fixed effects are shown on the odds scale **(the weibull model uses a log-link function rather than a logit-link function)**
 
@@ -1658,7 +1658,7 @@ post_diff_r <- post_r %>%
   
 ```
 
-**Table S9b**: the mean proportion of mates remating with _LH~m~^UBI^_ males for _SD/+_ males relative to the _w^1118^_ control males. A value of 2 means that remating was twice as likely when females intially mated with a _SD/+_ male compared with a _w^1118^_ male.
+**Table S9b**: the mean proportion of mates remating with _LH~m~^UBI^_ males for _SD/+_ males relative to the _w^1118^_ control males. A value of 2 means that remating was twice as likely when females initially mated with a _SD/+_ male compared with a _w^1118^_ male.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -1735,7 +1735,7 @@ $~$
 
 Here we take a more in depth look at remating by looking at remating latency within the three hour remating period.
 
-Fit the model - this time using remating latency as the response variable and specifiyng a weibull distribution (a time-to-event model).
+Fit the model - this time using remating latency as the response variable and specifying a weibull distribution (a time-to-event model).
 
 Fixed effects are shown on the odds scale **(the weibull model uses a log-link function rather than a logit-link function)**
 
@@ -1853,7 +1853,7 @@ post_diff_l <- post_l %>%
   
 ```
 
-**Table S10b**: the mean remating latency of females that initially mated with _SD/+_ males, relative to the _w^1118^_ control males. A value of 0.5 means that females remated in half the time of females that intially mated with a _w^1118^_ male.
+**Table S10b**: the mean remating latency of females that initially mated with _SD/+_ males, relative to the _w^1118^_ control males. A value of 0.5 means that females remated in half the time of females that initially mated with a _w^1118^_ male.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -1937,7 +1937,7 @@ $~$
 
 Here we look at copulation duration - an indicator of male investment in mating. 
 
-Fit the model using copulation duration as the response variable and specifiyng a weibull distribution (a time-to-event model).
+Fit the model using copulation duration as the response variable and specifying a weibull distribution (a time-to-event model).
 
 Fixed effects are shown on the odds scale (**the weibull model uses a log-link function rather than a logit-link function**)
 
@@ -2129,7 +2129,7 @@ $~$
 
 Here we look at copulation duration - an indicator of male investment in mating. 
 
-Fit the model using copulation duration as the response variable and specifiyng a weibull distribution (a time-to-event model).
+Fit the model using copulation duration as the response variable and specifying a weibull distribution (a time-to-event model).
 
 Fixed effects are shown on the odds scale (**the weibull model uses a log-link function rather than a logit-link function**)
 

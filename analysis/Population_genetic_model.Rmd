@@ -25,8 +25,7 @@ library(patchwork) # for combining plots
 library(rcartocolor) # for cool colours
 library(ggpubr) # for combining plots
 library(kableExtra) # scrolling tables
-library(future) # so we can multi-core
-library(future.apply) # so we can multi-core
+library(stickylabeller) # for labelling ggplot facets
 ```
 
 # Enter empirical data from present study
@@ -484,7 +483,7 @@ $~$
 
 **Step 1 - finding the genotype frequencies in the mating population**
 
-While not measured in our study, we assume individuals with the genotype SDSD do not survive to adulthood (`egg_adult_viability` = 0), and that the viability of WSD indivduals is unaffected.
+While not measured in our study, we assume individuals with the genotype SDSD do not survive to adulthood (`egg_adult_viability` = 0), and that the viability of WSD individuals is unaffected.
 
 ```{r}
 # viability of each genotype
@@ -732,7 +731,7 @@ $~$
 # We run the simulation if the results don't already exist. The output is very large, which causes my mac to run out of memory before the simulation can finish. Therefore we break the simulation into 33 chunks to accomodate my 16gB of ram. After each chunk finishes, its output is saved to the hard disk and is then deleted from local memory, allowing the simulation to finish. We then combine the 33 chunks into a single object and save this as output.rds
 
 if(!file.exists("simulation_results/output1.rds")){
-  output1 <- future_lapply(1:1000, run_simulation, parameters = parameters)
+  output1 <- lapply(1:1000, run_simulation, parameters = parameters)
   saveRDS(output1, "simulation_results/output1.rds")
 }
 
@@ -740,7 +739,7 @@ rm(output1)
 #gc()
 
 if(!file.exists("simulation_results/output2.rds")){
-  output2 <- future_lapply(1001:2000, run_simulation, parameters = parameters)
+  output2 <- lapply(1001:2000, run_simulation, parameters = parameters)
   saveRDS(output2, "simulation_results/output2.rds")
 }
 
@@ -748,7 +747,7 @@ rm(output2)
 #gc()
 
 if(!file.exists("simulation_results/output3.rds")){
-  output3 <- future_lapply(2001:3000, run_simulation, parameters = parameters)
+  output3 <- lapply(2001:3000, run_simulation, parameters = parameters)
   saveRDS(output3, "simulation_results/output3.rds")
 }
 
@@ -756,7 +755,7 @@ rm(output3)
 #gc()
 
 if(!file.exists("simulation_results/output4.rds")){
-  output4 <- future_lapply(3001:4000, run_simulation, parameters = parameters)
+  output4 <- lapply(3001:4000, run_simulation, parameters = parameters)
   saveRDS(output4, "simulation_results/output4.rds")
 }
 
@@ -764,7 +763,7 @@ rm(output4)
 #gc()
   
 if(!file.exists("simulation_results/output5.rds")){
-  output5 <- future_lapply(4001:5000, run_simulation, parameters = parameters)
+  output5 <- lapply(4001:5000, run_simulation, parameters = parameters)
   saveRDS(output5, "simulation_results/output5.rds")
 }
 
@@ -772,7 +771,7 @@ rm(output5)
 #gc()
 
 if(!file.exists("simulation_results/output6.rds")){
-  output6 <- future_lapply(5001:6000, run_simulation, parameters = parameters)
+  output6 <- lapply(5001:6000, run_simulation, parameters = parameters)
   saveRDS(output6, "simulation_results/output6.rds")
 }
 
@@ -780,7 +779,7 @@ rm(output6)
 #gc()
 
 if(!file.exists("simulation_results/output7.rds")){
-  output7 <- future_lapply(6001:7000, run_simulation, parameters = parameters)
+  output7 <- lapply(6001:7000, run_simulation, parameters = parameters)
   saveRDS(output7, "simulation_results/output7.rds")
 }
 
@@ -788,7 +787,7 @@ rm(output7)
 #gc()
 
 if(!file.exists("simulation_results/output8.rds")){
-  output8 <- future_lapply(7001:8000, run_simulation, parameters = parameters)
+  output8 <- lapply(7001:8000, run_simulation, parameters = parameters)
   saveRDS(output8, "simulation_results/output8.rds")
 }
 
@@ -796,7 +795,7 @@ rm(output8)
 #gc()
 
 if(!file.exists("simulation_results/output9.rds")){
-  output9 <- future_lapply(8001:9000, run_simulation, parameters = parameters)
+  output9 <- lapply(8001:9000, run_simulation, parameters = parameters)
   saveRDS(output9, "simulation_results/output9.rds")
 }
 
@@ -804,7 +803,7 @@ rm(output9)
 #gc()
   
 if(!file.exists("simulation_results/output10.rds")){
-  output10 <- future_lapply(9001:10000, run_simulation, parameters = parameters)
+  output10 <- lapply(9001:10000, run_simulation, parameters = parameters)
   saveRDS(output10, "simulation_results/output10.rds")
 }
 
@@ -812,7 +811,7 @@ rm(output10)
 #gc()
 
 if(!file.exists("simulation_results/output11.rds")){
-  output11 <- future_lapply(10001:11000, run_simulation, parameters = parameters)
+  output11 <- lapply(10001:11000, run_simulation, parameters = parameters)
   saveRDS(output11, "simulation_results/output11.rds")
 }
 
@@ -820,7 +819,7 @@ rm(output11)
 #gc()
 
 if(!file.exists("simulation_results/output12.rds")){
-  output12 <- future_lapply(11001:12000, run_simulation, parameters = parameters)
+  output12 <- lapply(11001:12000, run_simulation, parameters = parameters)
   saveRDS(output12, "simulation_results/output12.rds")
 }
 
@@ -828,7 +827,7 @@ rm(output12)
 #gc()
 
 if(!file.exists("simulation_results/output13.rds")){
-  output13 <- future_lapply(12001:13000, run_simulation, parameters = parameters)
+  output13 <- lapply(12001:13000, run_simulation, parameters = parameters)
   saveRDS(output13, "simulation_results/output13.rds")
 }
 
@@ -836,7 +835,7 @@ rm(output13)
 #gc()
 
 if(!file.exists("simulation_results/output14.rds")){
-  output14 <- future_lapply(13001:14000, run_simulation, parameters = parameters)
+  output14 <- lapply(13001:14000, run_simulation, parameters = parameters)
   saveRDS(output14, "simulation_results/output14.rds")
 }
 
@@ -844,7 +843,7 @@ rm(output14)
 #gc()
   
 if(!file.exists("simulation_results/output15.rds")){
-  output15 <- future_lapply(14001:15000, run_simulation, parameters = parameters)
+  output15 <- lapply(14001:15000, run_simulation, parameters = parameters)
   saveRDS(output15, "simulation_results/output15.rds")
 }
 
@@ -852,7 +851,7 @@ rm(output15)
 #gc()
 
 if(!file.exists("simulation_results/output16.rds")){
-  output16 <- future_lapply(15001:16000, run_simulation, parameters = parameters)
+  output16 <- lapply(15001:16000, run_simulation, parameters = parameters)
   saveRDS(output16, "simulation_results/output16.rds")
 }
 
@@ -860,7 +859,7 @@ rm(output16)
 #gc()
 
 if(!file.exists("simulation_results/output17.rds")){
-  output17 <- future_lapply(16001:17000, run_simulation, parameters = parameters)
+  output17 <- lapply(16001:17000, run_simulation, parameters = parameters)
   saveRDS(output17, "simulation_results/output17.rds")
 }
 
@@ -868,7 +867,7 @@ rm(output17)
 #gc()
 
 if(!file.exists("simulation_results/output18.rds")){
-  output18 <- future_lapply(17001:18000, run_simulation, parameters = parameters)
+  output18 <- lapply(17001:18000, run_simulation, parameters = parameters)
   saveRDS(output18, "simulation_results/output18.rds")
 }
 
@@ -876,7 +875,7 @@ rm(output18)
 #gc()
 
 if(!file.exists("simulation_results/output19.rds")){
-  output19 <- future_lapply(18001:19000, run_simulation, parameters = parameters)
+  output19 <- lapply(18001:19000, run_simulation, parameters = parameters)
   saveRDS(output19, "simulation_results/output19.rds")
 }
 
@@ -1101,9 +1100,10 @@ empirical_estimates_0.1 <-
                aes(x = P1_actual, y = P2_actual), 
                pch = 21, fill = "#eb7f86", colour = "grey10", size = 2.5) +
     facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
-               scales = "free", nrow = 3, labeller = "label_both", strip.position = c("top")) +
-     #annotate("text", label = c("italic(SD-5)", "italic(SD-Mad)", "italic(SD-72)"),
-             #x = c(1.5, 3, 5.2), y = c(80, 90, 88), size = 5, colour = "black", parse = TRUE) +
+               scales = "free", nrow = 3, strip.position = c("top"),
+               labeller = label_glue('({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}')) +
+    #annotate("text", label = c("italic(SD-5)", "italic(SD-Mad)", "italic(SD-72)"),
+    #x = c(1.5, 3, 5.2), y = c(80, 90, 88), size = 5, colour = "black", parse = TRUE) +
     labs(x = "% offspring sired by SD/+ male in the first mating role (P1)",
          y = "% offspring sired by SD/+ male in the second mating role (P2)") +
     scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
@@ -1150,7 +1150,8 @@ empirical_estimates_0.5 <-
              aes(x = P1_actual, y = P2_actual), 
              pch = 21, fill = "#eb7f86", colour = "grey10", size = 2.5) +
   facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
-             scales = "free", nrow = 3, labeller = "label_both", strip.position = c("top")) +
+               scales = "free", nrow = 3, strip.position = c("top"),
+               labeller = label_glue('({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}')) +
   labs(x = "% offspring sired by SD/+ male in the first mating role (P1)", 
        y = "% offspring sired by SD/+ male in the second mating role (P2)") +
   scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
