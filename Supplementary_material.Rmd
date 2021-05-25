@@ -43,7 +43,7 @@ img <- readPNG("SD_crossing_scheme.png")
 
 $~$
 
-**Table S1**: Recipe for food medium used in our experiment. The provided quantities make ~ 1 litre of food.
+**Table S1**: recipe for food medium used in our experiment. The provided quantities make ~ 1 litre of food.
 
 ```{r, food recipe}
 
@@ -201,7 +201,7 @@ posterior_prediction <-
   as_tibble()
 ```
 
-**Table S2**: The percentage of female offspring that inherited an _SD_ allele from a heterozygous parent _k_, split by the sex of the parent. _SD_ only drives when present in males. n = 14-15 for all groups.
+**Table S2**: the percentage of female offspring that inherited a _SD_ allele from a heterozygous parent _k_, split by the sex of the parent. _SD_ only drives when present in males. n = 14-15 for all groups.
 
 ```{r drive test table}
 
@@ -232,7 +232,7 @@ posterior_prediction %>%
         panel.grid.minor = element_blank())
 ```
 
-**Figure S2**: The estimated percentage of female offspring that inherited an _SD_ allele from a heterozygous parent, split by the sex of the parent. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. The dotted line indicates 50% inheritance; the expectation in the absence of segregation distortion. 
+**Figure S2**: The estimated percentage of female offspring that inherited a _SD_ allele from a heterozygous parent, split by the sex of the parent. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. The dotted line indicates 50% inheritance; the expectation in the absence of segregation distortion. 
 
 $~$
 
@@ -371,7 +371,7 @@ posterior_prediction_precop_success <-
 
 ```
 
-**Table S4a**: The estimated percentage of _SD/+_ or control males that successfully mated with a female when competing with a single _Lbw_ male.
+**Table S4a**: the estimated percentage of _SD/+_ or control males that successfully mated with a female when competing with a single _Lbw_ male.
 
 ```{r mating success Bayes table}
 predictions_precop_success %>% 
@@ -475,7 +475,7 @@ posterior_prediction_mating_latency <-
 
 $~$
 
-**Table S5a**: The mean time taken for _SD/+_ or control males to mate with a _LH~m~_ female.
+**Table S5a**: the mean time taken for _SD/+_ or control males to start mating with a _LH~m~_ female.
 
 ```{r mating latency Bayes table}
 predictions_mating_latency %>%
@@ -569,7 +569,7 @@ mean_mating_latency_plot /
 mating_latency_odds + plot_annotation(tag_levels = "a")
 ```
 
-**Figure S3:** The duration required for an _SD/+_ male to mate with a _LH~m~_ female and how this compares to _w^1118^_ control males. Panel **a** shows the estimated mating latency for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Negative values indicate that _SD/+_ males mated faster than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
+**Figure S3:** the mean time required for an _SD/+_ male to start mating with a _LH~m~_ female and how this compares to _w^1118^_ control males. Panel **a** shows the estimated mating latency for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Negative values indicate that _SD/+_ males mated faster than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
 
 $~$
 
@@ -628,7 +628,7 @@ posterior_prediction_copulation_duration <-
 
 $~$
 
-**Table S6a**: The mean copulation duration when a _SD/+_ or control mated with a _LH~m~_ female.
+**Table S6a**: the mean copulation duration when a _SD/+_ or control mated with a _LH~m~_ female.
 
 ```{r copulation duration Bayes table}
 predictions_copulation_duration %>%
@@ -721,7 +721,7 @@ mean_copulation_duration_plot /
 (copulation_duration_odds) + plot_annotation(tag_levels = "a")
 ```
 
-**Figure S4:** No difference in the duration of mating between a _SD/+_ male and a _LH~m~_ female, compared to _w^1118^_ control males. Panel **a** shows the estimated copulation duration for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Positive values indicate that _SD/+_ males mated for longer than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
+**Figure S4:** no difference in the duration of mating between a _SD/+_ male and a _LH~m~_ female, compared to _w^1118^_ control males. Panel **a** shows the estimated copulation duration for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Positive values indicate that _SD/+_ males mated for longer than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
 
 $~$
 
@@ -786,7 +786,7 @@ posterior_prediction_P1 <-
 
 $~$
 
-**Table S7a**: The estimated percentage of offspring sired by _SD/+_ or control males, when they mated first.
+**Table S7a**: the estimated percentage of offspring sired by _SD/+_ or control males, when they mated first.
 
 ```{r P1 Bayes table}
 
@@ -902,7 +902,7 @@ posterior_prediction_P2 <-
 
 $~$
 
-**Table S8a**: The estimated percentage of offspring sired by _SD/+_ or control males, when they mated second.
+**Table S8a**: the estimated percentage of offspring sired by _SD/+_ or control males, when they mated second.
 
 ```{r P2 Bayes table}
 
@@ -1008,7 +1008,7 @@ posterior_prediction_remating <-
 
 $~$
 
-**Table S9a**: The estimated percentage of females that remated that were first mated to a _SD/+_ or control male.
+**Table S9a**: the estimated percentage of females that remated that were first mated to a _SD/+_ or control male.
 
 ```{r remating Bayes table}
 predictions_remating %>% 
@@ -1158,7 +1158,7 @@ posterior_prediction_remating_latency <-
 
 ```
 
-**Table S10a**: The estimated time taken for females to remate, when provided with an opportunity, four days after initially mating with a _SD/+_ or control male.
+**Table S10a**: the estimated time taken for females to remate, when provided with an opportunity, four days after initially mating with a _SD/+_ or control male.
 
 ```{r remating latency Bayes table}
 
@@ -1212,7 +1212,7 @@ post_diff_l %>%
 mean_latency_plot <-
   posterior_prediction_remating_latency %>%
   mutate(SD = recode(posterior_prediction_remating_latency$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
-  filter(Block != "2") %>% 
+  filter(Block == "1") %>% 
   ggplot(aes(SD, avg_remating_latency)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
@@ -1258,7 +1258,7 @@ mean_latency_plot /
 (latency_odds) + plot_annotation(tag_levels = "a")
 ```
 
-**Figure S5:** The effect that _SD/+_ males have on female remating latency and how this compares to _w^1118^_ control males. Panel **a** shows the estimated remating latency for females exposed to _LH~m~^UBI^_ males over a three-hour period, that had mated with a _SD/+_ or control male four days earlier. Block 2 produced very different results to Blocks 1 and 3, so we exclude it from panel **a** to aid visual clarity (differences between the _SD_ variants and the control do not change). Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Negative values indicate that the mates of _SD/+_ males remated faster than the mates of _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
+**Figure S5:** the effect that _SD/+_ males have on female remating latency and how this compares to _w^1118^_ control males. Panel **a** shows the estimated remating latency for females exposed to _LH~m~^UBI^_ males over a three-hour period, that had mated with a _SD/+_ or control male four days earlier. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Negative values indicate that the mates of _SD/+_ males remated faster than the mates of _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
 
 $~$
 
@@ -1318,7 +1318,7 @@ posterior_prediction_copulation_duration_1 <-
   as_tibble()
 ```
 
-**Table S11a**: The mean copulation duration when a _SD/+_ male mated with a _LH~m~_ female in the first mating role.
+**Table S11a**: the mean copulation duration when a _SD/+_ male mated with a _LH~m~_ female in the first mating role.
 
 ```{r}
 predictions_copulation_duration_1 %>%
@@ -1410,7 +1410,7 @@ mean_copulation_duration_plot_1 /
 (copulation_duration_odds_1) + plot_annotation(tag_levels = "a")
 ```
 
-**Figure S6**: No difference in the duration of mating between a _SD/+_ male and a _LH~m~_ female, compared to _w^1118^_ control males, when the _SD/+_ (or control) male mated first. Panel **a** shows the estimated copulation duration for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_-variants. Positive values indicate that _SD/+_ males mated for longer than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
+**Figure S6**: no difference in the duration of mating between a _SD/+_ male and a _LH~m~_ female, compared to _w^1118^_ control males, when the _SD/+_ (or control) male mated first. Panel **a** shows the estimated copulation duration for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_-variants. Positive values indicate that _SD/+_ males mated for longer than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
 
 $~$
 
@@ -1470,7 +1470,7 @@ posterior_prediction_copulation_duration_2 <-
   as_tibble()
 ```
 
-**Table S12a**: The mean copulation duration when a _SD/+_ male mated with a _LH~m~_ female in the second mating role.
+**Table S12a**: the mean copulation duration when a _SD/+_ male mated with a _LH~m~_ female in the second mating role.
 
 ```{r}
 predictions_copulation_duration_2 %>%
@@ -1740,4 +1740,4 @@ empirical_estimates_0.5 <-
         strip.background = element_rect(colour = "black", fill = "Aliceblue", size = .8)))
 ```
 
-**Figure S8**: Predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 5% contour lines). The plot is split into nine panels, with varying levels of _SD/+_ male mating success across the rows and increasing likelihoods of a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the columns. The three orange points in each panel represent males carrying the _SD-5_ (leftmost point), and _SD-72_ and _SD-Mad_ (rightmost points) alleles; these points show where males carrying these alleles fall in the figure’s parameter space, as measured in Experiment 2. In the parameter space presented here, $k$ = 0.944 (our highest estimated value), $P1_{normal}$ = 0.5, _SD_ homozygotes are non-viable and _SD_ heterozygotes suffer no fitness costs outside of mating success and sperm competition.
+**Figure S8**: predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 5% contour lines). The plot is split into nine panels, with varying levels of _SD/+_ male mating success across the rows and increasing likelihoods of a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the columns. The three orange points in each panel represent males carrying the _SD-5_ (leftmost point), and _SD-72_ and _SD-Mad_ (rightmost points) alleles; these points show where males carrying these alleles fall in the figure’s parameter space, as measured in Experiment 2. In the parameter space presented here, $k$ = 0.944 (our highest estimated value), $P1_{normal}$ = 0.5, _SD_ homozygotes are non-viable and _SD_ heterozygotes suffer no fitness costs outside of mating success and sperm competition.
