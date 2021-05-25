@@ -414,7 +414,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-05-25
+<strong>Last updated:</strong> 2021-05-26
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -505,16 +505,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree877c09b4c442811e7ffc734deea113689bd61bd1targetblank877c09ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/877c09b4c442811e7ffc734deea113689bd61bd1" target="_blank">877c09b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree93c7c3a71de35c31657355ebeb80558f67dcd775targetblank93c7c3aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/93c7c3a71de35c31657355ebeb80558f67dcd775" target="_blank">93c7c3a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree877c09b4c442811e7ffc734deea113689bd61bd1targetblank877c09ba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree93c7c3a71de35c31657355ebeb80558f67dcd775targetblank93c7c3aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/877c09b4c442811e7ffc734deea113689bd61bd1" target="_blank">877c09b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/93c7c3a71de35c31657355ebeb80558f67dcd775" target="_blank">93c7c3a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -522,16 +522,14 @@ Note that you need to be careful to ensure that all relevant files for the analy
 <pre><code>
 Ignored files:
     Ignored:    .DS_Store
+    Ignored:    .Rapp.history
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.Rapp.history
 
-Untracked files:
-    Untracked:  Figure_2.pdf
-
 Unstaged changes:
-    Deleted:    Figure_4.pdf
+    Modified:   SD_sexual_selection.Rproj
     Modified:   Supplementary_material.Rmd
     Modified:   Supplementary_material.pdf
 
@@ -572,6 +570,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/93c7c3a71de35c31657355ebeb80558f67dcd775/analysis/Empirical_analysis.Rmd" target="_blank">93c7c3a</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-05-26
+</td>
+<td>
+small fixes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tomkeaney/SD_sexual_selection/f30258aac3f1b78957f599e4001cf340ea4a4304/docs/Empirical_analysis.html" target="_blank">f30258a</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-05-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -3780,7 +3812,7 @@ post_diff_l %&gt;%
 <pre class="r"><code>mean_latency_plot &lt;-
   posterior_prediction_remating_latency %&gt;%
   mutate(SD = recode(posterior_prediction_remating_latency$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;, &quot;5&quot; = &quot;SD-5&quot;)) %&gt;%
-  filter(Block != &quot;2&quot;) %&gt;% 
+  filter(Block == &quot;1&quot;) %&gt;% 
   ggplot(aes(SD, avg_remating_latency)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c(&quot;W1118&quot; = &quot;#d3f2a3&quot;, &quot;SD-Mad&quot; = &quot;#97e196&quot;, &quot;SD-72&quot; = &quot;#6cc08b&quot;, &quot;SD-5&quot; = &quot;#4c9b82&quot;)) +
@@ -3854,7 +3886,7 @@ tkeaney
 </table>
 </div>
 </div>
-<p><strong>Figure S5:</strong> The effect that <em>SD/+</em> males have on female remating latency and how this compares to <em>w<sup>1118</sup></em> control males. Panel <strong>a</strong> shows the estimated remating latency for females exposed to <em>LH<sub>m</sub><sup>UBI</sup></em> males over a three-hour period, that had mated with a <em>SD/+</em> or control male four days earlier. Block 2 produced very different results to Blocks 1 and 3, so we exclude it from panel <strong>a</strong> to aid visual clarity (differences between the <em>SD</em> variants and the control do not change). Panel <strong>b</strong> shows effect sizes on the odds scale for the <em>SD</em> variants. Negative values indicate that the mates of <em>SD/+</em> males remated faster than the mates of <em>w<sup>1118</sup></em> control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.</p>
+<p><strong>Figure S5:</strong> The effect that <em>SD/+</em> males have on female remating latency and how this compares to <em>w<sup>1118</sup></em> control males. Panel <strong>a</strong> shows the estimated remating latency for females exposed to <em>LH<sub>m</sub><sup>UBI</sup></em> males over a three-hour period, that had mated with a <em>SD/+</em> or control male four days earlier. Panel <strong>b</strong> shows effect sizes on the odds scale for the <em>SD</em> variants. Negative values indicate that the mates of <em>SD/+</em> males remated faster than the mates of <em>w<sup>1118</sup></em> control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.</p>
 <p><span class="math inline">\(~\)</span></p>
 </div>
 <div id="copulation-duration-in-the-first-mating-role" class="section level3">
@@ -4628,7 +4660,7 @@ tkeaney
 </table>
 </div>
 </div>
-<p><strong>Figure 1:</strong> The effect of <em>SD</em> on male mating and fertilisation success. Black points indicate the estimated mean, with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. Panels a, c, e and g show results on the response scale, while panels b, d, f, and h show the distribution of the log-odds differences between the <em>SD</em> variants and the control allele; 95% uncertainty intervals that do not overlap zero indicate a significant effect. Panel <strong>a</strong> shows the estimated percentage of males that successfully mated with a <em>LH<sub>m</sub></em> female, when competing against a single <em>Lbw</em> male. Panel <strong>b</strong> shows effect sizes on the log-odds scale for the <em>SD</em> variants; positive values indicate that <em>SD/+</em> males were more likely to mate than the <em>+/+</em> control males. Panel <strong>c</strong> shows the estimated percentage of offspring sired by males carrying <em>SD</em> or the control allele, when these males mated first (P1). Panel <strong>d</strong> shows effect sizes on the log-odds scale for the <em>SD</em> variants; negative values indicate that <em>SD/+</em> males had lower P1 values than the <em>+/+</em> control males. Panel <strong>e</strong> shows the estimated percentage of offspring sired by males carrying <em>SD</em> or the control allele, when these males mated second (P2). Panel <strong>f</strong> shows effect sizes on the log-odds scale for the <em>SD</em> variants; negative values indicate that <em>SD/+</em> males had lower P2 values than the <em>+/+</em> control males. Panel <strong>g</strong> shows the estimated percentage of females remating with <em>LH<sub>m</sub><sup>UBI</sup></em> males in a three-hour period, that had mated with a <em>SD/+</em> or control male four days earlier. Data was quite variable between blocks for this response, so we plot model estimates based upon Block 1 to aid visual clarity (differences between the <em>SD</em> variants and the control do not change). Panel <strong>h</strong> shows effect sizes on the log-odds scale for the <em>SD</em> variants; positive values indicate that the mates of <em>SD/+</em> males were more likely to remate than the mates of <em>+/+</em> control males, four days after the first mating.</p>
+<p><strong>Figure 1:</strong> The effect of <em>SD</em> on male mating and fertilisation success. Black points indicate the estimated mean, with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. Panels a, c, e and g show results on the response scale, while panels b, d, f, and h show the distribution of the log-odds differences between the <em>SD</em> variants and the control allele; 95% uncertainty intervals that do not overlap zero indicate a significant effect. Panel <strong>a</strong> shows the estimated percentage of males that successfully mated with a <em>LH<sub>m</sub></em> female, when competing against a single <em>Lbw</em> male. Panel <strong>b</strong> shows effect sizes on the log-odds scale for the <em>SD</em> variants; positive values indicate that <em>SD/+</em> males were more likely to mate than the <em>+/+</em> control males. Panel <strong>c</strong> shows the estimated percentage of offspring sired by males carrying <em>SD</em> or the control allele, when these males mated first (P1). Panel <strong>d</strong> shows effect sizes on the log-odds scale for the <em>SD</em> variants; negative values indicate that <em>SD/+</em> males had lower P1 values than the <em>+/+</em> control males. Panel <strong>e</strong> shows the estimated percentage of offspring sired by males carrying <em>SD</em> or the control allele, when these males mated second (P2). Panel <strong>f</strong> shows effect sizes on the log-odds scale for the <em>SD</em> variants; negative values indicate that <em>SD/+</em> males had lower P2 values than the <em>+/+</em> control males. Panel <strong>g</strong> shows the estimated percentage of females remating with <em>LH<sub>m</sub><sup>UBI</sup></em> males in a three-hour period, that had mated with a <em>SD/+</em> or control male four days earlier. Panel <strong>h</strong> shows effect sizes on the log-odds scale for the <em>SD</em> variants; positive values indicate that the mates of <em>SD/+</em> males were more likely to remate than the mates of <em>+/+</em> control males, four days after the first mating.</p>
 <p><span class="math inline">\(~\)</span></p>
 <br>
 <p>
