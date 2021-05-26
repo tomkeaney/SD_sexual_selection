@@ -1,6 +1,6 @@
 ---
 title: "Sexual selection and the population genetics of a selfish gene"
-author: "Thomas Keaney and Luke Holman"
+author: "Thomas Keaney, Theresa Jones and Luke Holman"
 subtitle: Population genetic model
 output: 
   html_document:
