@@ -13,6 +13,7 @@
 
 <title>Home</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -42,6 +43,8 @@ div.section {
   padding-top: 12px;
 }
 </style>
+
+
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -258,6 +261,9 @@ $(document).ready(function () {
   <a href="index.html">Home</a>
 </li>
 <li>
+  <a href="Supp_methods.html">Supplementary methods</a>
+</li>
+<li>
   <a href="Empirical_analysis.html">Empirical analysis</a>
 </li>
 <li>
@@ -317,7 +323,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-05-25
+<strong>Last updated:</strong> 2021-06-02
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -348,27 +354,39 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontreee36fca1914b9dfa4787672d34fbf2107c28d6456targetblanke36fca1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/e36fca1914b9dfa4787672d34fbf2107c28d6456" target="_blank">e36fca1</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree0289923cc9148e43c6dac70e6635342b5870183ctargetblank0289923a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/0289923cc9148e43c6dac70e6635342b5870183c" target="_blank">0289923</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontreee36fca1914b9dfa4787672d34fbf2107c28d6456targetblanke36fca1a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree0289923cc9148e43c6dac70e6635342b5870183ctargetblank0289923a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/e36fca1914b9dfa4787672d34fbf2107c28d6456" target="_blank">e36fca1</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/0289923cc9148e43c6dac70e6635342b5870183c" target="_blank">0289923</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .DS_Store
+    Ignored:    .Rapp.history
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/.DS_Store
     Ignored:    analysis/.Rapp.history
+
+Unstaged changes:
+    Modified:   SD_ESM_references.bib
+    Modified:   SD_crossing_scheme.png
+    Modified:   SD_sexual_selection.Rproj
+    Modified:   Supplementary_material.Rmd
+    Modified:   analysis/Population_genetic_model.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   data/Drive_test.csv
+    Modified:   data/SD_mating_data.csv
+    Modified:   data/two_choice_test_data.csv
+    Modified:   fits/remating_model_attractiveness.rds
+    Modified:   fits/survival_model_censored_attract.rds
 
 </code></pre>
 <p>
@@ -407,6 +425,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/0289923cc9148e43c6dac70e6635342b5870183c/analysis/index.Rmd" target="_blank">0289923</a>
+</td>
+<td>
+tomkeaney
+</td>
+<td>
+2021-06-02
+</td>
+<td>
+Edits to make the manuscript smaller
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tomkeaney/SD_sexual_selection/e28d4c6ee418b8caa4ad46c3e2b7ef2f67dc9932/docs/index.html" target="_blank">e28d4c6</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-05-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -466,8 +518,12 @@ Start workflowr project.
 </div>
 </div>
 <p><span class="math inline">\(~\)</span></p>
-<p>This website presents the R code required to run the analysis for Experiments 1-3 (see Empirical analysis), as well as the code to build and run the population genetic model included in the currently in development manuscript: <em>Sexual selection and the population genetics of a selfish gene</em>.</p>
+<p>This website presents the R code required to run the analysis for a pilot experiment, Experiments 1 and 2 (see Empirical analysis), and the code used to build and run the population genetic model included in the manuscript: <em>Sexual selection and the population genetics of a selfish gene</em>.</p>
 <p><span class="math inline">\(~\)</span></p>
+<div id="supplementary-methods" class="section level2">
+<h2><a href="Supp_methods.html">Supplementary methods</a></h2>
+<p><span class="math inline">\(~\)</span></p>
+</div>
 <div id="empirical-analysis" class="section level2">
 <h2><a href="Empirical_analysis.html">Empirical analysis</a></h2>
 <p><span class="math inline">\(~\)</span></p>
@@ -488,6 +544,8 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
+
+
 
 
 
