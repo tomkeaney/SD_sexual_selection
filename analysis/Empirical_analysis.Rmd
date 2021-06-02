@@ -275,7 +275,7 @@ posterior_prediction <-
 
 $~$
 
-**Table S2**: The percentage of female offspring that inherited an _SD_ allele from a heterozygous parent _k_, split by the sex of the parent. _SD_ only drives when present in males. n = 14-15 for all groups.
+The percentage of female offspring that inherited an _SD_ allele from a heterozygous parent _k_, split by the sex of the parent. _SD_ only drives when present in males. n = 14-15 for all groups.
 
 ```{r drive test table}
 
@@ -322,7 +322,7 @@ _k~c~_ values are presented in the table below
 
 $~$
 
-**Table S3**: the viability corrected inheritance (following Temin, 1991) of each _SD_ variant and the control allele from a _SD/+_ (or _+/+_) male.
+**Table S2**: the viability corrected inheritance of each _SD_ variant and the control allele from a _SD/+_ (or _+/+_) male.
 
 ```{r corrected k values}
 
@@ -554,7 +554,7 @@ posterior_prediction_precop_success <-
 
 $~$
 
-**Table S4a**: The estimated percentage of _SD/+_ or control males that successfully mated with a female when competing with a single _LBw_ male.
+The estimated percentage of _SD/+_ or control males that successfully mated with a female when competing with a single _LBw_ male.
 
 ```{r mating success Bayes table}
 predictions_precop_success %>% 
@@ -585,7 +585,7 @@ post_diff_ms <- post_ms %>%
   
 ```
 
-**Table S4b**: the mating success of _SD/+_ males relative to the _w^1118^_ control males. A value of 2 means that _SD/+_ males were twice as successful as _w^1118^_ control males.
+The mating success of _SD/+_ males relative to the _w^1118^_ control males. A value of 2 means that _SD/+_ males were twice as successful as _w^1118^_ control males.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -745,7 +745,7 @@ posterior_prediction_mating_latency <-
 
 $~$
 
-**Table S5a**: The mean time taken for _SD/+_ or control males to mate with a _LH~m~_ female.
+The mean time taken for _SD/+_ or control males to mate with a _LH~m~_ female.
 
 ```{r mating latency Bayes table}
 predictions_mating_latency %>%
@@ -776,7 +776,7 @@ post_diff_ml <- post_ml %>%
   
 ```
 
-**Table S5b**: the mean mating latency of males that successfully mated with _LH~m~_ females when competing against _Lbw_ males, relative to the _w^1118^_ control males. A value of 0.5 means that males mated in half the time of _w^1118^_ males.
+The mean mating latency of males that successfully mated with _LH~m~_ females when competing against _Lbw_ males, relative to the _w^1118^_ control males. A value of 0.5 means that males mated in half the time of _w^1118^_ males.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -938,7 +938,7 @@ posterior_prediction_copulation_duration <-
 
 $~$
 
-**Table S6a**: The mean copulation duration when a _SD/+_ or control male mated with a _LH~m~_ female.
+The mean copulation duration when a _SD/+_ or control male mated with a _LH~m~_ female.
 
 ```{r copulation duration Bayes table}
 predictions_copulation_duration %>%
@@ -969,7 +969,7 @@ post_diff_cd <- post_cd %>%
   
 ```
 
-**Table S6b**: the mean copulation duration for _SD/+_ males that successfully mated with _LH~m~_ females when competing against _Lbw_ males, relative to the _w^1118^_ control males. A value of 0.5 means that males mated in half the time of _w^1118^_ males.
+The mean copulation duration for _SD/+_ males that successfully mated with _LH~m~_ females when competing against _Lbw_ males, relative to the _w^1118^_ control males. A value of 0.5 means that males mated in half the time of _w^1118^_ males.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -1233,7 +1233,7 @@ posterior_prediction_P1 <-
 
 $~$
 
-**Table S7a**: The estimated percentage of offspring sired by _SD/+_ or control males, when they mated first.
+The estimated percentage of offspring sired by _SD/+_ or control males, when they mated first.
 
 ```{r P1 Bayes table}
 
@@ -1271,7 +1271,7 @@ post_diff_P1 <-
 
 ```
 
-**Table S7b**: the mean proportion of offspring sired by each _SD_ variant relative to the _w^1118^_ control, when these males mated with _LH~m~_ females first. A value of 0.5 means that the proportion of offspring sired was half that of _w^1118^_ males.
+The mean proportion of offspring sired by each _SD_ variant relative to the _w^1118^_ control, when these males mated with _LH~m~_ females first. A value of 0.5 means that the proportion of offspring sired was half that of _w^1118^_ males.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -1429,7 +1429,7 @@ posterior_prediction_P2 <-
 
 $~$
 
-**Table S8a**: The estimated percentage of offspring sired by _SD/+_ or control males, when they mated second.
+The estimated percentage of offspring sired by _SD/+_ or control males, when they mated second.
 
 ```{r P2 Bayes table}
 
@@ -1464,7 +1464,7 @@ post_diff_P2 <- post_P2 %>%
 
 ```
 
-**Table S8b**: the mean proportion of offspring sired by each _SD_ variant relative to the _w^1118^_ control, when these males mated with _LH~m~_ females second. A value of 0.5 means that the proportion of offspring sired was half that of _w^1118^_ males.
+The mean proportion of offspring sired by each _SD_ variant relative to the _w^1118^_ control, when these males mated with _LH~m~_ females second. A value of 0.5 means that the proportion of offspring sired was half that of _w^1118^_ males.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -1617,7 +1617,7 @@ posterior_prediction_remating <-
 
 $~$
 
-**Table S9a**: The estimated percentage of females that remated that were first mated to a _SD/+_ or control male.
+The estimated percentage of females that remated that were first mated to a _SD/+_ or control male.
 
 ```{r remating Bayes table}
 predictions_remating %>% 
@@ -1652,7 +1652,7 @@ post_diff_r <- post_r %>%
   
 ```
 
-**Table S9b**: the mean proportion of mates remating with _LH~m~^UBI^_ males for _SD/+_ males relative to the _w^1118^_ control males. A value of 2 means that remating was twice as likely when females initially mated with a _SD/+_ male compared with a _w^1118^_ male.
+The mean proportion of mates remating with _LH~m~^UBI^_ males for _SD/+_ males relative to the _w^1118^_ control males. A value of 2 means that remating was twice as likely when females initially mated with a _SD/+_ male compared with a _w^1118^_ male.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -1811,7 +1811,7 @@ posterior_prediction_remating_latency <-
 
 $~$
 
-**Table S10a**: The estimated time taken for females to remate, when provided with an opportunity, four days after initially mating with a _SD/+_ or control male.
+The estimated time taken for females to remate, when provided with an opportunity, four days after initially mating with a _SD/+_ or control male.
 
 ```{r remating latency Bayes table}
 
@@ -1847,7 +1847,7 @@ post_diff_l <- post_l %>%
   
 ```
 
-**Table S10b**: the mean remating latency of females that initially mated with _SD/+_ males, relative to the _w^1118^_ control males. A value of 0.5 means that females remated in half the time of females that initially mated with a _w^1118^_ male.
+The mean remating latency of females that initially mated with _SD/+_ males, relative to the _w^1118^_ control males. A value of 0.5 means that females remated in half the time of females that initially mated with a _w^1118^_ male.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -2011,7 +2011,7 @@ posterior_prediction_copulation_duration_1 <-
   as_tibble()
 ```
 
-**Table S11a**: The mean copulation duration when a _SD/+_ male mated with a _LH~m~_ female in the first mating role.
+The mean copulation duration when a _SD/+_ male mated with a _LH~m~_ female in the first mating role.
 
 ```{r}
 predictions_copulation_duration_1 %>%
@@ -2042,7 +2042,7 @@ post_diff_cd_1 <- post_cd_1 %>%
   filter(`difference comparison` == c("SD-Mad", "SD-72", "SD-5"))
 ```
 
-**Table S11b**: the mean copulation duration for _SD/+_ males that mated with a _LH~m~_ female in the second mating role, relative to the _w^1118^_ control males. A value of 0.5 means that males mated for half the time of _w^1118^_ males.
+The mean copulation duration for _SD/+_ males that mated with a _LH~m~_ female in the second mating role, relative to the _w^1118^_ control males. A value of 0.5 means that males mated for half the time of _w^1118^_ males.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
@@ -2203,7 +2203,7 @@ posterior_prediction_copulation_duration_2 <-
   as_tibble()
 ```
 
-**Table S12a**: The mean copulation duration when a _SD/+_ male mated with a _LH~m~_ female in the second mating role.
+The mean copulation duration when a _SD/+_ male mated with a _LH~m~_ female in the second mating role.
 
 ```{r}
 predictions_copulation_duration_2 %>%
@@ -2234,7 +2234,7 @@ post_diff_cd_2 <- post_cd_2 %>%
   filter(`difference comparison` == c("SD-Mad", "SD-72", "SD-5"))
 ```
 
-**Table S12b**: the mean copulation duration for _SD/+_ males that mated with a _LH~m~_ female in the second mating role, relative to the _w^1118^_ control males. A value of 0.5 means that males mated for half the time of _w^1118^_ males.
+The mean copulation duration for _SD/+_ males that mated with a _LH~m~_ female in the second mating role, relative to the _w^1118^_ control males. A value of 0.5 means that males mated for half the time of _w^1118^_ males.
 
 ```{r}
 # Create a table summarising the proportions of offspring sired relative to w1118
