@@ -490,16 +490,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree204ad9233d25660bc05fa5f52499c50c06a823c1targetblank204ad92a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/204ad9233d25660bc05fa5f52499c50c06a823c1" target="_blank">204ad92</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree51d8aeeb704bba08847036dd9c11780f52cf4139targetblank51d8aeea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/51d8aeeb704bba08847036dd9c11780f52cf4139" target="_blank">51d8aee</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree204ad9233d25660bc05fa5f52499c50c06a823c1targetblank204ad92a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree51d8aeeb704bba08847036dd9c11780f52cf4139targetblank51d8aeea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/204ad9233d25660bc05fa5f52499c50c06a823c1" target="_blank">204ad92</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/51d8aeeb704bba08847036dd9c11780f52cf4139" target="_blank">51d8aee</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -514,11 +514,8 @@ Ignored files:
     Ignored:    analysis/.Rapp.history
 
 Unstaged changes:
-    Modified:   SD_crossing_scheme.png
     Modified:   Supplementary_material.Rmd
     Modified:   Supplementary_material.pdf
-    Modified:   analysis/_site.yml
-    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -557,6 +554,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/51d8aeeb704bba08847036dd9c11780f52cf4139/analysis/Supp_methods.Rmd" target="_blank">51d8aee</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+<td>
+more final touches
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tomkeaney/SD_sexual_selection/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/Supp_methods.html" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -617,16 +648,8 @@ Edits to make the manuscript smaller
 </div>
 <pre class="r"><code>library(png) # to load images
 library(grid) # to plot images
-library(tidyverse) # for data wrangling and plotting</code></pre>
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-✓ tibble  3.1.1     ✓ dplyr   1.0.5
-✓ tidyr   1.1.3     ✓ stringr 1.4.0
-✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-x dplyr::filter() masks stats::filter()
-x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(pander) # for tables</code></pre>
+library(tidyverse) # for data wrangling and plotting
+library(pander) # for tables</code></pre>
 <p><strong>Pilot experiment: confirming that <em>SD</em> exhibits segregation distortion</strong></p>
 <p>In a pilot experiment, we measured the strength of segregation distortion produced by each of our experimental treatment lines. We crossed females from each of the three <em>SD/+</em> lines and the <em>+/+</em> line to males homozygous for the <em>bw</em> mutation (Figure S1); like <em>SD</em>, <em>bw</em> is located on chromosome 2, so this cross yielded <em>SD/bw</em> or <em>+/bw</em> progeny. We then mated 20 <em>SD/bw</em> (or <em>+/bw</em>) males from each of the four crosses to <em>bw/bw</em> females, and recorded the eye colour (red or brown) of the resulting female offspring to determine the proportion of offspring fertilised by <em>SD</em>- (or +) and <em>bw</em>-bearing sperm. Male progeny were not counted because some of them in the reciprocal cross (see below) expressed a white-eye phenotype (due to male hemizygosity and an X-linked mutation of <em>white</em>), preventing us from determining which copy of chromosome 2 they inherited.</p>
 <p><em>SD</em> alleles are commonly associated with viability costs, which might cause underestimation of the strength of segregation distortion. To correct for any such viability costs, we also performed the reciprocal cross ( <em>SD/+</em> females × <em>bw/bw</em> males) and calculated the proportion of offspring inheriting the <em>SD</em> bearing chromosome as above. Because <em>SD</em> does not affect segregation in females, a shortage of adult offspring carrying <em>SD</em> (relative to the 50% Mendelian expectation) indicates reduced survival of <em>SD</em> progeny to adulthood (relative to bw progeny). We calculated the viability-corrected estimate of segregation distortion, <em>k<sub>c</sub></em>, using the formula in <a href="https://www.ncbi.nlm.nih.gov/pubmed/1906417">Temin</a> (1991, Genetics).</p>
@@ -708,6 +731,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Supp_methods.Rmd/unnamed-chunk-2-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Supp_methods.Rmd/unnamed-chunk-2-1.png" target="_blank">bfbb766</a>
