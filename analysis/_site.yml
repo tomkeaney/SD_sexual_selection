@@ -5,6 +5,8 @@ navbar:
   left:
   - text: Home
     href: index.html
+  - text: Supplementary methods
+    href: Supp_methods.html
   - text: Empirical analysis
     href: Empirical_analysis.html
   - text: Population genetic model
