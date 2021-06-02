@@ -1,0 +1,50 @@
+---
+title: "Sexual selection and the population genetics of a selfish gene"
+author: "Thomas Keaney, Theresa Jones and Luke Holman"
+subtitle: Supplementary methods
+output: 
+  html_document:
+    code_folding: hide
+    toc: yes
+    toc_float: yes
+---
+
+```{r}
+library(png) # to load images
+library(grid) # to plot images
+library(tidyverse) # for data wrangling and plotting
+library(pander) # for tables
+```
+
+**Pilot experiment: confirming that _SD_ exhibits segregation distortion**
+
+In a pilot experiment, we measured the strength of segregation distortion produced by each of our experimental treatment lines. We crossed females from each of the three _SD/+_ lines and the _+/+_ line to males homozygous for the _bw_ mutation (Figure S1); like _SD_, _bw_ is located on chromosome 2, so this cross yielded _SD/bw_ or _+/bw_ progeny. We then mated 20 _SD/bw_ (or _+/bw_) males from each of the four crosses to _bw/bw_ females, and recorded the eye colour (red or brown) of the resulting female offspring to determine the proportion of offspring fertilised by _SD_- (or +) and _bw_-bearing sperm. Male progeny were not counted because some of them in the reciprocal cross (see below) expressed a white-eye phenotype (due to male hemizygosity and an X-linked mutation of _white_), preventing us from determining which copy of chromosome 2 they inherited. 
+
+_SD_ alleles are commonly associated with viability costs, which might cause underestimation of the strength of segregation distortion. To correct for any such viability costs, we also performed the reciprocal cross ( _SD/+_ females × _bw/bw_ males) and calculated the proportion of offspring inheriting the _SD_ bearing chromosome as above. Because _SD_ does not affect segregation in females, a shortage of adult offspring carrying _SD_ (relative to the 50% Mendelian expectation) indicates reduced survival of _SD_ progeny to adulthood (relative to bw progeny). We calculated the viability-corrected estimate of segregation distortion, _k~c~_, using the formula in Temin [1].
+
+To analyse our results, we fit a binomial model, in which red-eye daughters (i.e. the progeny that inherited the _SD_ or _+_ allele from their _SD/bw_ or _+/bw_ father) were treated as ‘successes’ and the brown-eye daughters as ‘failures’. We included the sex of the experimental individual and the variant of _SD_ (or control) as fixed effects (with the control as the reference level), as well as the interaction between these variables. We also included pair ID as a random effect. 
+
+
+$~$
+
+**Table S1**: Recipe for food medium used in our experiment. The provided quantities make ~ 1 litre of food.
+
+```{r, food recipe}
+
+tibble("Ingredients" = c("Soy flour", "Cornmeal", "Yeast", "Dextrose", "Agar", "Water", "Tegosept", "Acid mix (4 mL orthophosphoric acid, 41 mL propionic acid, 55 mL water to make 100 mL)"),
+       "Quantity" = c("20 g", "73 g", "35 g", "75 g", "6 g", "1000 mL", "17 mL", "14 mL")) %>% 
+  pander(split.cell = 40, split.table = Inf)
+
+```
+
+$~$
+
+```{r fig.width=6, fig.height=8}
+
+img <- readPNG("SD_crossing_scheme.png")
+ grid.raster(img)
+```
+
+**Figure S1.** Crossing scheme used to standardise the genetic background across the _SD-5/+_, _SD-72/+_, _SD-Mad/+_ and _SD+/+_ lines. The _SD+/+_ line was created in identical fashion except that we substituted the  _SD_ bearing chromosome with chromosome 2 from the _w^1118^_ isogenic line. Note that at step four there are three possible options 1) the leftmost genotype can be backcrossed to maintain it in the laboratory, 2) the leftmost genotype can be crossed to a _bw_ stock to produce the experimental flies used in Experiment 1 or 3) the leftmost genotype can be crossed to _w^1118^_ to create the experimental flies used in Experiments 2 and 3.   
+
+

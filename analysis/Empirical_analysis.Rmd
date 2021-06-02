@@ -14,12 +14,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE)
 ```
 
-# Load packages
+# Load packages and the data
 
 ```{r}
 
-library(png) # to load images
-library(grid) # to plot images
 library(tidyverse) # for data wrangling and plotting
 library(reshape2) # for the melt function
 library(brms) # for Bayesian models
@@ -33,32 +31,6 @@ library(workflowr) # for website building
 library(DT) # for search- and saveable tables
 
 ```
-
-# Supplementary methods
-
-```{r fig.width=6, fig.height=8}
-
-img <- readPNG("SD_crossing_scheme.png")
- grid.raster(img)
-```
-
-**Figure S1.** Crossing scheme used to standardise the genetic background across the _SD-5/+_, _SD-72/+_, _SD-Mad/+_ and _SD+/+_ lines. The _SD+/+_ line was created in identical fashion except that we substituted the  _SD_ bearing chromosome with chromosome 2 from the _w^1118^_ isogenic line. Note that at step four there are three possible options 1) the leftmost genotype can be backcrossed to maintain it in the laboratory, 2) the leftmost genotype can be crossed to a _bw_ stock to produce the experimental flies used in Experiment 1 or 3) the leftmost genotype can be crossed to _w^1118^_ to create the experimental flies used in Experiments 2 and 3.   
-
-$~$
-
-**Table S1**: Recipe for food medium used in our experiment. The provided quantities make ~ 1 litre of food.
-
-```{r, food recipe}
-
-tibble("Ingredients" = c("Soy flour", "Cornmeal", "Yeast", "Dextrose", "Agar", "Water", "Tegosept", "Acid mix (4 mL orthophosphoric acid, 41 mL propionic acid, 55 mL water to make 100 mL)"),
-       "Quantity" = c("20 g", "73 g", "35 g", "75 g", "6 g", "1000 mL", "17 mL", "14 mL")) %>% 
-  pander(split.cell = 40, split.table = Inf)
-
-```
-
-$~$
-
-# Data analysis
 
 $~$
 
@@ -160,7 +132,9 @@ remating_data <-
 
 $~$
 
-## Experiment 1: Testing whether the lines exhibit meiotic drive
+# Pilot experiment 
+
+**Confirming that _SD_ exhibits segregation distortion**
 
 $~$
 
@@ -428,9 +402,13 @@ bind_rows(k_c_SD5, k_c_SD72, k_c_SDMAD, k_c_W1118) %>%
 
 $~$
 
-## Experiment 2: Testing the mating success of _SD/+_ males in the presence of a competitor
+# Experiment 1 
 
-### Inspect the raw data
+**Testing the mating success of _SD/+_ males in the presence of a competitor**
+
+$~$
+
+## Inspect the raw data
 
 ```{r}
 
@@ -484,6 +462,14 @@ Successful_male: the male that successfully mated with the female
 Mating_occurred: did the female mate with one of the two males before the experiment ended?
 
 Finish_time: the time in hms at which the Experiment ended.
+
+$~$
+
+## Mating success
+
+$~$
+
+Here we model mating success as a YES/No response variable.
 
 $~$
 
@@ -670,7 +656,9 @@ Mating_success_logodds <-
 
 $~$
 
-### Mating latency
+## Mating latency
+
+$~$
 
 Here we take a more in depth look at mating success by looking at mating latency - the duration between a female's introduction to the competing males' vial and the onset of copulation.
 
@@ -864,7 +852,9 @@ mating_latency_odds + plot_annotation(tag_levels = "a")
 
 $~$
 
-### Copulation duration
+## Copulation duration
+
+$~$
 
 Here we take a more in depth look at mating success by looking at copulation duration - an indicator of male investment in mating.
 
@@ -1055,9 +1045,13 @@ mean_copulation_duration_plot /
 
 $~$
 
-## Experiment 3: Testing sperm competitive success and female remating frequency
+# Experiment 2 
 
-### Inspect the raw data
+**Testing sperm competitive success and female remating frequency**
+
+$~$
+
+## Inspect the raw data
 
 ```{r}
 
@@ -1125,7 +1119,7 @@ Censored: Identical to remating column except in a 1/0 format for survival model
 
 $~$
 
-### A rough look at sperm precedence
+## A rough look at sperm precedence
 
 Take a glance at how mating order affected fertilisation success
 
@@ -1149,7 +1143,7 @@ Take a glance at how mating order affected fertilisation success
 
 $~$
 
-### Measuring P1
+## Measuring P1
 
 Fit the model. 
 
@@ -1343,7 +1337,7 @@ P1_logodds <-
 
 $~$
 
-### Measuring P2
+## Measuring P2
 
 $~$
 
@@ -1537,7 +1531,7 @@ P2_logodds <-
 
 $~$
 
-### Are females that mate first with a male harbouring _SD_ more likely to remate?
+## Are females that mate first with a male harbouring _SD_ more likely to remate?
 
 $~$
 
@@ -1729,7 +1723,7 @@ Remating_logodds <-
 
 $~$
 
-### Remating latency
+## Remating latency
 
 $~$
 
@@ -1931,7 +1925,7 @@ mean_latency_plot /
 
 $~$
 
-### Copulation duration in the first mating role
+## Copulation duration in the first mating role
 
 $~$
 
@@ -2123,7 +2117,7 @@ mean_copulation_duration_plot_1 /
 
 $~$
 
-### Copulation duration in the second mating role
+## Copulation duration in the second mating role
 
 $~$
 
@@ -2315,7 +2309,7 @@ mean_copulation_duration_plot_2 /
 
 $~$
 
-## Building Figure 1
+# Building Figure 1
 
 ```{r, fig.height=11, fig.width= 10}
 
@@ -2328,7 +2322,7 @@ mean_remating_plot + Remating_logodds +
 
 ```
 
-**Figure 1:** The effect of _SD_ on male mating and fertilisation success. Black points indicate the estimated mean, with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. Panels a, c, e and g show results on the response scale, while panels b, d, f, and h show the distribution of the log-odds differences between the _SD_ variants and the control allele; 95% uncertainty intervals that do not overlap zero indicate a significant effect. Panel **a** shows the estimated percentage of males that successfully mated with a _LH~m~_ female, when competing against a single _Lbw_ male. Panel **b** shows effect sizes on the log-odds scale for the _SD_ variants; positive values indicate that _SD/+_ males were more likely to mate than the _+/+_ control males. Panel **c** shows the estimated percentage of offspring sired by males carrying _SD_ or the control allele, when these males mated first (P1). Panel **d** shows effect sizes on the log-odds scale for the _SD_ variants; negative values indicate that _SD/+_ males had lower P1 values than the _+/+_ control males. Panel **e** shows the estimated percentage of offspring sired by males carrying _SD_ or the control allele, when these males mated second (P2). Panel **f** shows effect sizes on the log-odds scale for the _SD_ variants; negative values indicate that _SD/+_ males had lower P2 values than the _+/+_ control males. Panel **g** shows the estimated percentage of females remating with _LH~m~^UBI^_ males in a three-hour period, that had mated with a _SD/+_ or control male four days earlier. Panel **h** shows effect sizes on the log-odds scale for the _SD_ variants; positive values indicate that the mates of _SD/+_ males were more likely to remate than the mates of _+/+_ control males, four days after the first mating.
+**Figure 1**. The effect of _SD_ on male mating success, fertilisation success and female remating propensity. Black points indicate the estimated mean, with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. Panels a, c, e and g show results on the response scale, while panels b, d, f, and h show log-odds differences between the _SD_ variants and the control allele; 95% uncertainty intervals that do not overlap zero indicate a significant effect. 
 
 $~$
 

@@ -10,7 +10,11 @@ editor_options:
 
 $~$
 
-This website presents the R code required to run the analysis for Experiments 1-3 (see Empirical analysis), as well as the code to build and run the population genetic model included in the currently in development manuscript: _Sexual selection and the population genetics of a selfish gene_.
+This website presents the R code required to run the analysis for a pilot experiment,  Experiments 1 and 2 (see Empirical analysis), and the code used to build and run the population genetic model included in the manuscript: _Sexual selection and the population genetics of a selfish gene_.
+
+$~$
+
+## [Supplementary methods](Supp_methods.html)
 
 $~$
 
