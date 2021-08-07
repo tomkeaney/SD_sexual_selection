@@ -14,9 +14,9 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE, cache = FALSE, warning = FALSE, message = FALSE, fig.align = "center")
 ```
 
-Click **[here](https://tomkeaney.github.io/SD_sexual_selection/)** to view the HTML report, which serves as online supplementary material for the associated manuscript (DOI here if accepted...), submitted to _Proceedings of the Royal Society B_. The report is split into two parts. The first documents our empirical analysis, while the second provides an in-depth explanation for how we coded our population genetic model. Together, the report includes all supplementary figures and tables, the R script required to produce the analysis, figures and tables, and the raw data.
+Click **[here](https://tomkeaney.github.io/SD_sexual_selection/)** to view the HTML report, which serves as online supplementary material for the associated manuscript (http://dx.doi.org/10.1098/rspb.2021.1190), submitted to _Proceedings of the Royal Society B_. The report is split into three parts. The first provides the supplementary methods, the second documents our empirical analysis and the third provides an in-depth explanation for how we coded our population genetic model. Together, the report includes all supplementary figures and tables, the R script required to produce the analysis, figures and tables, and the raw data.
 
-In an attempt to future proof the availability of our supplementary material, we also include Table S1-12 and Figures S1-8 in this document. Additionally, our data will also be deposited in the Dryad database **[here](...)** (this link will be supplied if the manuscript is accepted).
+In an attempt to future proof the availability of our supplementary material, we also include the supplementary methods, Table S1-2 and Figures S1-8 in this document. Additionally, our data will be deposited in the Dryad database **[here](...)** (this link will be supplied if the manuscript is accepted).
 
 ```{r, include=FALSE}
 library(png) # to load images
@@ -34,12 +34,23 @@ library(stickylabeller) # for adding annotations to facets
 
 ```
 
-```{r fig.width=6, fig.height=8}
+$~$
 
-img <- readPNG("SD_crossing_scheme.png")
- grid.raster(img)
-```
-**Figure S1.** Crossing scheme used to standardise the genetic background across the _SD-5/+_, _SD-72/+_, _SD-Mad/+_ and _SD+/+_ lines. The _SD+/+_ line was created in identical fashion except that we substituted the  _SD_ bearing chromosome with chromosome 2 from the _w^1118^_ isogenic line. Note that at step four there are three possible options 1) the leftmost genotype can be backcrossed to maintain it in the laboratory, 2) the leftmost genotype can be crossed to a _bw_ stock to produce the experimental flies used in Experiment 1 or 3) the leftmost genotype can be crossed to _w^1118^_ to create the experimental flies used in Experiments 2 and 3.  
+**Pilot experiment: confirming that _SD_ exhibits segregation distortion**
+
+In a pilot experiment, we measured the strength of segregation distortion produced by each of our experimental treatment lines. We crossed females from each of the three _SD/+_ lines and the _+/+_ line to males homozygous for the _bw_ mutation (Figure S1); like _SD_, _bw_ is located on chromosome 2, so this cross yielded _SD/bw_ or _+/bw_ progeny. We then mated 20 _SD/bw_ (or _+/bw_) males from each of the four crosses to _bw/bw_ females, and recorded the eye colour (red or brown) of the resulting female offspring to determine the proportion of offspring fertilised by _SD_- (or +) and _bw_-bearing sperm. Male progeny were not counted because some of them in the reciprocal cross (see below) expressed a white-eye phenotype (due to male hemizygosity and an X-linked mutation of _white_), preventing us from determining which copy of chromosome 2 they inherited. 
+
+_SD_ alleles are commonly associated with viability costs, which might cause underestimation of the strength of segregation distortion. To correct for any such viability costs, we also performed the reciprocal cross ( _SD/+_ females × _bw/bw_ males) and calculated the proportion of offspring inheriting the _SD_ bearing chromosome as above. Because _SD_ does not affect segregation in females, a shortage of adult offspring carrying _SD_ (relative to the 50% Mendelian expectation) indicates reduced survival of _SD_ progeny to adulthood (relative to bw progeny). We calculated the viability-corrected estimate of segregation distortion, _k~c~_, using the formula in [Temin](https://www.ncbi.nlm.nih.gov/pubmed/1906417) (1991, Genetics).
+
+To analyse our results, we fit a binomial model, in which red-eye daughters (i.e. the progeny that inherited the _SD_ or _+_ allele from their _SD/bw_ or _+/bw_ father) were treated as ‘successes’ and the brown-eye daughters as ‘failures’. We included the sex of the experimental individual and the variant of _SD_ (or control) as fixed effects (with the control as the reference level), as well as the interaction between these variables. We also included pair ID as a random effect.
+
+$~$
+
+$~$
+
+$~$
+
+$~$
 
 $~$
 
@@ -53,7 +64,15 @@ tibble("Ingredients" = c("Soy flour", "Cornmeal", "Yeast", "Dextrose", "Agar", "
 
 ```
 
+```{r fig.width=6, fig.height=8}
+
+img <- readPNG("SD_crossing_scheme.png")
+ grid.raster(img)
+```
+**Figure S1.** Crossing scheme used to standardise the genetic background across the _SD-5/+_, _SD-72/+_, _SD-Mad/+_ and _SD+/+_ lines. The _SD+/+_ line was created in identical fashion except that we substituted the  _SD_ bearing chromosome with chromosome 2 from the _w^1118^_ isogenic line. Note that at step four there are three possible options 1) the leftmost genotype can be backcrossed to maintain it in the laboratory, 2) the leftmost genotype can be crossed to a _bw_ stock to produce the experimental flies used in Experiment 1 or 3) the leftmost genotype can be crossed to _w^1118^_ to create the experimental flies used in Experiments 2 and 3.  
+
 $~$
+
 
 ```{r, include= FALSE}
 
@@ -201,17 +220,6 @@ posterior_prediction <-
   as_tibble()
 ```
 
-**Table S2**: the percentage of female offspring that inherited a _SD_ allele from a heterozygous parent _k_, split by the sex of the parent. _SD_ only drives when present in males. n = 14-15 for all groups.
-
-```{r drive test table}
-
-predictions %>% 
-  mutate(`Variant carried` = recode(predictions$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5"),
-         Sex = recode(predictions$Sex, "F" = "Female", "M" = "Male")) %>% 
-  select(`Variant carried`, everything(), -SD) %>% 
-pander(split.cell = 40, split.table = Inf, round = 2)
-```
-
 $~$
 
 ```{r}
@@ -236,8 +244,27 @@ posterior_prediction %>%
 
 $~$
 
-**Table S3**: the viability corrected inheritance (following Temin, 1991) of each _SD_ variant and the control allele from a _SD/+_ (or _+/+_) male.
+$~$
 
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+**Table S2**: the viability corrected inheritance (following Temin, 1991) of each _SD_ variant and the control allele from a _SD/+_ (or _+/+_) male.
 ```{r corrected k values}
 
 post <- posterior_samples(drive_model) %>% 
@@ -314,109 +341,6 @@ bind_rows(k_c_SD5, k_c_SD72, k_c_SDMAD, k_c_W1118) %>%
 
 ```
 
-$~$
-
-```{r mating success model, include=FALSE}
-
-precop_success_model <- 
-  brm(Successful_male ~ SD + (1 | Rearing_vial),
-      data = precop_data, 
-      family = bernoulli,
-      prior = c(prior(normal(0, 5), class = Intercept), 
-                prior(normal(0, 3), class = b)),
-      iter = 8000,
-      warmup = 2000,
-      chains = 4,
-      cores = 4,
-      seed = 2,
-      file = "fits/precop_success_model")
-
-```
-
-```{r Bayes predictions mating success, include=FALSE}
-
-# Define new data for prediction with posteriors
-
-new_posterior_precop_success <-
-  expand.grid(SD = unique(precop_data$SD)) %>% 
-  mutate(id = paste("V", 1:3, sep = "")) %>% 
-  as_tibble()
-
-# Get predicted means
-
-predictions_precop_success <- 
-  as.data.frame(fitted(precop_success_model, newdata = new_posterior_precop_success, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
-  mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = prop_SD_success, -posterior_draw) %>%
-  left_join(new_posterior_precop_success, by = "id") %>%
-  select(-id) %>% 
-  mutate(percent_SD_success = prop_SD_success * 100) %>% 
-  as_tibble() %>% 
-  group_by(SD) %>% 
-  summarise(`Estimated % of males mating` = median(percent_SD_success),
-            `2.5%` = quantile(percent_SD_success, probs = 0.025),
-            `97.5%` = quantile(percent_SD_success, probs = 0.975))
-
-
-# Now get the predicted posterior
-
-posterior_prediction_precop_success <- 
-  as.data.frame(fitted(precop_success_model, newdata = new_posterior_precop_success, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
-  mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = prop_SD_success, -posterior_draw) %>%
-  left_join(new_posterior_precop_success, by = "id") %>%
-  select(-id) %>% 
-  mutate(percent_SD_success = prop_SD_success * 100) %>% 
-  as_tibble()
-
-```
-
-**Table S4a**: the estimated percentage of _SD/+_ or control males that successfully mated with a female when competing with a single _Lbw_ male.
-
-```{r mating success Bayes table}
-predictions_precop_success %>% 
-  mutate(`Variant carried` = recode(predictions_precop_success$SD, "MAD" = "SD-Mad", "72" = "SD-72")) %>% 
-  select(`Variant carried`, everything(), -SD) %>%
-  pander(split.cell = 40, split.table = Inf)
-```
-
-```{r}
-
-# get posterior samples
-
-post_ms <- posterior_samples(precop_success_model)
-
-# now find the differences between the reference level (w1118) and the remaining levels (the SD lines)
-
-# the inv_logit_scaled() function converts the posterior draws onto the response scale 
-
-post_diff_ms <- post_ms %>% 
-  mutate(p_w1118 =  inv_logit_scaled(b_Intercept),
-         p_SD_MAD = inv_logit_scaled(b_SDMAD + b_Intercept),
-         p_SD_72 = inv_logit_scaled(b_SD72 + b_Intercept),
-         `SD-Mad` = p_SD_MAD / p_w1118,
-         `SD-72` = p_SD_72 / p_w1118) %>% 
-  gather(key = `difference comparison`, value = `% difference`) %>% 
-  filter(`difference comparison` == c("SD-Mad", "SD-72"))
-  
-```
-
-**Table S4b**: the mating success of _SD/+_ males relative to the _w^1118^_ control males. A value of 2 means that _SD/+_ males were twice as successful as _w^1118^_ control males.
-
-```{r}
-# Create a table summarising the proportions of offspring sired relative to w1118
-
-post_diff_ms %>% 
-  group_by(`difference comparison`) %>% 
-  summarise(`Mating success relative to w1118`  = mean(`% difference`),
-            `2.5%` = quantile(`% difference`, probs = 0.025),
-            `97.5%` = quantile(`% difference`, probs = 0.975)) %>% 
-  rename(`SD-variant` = `difference comparison`) %>% 
-   pander(split.cell = 40, split.table = Inf, round = 2)
-```
-
-$~$
-
 ```{r, include=FALSE}
 
 
@@ -473,17 +397,6 @@ posterior_prediction_mating_latency <-
 
 ```
 
-$~$
-
-**Table S5a**: the mean time taken for _SD/+_ or control males to start mating with a _LH~m~_ female.
-
-```{r mating latency Bayes table}
-predictions_mating_latency %>%
-  mutate(`Variant carried` = recode(predictions_mating_latency$SD, "MAD" = "SD-Mad", "72" = "SD-72")) %>% 
-  select(`Variant carried`, everything(), -SD) %>%
-  pander(split.cell = 40, split.table = Inf, round = 0)
-```
-
 ```{r, include=FALSE}
 
 # get posterior samples
@@ -504,22 +417,6 @@ post_diff_ml <- post_ml %>%
   gather(key = `difference comparison`, value = proportion) %>% 
   filter(`difference comparison` == c("SD-Mad", "SD-72"))
   
-```
-
-**Table S5b**: the mean mating latency of males that successfully mated with _LH~m~_ females when competing against _Lbw_ males, relative to the _w^1118^_ control males. A value of 0.5 means that males mated in half the time of _w^1118^_ males.
-
-$~$
-
-```{r}
-# Create a table summarising the proportions of offspring sired relative to w1118
-
-post_diff_ml %>% 
-  group_by(`difference comparison`) %>% 
-  summarise(`Mean mating latency relative to w1118`  = mean(proportion),
-            `2.5%` = quantile(proportion, probs = 0.025),
-            `97.5%` = quantile(proportion, probs = 0.975)) %>% 
-  rename(`SD-variant` = `difference comparison`) %>% 
-   pander(split.cell = 40, split.table = Inf, round = 2)
 ```
 
 ```{r, include=FALSE}
@@ -563,13 +460,34 @@ mating_latency_odds <-
 
 ```
 
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
 
 ```{r}
 mean_mating_latency_plot /
 mating_latency_odds + plot_annotation(tag_levels = "a")
 ```
 
-**Figure S3:** the mean time required for an _SD/+_ male to start mating with a _LH~m~_ female and how this compares to _w^1118^_ control males. Panel **a** shows the estimated mating latency for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Negative values indicate that _SD/+_ males mated faster than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
+**Figure S3:** the mean time required for an _SD/+_ male to start mating with a _LH~m~_ female in Experiment 1, and how this compares to _w^1118^_ control males. Panel **a** shows the estimated mating latency for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Negative values indicate that _SD/+_ males mated faster than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
 
 $~$
 
@@ -626,17 +544,6 @@ posterior_prediction_copulation_duration <-
 
 ```
 
-$~$
-
-**Table S6a**: the mean copulation duration when a _SD/+_ or control mated with a _LH~m~_ female.
-
-```{r copulation duration Bayes table}
-predictions_copulation_duration %>%
-  mutate(`Variant carried` = recode(predictions_copulation_duration$SD, "MAD" = "SD-Mad", "72" = "SD-72")) %>% 
-  select(`Variant carried`, everything(), -SD) %>%
-  pander(split.cell = 40, split.table = Inf, round = 1)
-```
-
 ```{r, include=FALSE}
 
 # get posterior samples
@@ -657,22 +564,6 @@ post_diff_cd <- post_cd %>%
   gather(key = `difference comparison`, value = proportion) %>% 
   filter(`difference comparison` == c("SD-Mad", "SD-72"))
   
-```
-
-**Table S6b**: the mean mating latency of _SD/+_ males that successfully mated with _LH~m~_ females when competing against _Lbw_ males, relative to the _w^1118^_ control males. A value of 0.5 means that males mated in half the time of _w^1118^_ males.
-
-$~$
-
-```{r}
-# Create a table summarising the proportions of offspring sired relative to w1118
-
-post_diff_cd %>% 
-  group_by(`difference comparison`) %>% 
-  summarise(`Mean copulation duration relative to w1118`  = mean(proportion),
-            `2.5%` = quantile(proportion, probs = 0.025),
-            `97.5%` = quantile(proportion, probs = 0.975)) %>% 
-  rename(`SD-variant` = `difference comparison`) %>% 
-   pander(split.cell = 40, split.table = Inf, round = 3)
 ```
 
 ```{r}
@@ -721,387 +612,9 @@ mean_copulation_duration_plot /
 (copulation_duration_odds) + plot_annotation(tag_levels = "a")
 ```
 
-**Figure S4:** no difference in the duration of mating between a _SD/+_ male and a _LH~m~_ female, compared to _w^1118^_ control males. Panel **a** shows the estimated copulation duration for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Positive values indicate that _SD/+_ males mated for longer than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
+**Figure S4:** no difference in the duration of mating between a _SD/+_ male and a _LH~m~_ female in Experiment 1, compared to _w^1118^_ control males. Panel **a** shows the estimated copulation duration for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Positive values indicate that _SD/+_ males mated for longer than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
 
 $~$
-
-```{r, include=FALSE}
-
-# filter so that only trials where the SD male mated with the female first are included
-
-sperm_comp_data_P1 <- 
-  sperm_comp_data %>%
-  filter(Mating.Order == "first")
-  
-# fit the model 
-
-sperm_comp_model_P1 <- brm(Treatment.progeny | trials(total_offspring) ~ SD + Block + (1|Vial) +(1|ID),
-                           data = sperm_comp_data_P1, 
-                           family = binomial,
-                           prior = c(prior(normal(0, 5), class = Intercept), 
-                                     prior(normal(0, 3), class = b)),
-                           iter = 8000,
-                           warmup = 2000,
-                           chains = 4,
-                           cores = 4,
-                           seed = 2,
-                           control = list(adapt_delta = 0.99, max_treedepth = 15),
-                           file = "fits/sperm_comp_model_P1")
-
-```
-
-```{r P1 Bayes predictions, include=FALSE}
-
-# Define new data for prediction with posteriors
-
-new_posterior_P1 <-
-  expand.grid(total_offspring = 100, SD = c("W1118", "MAD", "72", "5"), Block = unique(sperm_comp_data_P1$Block)) %>% 
-  mutate(id = paste("V", 1:12, sep = "")) %>% 
-  as_tibble()
-
-predictions_P1 <- 
-  as.data.frame(fitted(sperm_comp_model_P1, newdata = new_posterior_P1, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
-  mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %>%
-  left_join(new_posterior_P1, by = "id") %>%
-  select(-id) %>% 
-  as_tibble() %>% 
-  group_by(SD) %>% 
-  summarise(`Estimated % of offspring sired` = median(percent_focal_offspring),
-            `2.5%` = quantile(percent_focal_offspring, probs = 0.025),
-            `97.5%` = quantile(percent_focal_offspring, probs = 0.975))
-
-
-# Now get the predicted posterior but don't summarise
-
-posterior_prediction_P1 <- 
-  as.data.frame(fitted(sperm_comp_model_P1, newdata = new_posterior_P1, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
-  mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %>%
-  left_join(new_posterior_P1, by = "id") %>%
-  select(-id) %>% 
-  as_tibble()
-
-```
-
-$~$
-
-**Table S7a**: the estimated percentage of offspring sired by _SD/+_ or control males, when they mated first.
-
-```{r P1 Bayes table}
-
-predictions_P1 %>% 
-  mutate(`Variant carried` = recode(predictions_P1$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>% 
-  select(`Variant carried`, everything(), -SD) %>% 
-  pander(split.cell = 40, split.table = Inf, round = 2)
-
-```
-
-
-```{r, include=FALSE}
-
-# get posterior samples
-
-post_P1 <- 
-  posterior_samples(sperm_comp_model_P1) %>% 
-  as_tibble()
-
-# now find the differences between the reference level (w1118) and the remaining levels (the SD lines)
-
-# the inv_logit_scaled() function converts the posterior draws onto the response scale 
-
-post_diff_P1 <- 
-  post_P1 %>% 
-  mutate(p_w1118 =  inv_logit_scaled(b_Intercept),
-         p_SD_MAD = inv_logit_scaled(b_SDMAD + b_Intercept),
-         p_SD_72 = inv_logit_scaled(b_SD72 + b_Intercept),
-         p_SD_5 = inv_logit_scaled(b_SD5 + b_Intercept),
-         `SD-Mad` = p_SD_MAD / p_w1118,
-         `SD-72` = p_SD_72 / p_w1118,
-         `SD-5` = p_SD_5 / p_w1118) %>% 
-  gather(key = `difference comparison`, value = `% difference`) %>% 
-  filter(`difference comparison` == c("SD-Mad", "SD-72", "SD-5"))
-
-```
-
-**Table S7b**: the mean proportion of offspring sired by each _SD_ variant relative to the _w^1118^_ control, when these males mated with _LH~m~_ females first. A value of 0.5 means that the proportion of offspring sired was half that of _w^1118^_ males.
-
-```{r}
-# Create a table summarising the proportions of offspring sired relative to w1118
-
-post_diff_P1 %>% 
-  group_by(`difference comparison`) %>% 
-  summarise(`Mean proportion of offspring sired relative to w1118`  = mean(`% difference`),
-            `2.5%` = quantile(`% difference`, probs = 0.025),
-            `97.5%` = quantile(`% difference`, probs = 0.975)) %>% 
-  rename(`SD-variant` = `difference comparison`) %>% 
-   pander(split.cell = 40, split.table = Inf, round = 2)
-   
-```
-
-```{r, include=FALSE}
-
-# Filter so that only trials where the SD male mated with the female second are included
-
-sperm_comp_data_P2 <- 
-  sperm_comp_data %>%
-  filter(Mating.Order == "second") 
-
-# fit the model
-
-sperm_comp_model_P2 <- brm(Treatment.progeny | trials(total_offspring) ~ SD + Block + (1|Vial) + (1|ID),
-                           data = sperm_comp_data_P2, 
-                           family = binomial,
-                           prior = c(prior(normal(0, 5), class = Intercept), 
-                                     prior(normal(0, 3), class = b)),
-                           iter = 8000,
-                           warmup = 2000,
-                           chains = 4,
-                           cores = 4,
-                           seed = 2,
-                           control = list(adapt_delta = 0.999, max_treedepth = 15),
-                           file = "fits/sperm_comp_model_P2")
-
-```
-
-```{r Bayes predictions P2, include=FALSE}
-  
-# Define new data for prediction with posteriors
-
-new_posterior_P2 <-
-  expand.grid(total_offspring = 100, SD = c("W1118", "MAD", "72", "5"), Block = unique(sperm_comp_data_P2$Block)) %>% 
-  mutate(id = paste("V", 1:12, sep = "")) %>% 
-  as_tibble()
-
-# Get predicted means
-
-predictions_P2 <- 
-  as.data.frame(fitted(sperm_comp_model_P2, newdata = new_posterior_P2, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
-  mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %>%
-  left_join(new_posterior_P2, by = "id") %>%
-  select(-id) %>% 
-  as_tibble() %>% 
-  group_by(SD) %>% 
-  summarise(`Estimated % of offspring sired` = median(percent_focal_offspring),
-            `2.5%` = quantile(percent_focal_offspring, probs = 0.025),
-            `97.5%` = quantile(percent_focal_offspring, probs = 0.975))
-
-
-# Now get the predicted posterior
-
-posterior_prediction_P2 <- 
-  as.data.frame(fitted(sperm_comp_model_P2, newdata = new_posterior_P2, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
-  mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %>%
-  left_join(new_posterior_P2, by = "id") %>%
-  select(-id) %>% 
-  as_tibble()
-
-```
-
-$~$
-
-**Table S8a**: the estimated percentage of offspring sired by _SD/+_ or control males, when they mated second.
-
-```{r P2 Bayes table}
-
-predictions_P2 %>% 
-  mutate(`Variant carried` = recode(predictions_P2$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>% 
-  select(`Variant carried`, everything(), -SD) %>% 
-  pander(split.cell = 40, split.table = Inf, round = 2)
-```
-
-```{r, include=FALSE}
-
-# get posterior samples
-
-post_P2 <- posterior_samples(sperm_comp_model_P2)
-
-# now find the differences between the reference level (w1118) and the remaining levels (the SD lines)
-
-# the inv_logit_scaled() function converts the posterior draws onto the response scale 
-
-post_diff_P2 <- post_P2 %>% 
-  mutate(p_w1118 =  inv_logit_scaled(b_Intercept),
-         p_SD_MAD = inv_logit_scaled(b_SDMAD + b_Intercept),
-         p_SD_72 = inv_logit_scaled(b_SD72 + b_Intercept),
-         p_SD_5 = inv_logit_scaled(b_SD5 + b_Intercept),
-         `SD-Mad` = p_SD_MAD / p_w1118,
-         `SD-72` = p_SD_72 / p_w1118,
-         `SD-5` = p_SD_5 / p_w1118) %>% 
-  gather(key = `difference comparison`, value = `% difference`) %>% 
-  filter(`difference comparison` == c("SD-Mad", "SD-72", "SD-5")) 
-
-```
-
-**Table S8b**: the mean proportion of offspring sired by each _SD_ variant relative to the _w^1118^_ control, when these males mated with _LH~m~_ females second. A value of 0.5 means that the proportion of offspring sired was half that of _w^1118^_ males.
-
-```{r}
-# Create a table summarising the proportions of offspring sired relative to w1118
-
-post_diff_P2 %>% 
-  group_by(`difference comparison`) %>% 
-  summarise(`Mean proportion of offspring sired relative to w1118`  = mean(`% difference`),
-            `2.5%` = quantile(`% difference`, probs = 0.025),
-            `97.5%` = quantile(`% difference`, probs = 0.975)) %>% 
-  rename(`SD-variant` = `difference comparison`) %>% 
-   pander(split.cell = 40, split.table = Inf, round = 3)
-```
-
-```{r, include=FALSE}
-
-remating_model <- 
-  brm(Remating ~ SD + Block + (1|Vial),
-      data = remating_data, 
-      family = bernoulli,
-      prior = c(prior(normal(0, 5), class = Intercept), 
-                prior(normal(0, 3), class = b)),
-      iter = 8000,
-      warmup = 2000,
-      chains = 4,
-      cores = 4,
-      seed = 2,
-      control = list(adapt_delta = 0.99),
-      file = "fits/remating_model")
-
-```
-
-
-```{r Bayes predictions remating, include=FALSE}
-
-# Define new data for prediction with posteriors
-
-new_posterior_remating <-
-  expand.grid(SD = unique(remating_data$SD), Block = unique(remating_data$Block)) %>% 
-  mutate(id = paste("V", 1:12, sep = "")) %>% 
-  as_tibble()
-
-# Get predicted means
-
-predictions_remating <- 
-  as.data.frame(fitted(remating_model, newdata = new_posterior_remating, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
-  mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = prop_females_remating, -posterior_draw) %>%
-  left_join(new_posterior_remating, by = "id") %>%
-  select(-id) %>% 
-  mutate(percent_females_remating = prop_females_remating * 100) %>% 
-  as_tibble() %>% 
-  group_by(SD, Block) %>% 
-  summarise(`Estimated % of mates remating` = median(percent_females_remating),
-            `2.5%` = quantile(percent_females_remating, probs = 0.025),
-            `97.5%` = quantile(percent_females_remating, probs = 0.975))
-
-
-# Now get the predicted posterior
-
-posterior_prediction_remating <- 
-  as.data.frame(fitted(remating_model, newdata = new_posterior_remating, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
-  mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = prop_females_remating, -posterior_draw) %>%
-  left_join(new_posterior_remating, by = "id") %>%
-  select(-id) %>% 
-  mutate(percent_females_remating = prop_females_remating * 100) %>% 
-  as_tibble()
-
-```
-
-$~$
-
-**Table S9a**: the estimated percentage of females that remated that were first mated to a _SD/+_ or control male.
-
-```{r remating Bayes table}
-predictions_remating %>% 
-  mutate(`Variant carried` = SD) %>% 
-  mutate(`Variant carried` = recode(SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>% 
-  ungroup() %>% 
-  select(`Variant carried`, everything(), -SD) %>%
-  pander(split.cell = 40, split.table = Inf)
-```
-
-
-```{r}
-
-# get posterior samples
-
-post_r <- posterior_samples(remating_model)
-
-# now find the differences between the reference level (w1118) and the remaining levels (the SD lines)
-
-# the inv_logit_scaled() function converts the posterior draws onto the response scale 
-
-post_diff_r <- post_r %>% 
-  mutate(p_w1118 =  inv_logit_scaled(b_Intercept),
-         p_SD_MAD = inv_logit_scaled(b_SDMAD + b_Intercept),
-         p_SD_72 = inv_logit_scaled(b_SD72 + b_Intercept),
-         p_SD_5 = inv_logit_scaled(b_SD5 + b_Intercept),
-         `SD-Mad` = p_SD_MAD / p_w1118,
-         `SD-72` = p_SD_72 / p_w1118,
-         `SD-5` = p_SD_5 / p_w1118) %>% 
-  gather(key = `difference comparison`, value = `% difference`) %>% 
-  filter(`difference comparison` == c("SD-Mad", "SD-72", "SD-5"))
-  
-```
-
-**Table S9b**: the mean proportion of mates remating with _LH~m~^UBI^_ males for _SD/+_ males relative to the _w^1118^_ control males. A value of 2 means that remating was twice as likely when females initially mated with a _SD/+_ male compared with a _w^1118^_ male.
-
-```{r}
-# Create a table summarising the proportions of offspring sired relative to w1118
-
-post_diff_r %>% 
-  group_by(`difference comparison`) %>% 
-  summarise(`Mean proportion of mates remating relative to w1118`  = mean(`% difference`),
-            `2.5%` = quantile(`% difference`, probs = 0.025),
-            `97.5%` = quantile(`% difference`, probs = 0.975)) %>% 
-  rename(`SD-variant` = `difference comparison`) %>% 
-   pander(split.cell = 40, split.table = Inf, round = 2)
-```
-
-$~$
-
-```{r}
-
-mean_remating_plot <-
-  posterior_prediction_remating %>%
-  mutate(SD = recode(posterior_prediction_remating$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
-  filter(Block == "1") %>% # here we select data from the first block to make the plot look nicer - this doesn't affect the differences between each SD variant and the control, it just shrinks the uncertainty that occurs because of differences between blocks
-  ggplot(aes(SD, percent_females_remating)) + 
-  stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
-  coord_flip() +
-  ylab("Estimated % of females that mated twice") +
-  xlab("Male variant mated to first") +
-  theme_bw() + 
-  theme(legend.position = "none",
-        panel.grid.minor = element_blank())
-
-```
-
-```{r}
-
-Remating_logodds <-
-  post_r %>% 
-  mutate(`SD-Mad` = b_SDMAD,
-         `SD-72` = b_SD72,
-         `SD-5` = b_SD5) %>% 
-  gather(key = parameter, value = logodds) %>% 
-  filter(parameter == c("SD-Mad", "SD-72", "SD-5")) %>%
-  as_tibble() %>%
-  mutate(parameter =factor(parameter, levels=c("SD-Mad", "SD-72", "SD-5"))) %>%
-  
-  ggplot(aes(parameter, logodds)) + 
-  stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
-  coord_flip() +
-  geom_hline(yintercept = 0, linetype = 2) +
-  scale_y_continuous("Log-odds difference from w1118",
-                     breaks = c(-1, 0, 1, 2, 3)) +
-  xlab(NULL) +
-  theme_bw() + 
-  theme(legend.position = "none",
-        panel.grid.minor = element_blank()) 
-  
-```
 
 ```{r}
 
@@ -1158,18 +671,6 @@ posterior_prediction_remating_latency <-
 
 ```
 
-**Table S10a**: the estimated time taken for females to remate, when provided with an opportunity, four days after initially mating with a _SD/+_ or control male.
-
-```{r remating latency Bayes table}
-
-  predictions_remating_latency %>%
-  #mutate(`Variant carried` = SD) %>% 
-  mutate(`Variant carried` = fct_recode(SD, "SD-Mad" = "MAD", "SD-72" = "72", "SD-5" = "5")) %>% 
-  ungroup() %>% 
-  select(`Variant carried`, Block, `Estimated time to remating (mins)`, `2.5%`, `97.5%`) %>%
-  pander(split.cell = 40, split.table = Inf, round = 1)
-```
-
 ```{r}
 
 # get posterior samples
@@ -1192,20 +693,6 @@ post_diff_l <- post_l %>%
   gather(key = `difference comparison`, value = proportion) %>% 
   filter(`difference comparison` == c("SD-Mad", "SD-72", "SD-5"))
   
-```
-
-**Table S10b**: the mean remating latency of females that initially mated with _SD/+_ males, relative to the _w^1118^_ control males. A value of 0.5 means that females remated in half the time of females that initially mated with a _w^1118^_ male.
-
-```{r}
-# Create a table summarising the proportions of offspring sired relative to w1118
-
-post_diff_l %>% 
-  group_by(`difference comparison`) %>% 
-  summarise(`Mean remating latency relative to w1118`  = mean(proportion),
-            `2.5%` = quantile(proportion, probs = 0.025),
-            `97.5%` = quantile(proportion, probs = 0.975)) %>% 
-  rename(`SD-variant` = `difference comparison`) %>% 
-   pander(split.cell = 40, split.table = Inf, round = 2)
 ```
 
 ```{r}
@@ -1258,7 +745,7 @@ mean_latency_plot /
 (latency_odds) + plot_annotation(tag_levels = "a")
 ```
 
-**Figure S5:** the effect that _SD/+_ males have on female remating latency and how this compares to _w^1118^_ control males. Panel **a** shows the estimated remating latency for females exposed to _LH~m~^UBI^_ males over a three-hour period, that had mated with a _SD/+_ or control male four days earlier. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Negative values indicate that the mates of _SD/+_ males remated faster than the mates of _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
+**Figure S5:** the effect that _SD/+_ males had on female remating latency in Experiment 2, and how this compares to _w^1118^_ control males. Panel **a** shows the estimated remating latency for females exposed to _LH~m~^UBI^_ males over a three-hour period, that had mated with a _SD/+_ or control male four days earlier. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Negative values indicate that the mates of _SD/+_ males remated faster than the mates of _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
 
 $~$
 
@@ -1318,15 +805,6 @@ posterior_prediction_copulation_duration_1 <-
   as_tibble()
 ```
 
-**Table S11a**: the mean copulation duration when a _SD/+_ male mated with a _LH~m~_ female in the first mating role.
-
-```{r}
-predictions_copulation_duration_1 %>%
-  mutate(`Variant carried` = recode(predictions_copulation_duration_1$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>% 
-  select(`Variant carried`, everything(), -SD) %>%
-  pander(split.cell = 40, split.table = Inf, round = 1)
-```
-
 ```{r}
 # get posterior samples
 
@@ -1348,22 +826,6 @@ post_diff_cd_1 <- post_cd_1 %>%
   gather(key = `difference comparison`, value = proportion) %>% 
   filter(`difference comparison` == c("SD-Mad", "SD-72", "SD-5"))
 ```
-
-**Table S11b**: the mean copulation duration for _SD/+_ males that mated with a _LH~m~_ female in the second mating role, relative to the _w^1118^_ control males. A value of 0.5 means that males mated for half the time of _w^1118^_ males.
-
-```{r}
-# Create a table summarising the proportions of offspring sired relative to w1118
-
-post_diff_cd_1 %>% 
-  group_by(`difference comparison`) %>% 
-  summarise(`Mean copulation duration relative to w1118`  = mean(proportion),
-            `2.5%` = quantile(proportion, probs = 0.025),
-            `97.5%` = quantile(proportion, probs = 0.975)) %>% 
-  rename(`SD-variant` = `difference comparison`) %>% 
-   pander(split.cell = 40, split.table = Inf, round = 3)
-```
-
-$~$
 
 ```{r}
 mean_copulation_duration_plot_1 <-
@@ -1410,7 +872,7 @@ mean_copulation_duration_plot_1 /
 (copulation_duration_odds_1) + plot_annotation(tag_levels = "a")
 ```
 
-**Figure S6**: no difference in the duration of mating between a _SD/+_ male and a _LH~m~_ female, compared to _w^1118^_ control males, when the _SD/+_ (or control) male mated first. Panel **a** shows the estimated copulation duration for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_-variants. Positive values indicate that _SD/+_ males mated for longer than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
+**Figure S6**: no difference in the duration of mating between a _SD/+_ male and a _LH~m~_ female in Experiment 2, compared to _w^1118^_ control males, when the _SD/+_ (or control) male mated first. Panel **a** shows the estimated copulation duration for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_-variants. Positive values indicate that _SD/+_ males mated for longer than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
 
 $~$
 
@@ -1470,15 +932,6 @@ posterior_prediction_copulation_duration_2 <-
   as_tibble()
 ```
 
-**Table S12a**: the mean copulation duration when a _SD/+_ male mated with a _LH~m~_ female in the second mating role.
-
-```{r}
-predictions_copulation_duration_2 %>%
-  mutate(`Variant carried` = recode(predictions_copulation_duration_2$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>% 
-  select(`Variant carried`, everything(), -SD) %>%
-  pander(split.cell = 40, split.table = Inf, round = 1)
-```
-
 ```{r}
 # get posterior samples
 
@@ -1499,22 +952,6 @@ post_diff_cd_2 <- post_cd_2 %>%
          `SD-5` = p_SD_5 / p_w1118) %>% 
   gather(key = `difference comparison`, value = proportion) %>% 
   filter(`difference comparison` == c("SD-Mad", "SD-72", "SD-5"))
-```
-
-**Table S12b**: the mean copulation duration for _SD/+_ males that mated with a _LH~m~_ female in the second mating role, relative to the _w^1118^_ control males. A value of 0.5 means that males mated for half the time of _w^1118^_ males.
-
-$~$
-
-```{r}
-# Create a table summarising the proportions of offspring sired relative to w1118
-
-post_diff_cd_2 %>% 
-  group_by(`difference comparison`) %>% 
-  summarise(`Mean copulation duration relative to w1118`  = mean(proportion),
-            `2.5%` = quantile(proportion, probs = 0.025),
-            `97.5%` = quantile(proportion, probs = 0.975)) %>% 
-  rename(`SD-variant` = `difference comparison`) %>% 
-   pander(split.cell = 40, split.table = Inf, round = 3)
 ```
 
 ```{r}
@@ -1562,19 +999,19 @@ mean_copulation_duration_plot_2 /
 (copulation_duration_odds_2) + plot_annotation(tag_levels = "a")
 ```
 
-**Figure S7**: mating duration between a _SD/+_ male and a _LH~m~_ female, compared to _w^1118^_ control males, when the _SD/+_ (or control) male mated second. Panel **a** shows the estimated copulation duration for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Positive values indicate that _SD/+_ males mated for longer than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
+**Figure S7**: mating duration between a _SD/+_ male and a _LH~m~_ female pair in Experiment 2, compared to _w^1118^_ control males, when the _SD/+_ (or control) male mated second. Panel **a** shows the estimated copulation duration for _SD/+_ and control males. Panel **b** shows effect sizes on the odds scale for the _SD_ variants. Positive values indicate that _SD/+_ males mated for longer than _w^1118^_ control males. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution.
 
 $~$
 
-```{r Enter estimated parameter values, include=FALSE}
+```{r Enter estimated parameter values}
 
 # k_c values
 
-estimated_k_SD5 <- 0.942 # 94.4% of progeny inherit SD #0.944
+estimated_k_SD5 <- 0.944 # 94.4% of progeny inherit SD 
 
-estimated_k_SD72 <- 0.911 # 90.9% of progeny inherit SD #0.909
+estimated_k_SD72 <- 0.909 # 90.9% of progeny inherit SD 
 
-estimated_k_SDMAD <- 0.867 # 86.8% of progeny inherit SD #0.868
+estimated_k_SDMAD <- 0.868 # 86.8% of progeny inherit SD
 
 # The relative mating success for each SD variant
 
@@ -1586,27 +1023,53 @@ estimated_precop_SDMAD <- 1.19
 
 # P1cost and P2cost values, plugged in from Table S7b and Table S8b
 
-P1_SD5 <- 1 - 0.15 # 0.15
+P1_SD5 <- 1 - 0.15 
 
-P2_SD5 <- 1 - 0.945 # 0.945
+P2_SD5 <- 1 - 0.945 
 
-P1_SD72 <- 1 - 0.43 # 0.43
+P1_SD72 <- 1 - 0.43 
 
-P2_SD72 <- 1 - 0.997 # 0.997
+P2_SD72 <- 1 - 0.997 
 
-P1_SDMAD <- 1 - 0.39 # 0.39
+P1_SDMAD <- 1 - 0.39 
 
 P2_SDMAD <- 0 # no cost
 
+# We also include 95% credible intervals for P1 and P2 cost, to use in Figure 2 and Figure S8
+
+lower_P1_SD5 <- 1 - 0.02 
+
+lower_P2_SD5 <- 1 - 0.855
+
+lower_P1_SD72 <- 1 - 0.05 
+
+lower_P2_SD72 <- 1 - 0.969 
+
+lower_P1_SDMAD <-  NA #1 - 0.04 essentially identical to SD-72 so to avoid clutter in our figures we don't include this value
+
+lower_P2_SDMAD <- 0 # no cost
+
+upper_P1_SD5 <- 1 - 0.6
+
+upper_P2_SD5 <- 1 - 0.997
+
+upper_P1_SD72 <- 0 # no cost
+
+upper_P2_SD72 <- 0 # no cost
+
+upper_P1_SDMAD <- 0 # no cost
+
+upper_P2_SDMAD <- 0 # no cost
+
 # Remating probabilities from Table S9a, using estimates from Block 1
 
-estimated_prob_remating_W = 0.3061 # 0.30
+estimated_prob_remating_W = 0.304 
 
-estimated_prob_remating_SD5 = 0.753 # 0.75
+estimated_prob_remating_SD5 = 0.755 
 
-estimated_prob_remating_SD72 = 0.425 # 0.43
+estimated_prob_remating_SD72 = 0.425 
 
-estimated_prob_remating_SDMAD = 0.425 # 0.43
+estimated_prob_remating_SDMAD = 0.429
 
 # Create a tibble containing empirical estimates
 
@@ -1615,7 +1078,11 @@ empirical_estimates <-
          kc = c(estimated_k_SD5, estimated_k_SD72, estimated_k_SDMAD),
          Precop = c(estimated_precop_SD5, estimated_precop_SD72, estimated_precop_SDMAD),
          P1cost = c(P1_SD5, P1_SD72, P1_SDMAD),
+         lower_P1cost = c(lower_P1_SD5, lower_P1_SD72, lower_P1_SDMAD),
+         upper_P1cost = c(upper_P1_SD5, upper_P1_SD72, upper_P1_SDMAD),
          P2cost = c(P2_SD5, P2_SD72, P2_SDMAD),
+         lower_P2cost = c(lower_P2_SD5, lower_P2_SD72, lower_P2_SDMAD),
+         upper_P2cost = c(upper_P2_SD5, upper_P2_SD72, upper_P2_SDMAD),
          remating_prob = c(estimated_prob_remating_SD5, estimated_prob_remating_SD72, estimated_prob_remating_SDMAD))
 
 
@@ -1693,7 +1160,7 @@ parameters <- rbind(
 ) %>% mutate(parameter_space_ID = row_number())
 
 
-# Combine the SD freqs with the parameter data and transform data to improve clarity
+# Combine the SD frequencies with the parameter data and transform data to improve clarity
 
 plotting_data <- parameters %>%
   mutate(prop_SD = final_SD_props_among_adults,
@@ -1703,13 +1170,18 @@ plotting_data <- parameters %>%
   mutate(remating_ratio = round(remating_ratio, digits = 1))
 
 
+# Transform our empirical estimates to match the plotting data  
 
 empirical_estimates_0.5 <-
   empirical_estimates %>% 
-  mutate(W_remating_prob = 0.3061,
+  mutate(W_remating_prob = 0.30,
          normalP1 = 0.5,
          P1_actual = (normalP1 -  P1cost * normalP1) * 100,
+         lower_P1_actual = (normalP1 -  lower_P1cost * normalP1) * 100,
+         upper_P1_actual = (normalP1 -  upper_P1cost * normalP1) * 100,
          P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)) * 100,
+         lower_P2_actual = ((1 - normalP1) - lower_P2cost * (1 - normalP1)) * 100,
+         upper_P2_actual = ((1 - normalP1) - upper_P2cost * (1 - normalP1)) * 100,
          remating_ratio = remating_prob / estimated_prob_remating_W) %>% 
   mutate(remating_ratio = round(remating_ratio, digits = 1))
 
@@ -1720,24 +1192,34 @@ empirical_estimates_0.5 <-
   rename(`Wildtype P1` = normalP1,
          `Relative risk of sperm competition` = remating_ratio,
          `Relative mating success` = S_precop_WSD_male) %>% 
-  filter(k == 0.942, `Wildtype P1` == 0.5) %>% 
-  ggplot(aes(x = P1_actual, y = P2_actual, fill = 100 * prop_SD)) +
-  geom_blank() +
-  geom_raster() + 
-  stat_contour(aes(z = 100 * prop_SD), colour = "grey10", binwidth = 5) +
-  geom_point(data = empirical_estimates_0.5,
-             aes(x = P1_actual, y = P2_actual), 
-             pch = 21, fill = "#eb7f86", colour = "grey10", size = 2.5) +
-  facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
+  filter(k == 0.944, `Wildtype P1` == 0.5) %>% 
+ ggplot(aes(x = P1_actual, y = P2_actual)) +
+    geom_blank() +
+    geom_raster(aes(fill = 100 * prop_SD)) + 
+    stat_contour(aes(z = 100 * prop_SD), colour = "black", binwidth = 10) +
+    stat_contour(aes(z = 100 * prop_SD), colour = "black", breaks = 8, linetype = 2) +
+    geom_errorbar(data = empirical_estimates_0.5,
+                  aes(x = P1_actual, ymin = lower_P2_actual, ymax = upper_P2_actual),
+                  width = 2, colour = "grey11", alpha = 0.8) +
+    geom_errorbarh(data = empirical_estimates_0.5,
+                   aes(y = P2_actual, xmin = lower_P1_actual, xmax = upper_P1_actual),
+                   colour = "grey11", alpha = 0.8, height = 2) +
+    geom_point(data = empirical_estimates_0.5,
+               aes(x = P1_actual, y = P2_actual), 
+               pch = 21, fill = "#eb7f86", colour = "grey11", size = 3) +
+    facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
                scales = "free", nrow = 3, strip.position = c("top"),
                labeller = label_glue('({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}')) +
-  labs(x = "% offspring sired by SD/+ male in the first mating role (P1)", 
-       y = "% offspring sired by SD/+ male in the second mating role (P2)") +
-  scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
-  scale_x_continuous(expand = c(0, 0)) + 
-  scale_y_continuous(expand = c(0, 0)) +   # , labels = c(0, 0.25, 0.5, 0.75, 1)
-  theme(panel.border = element_rect(fill = NA, colour = "black", size = .8),
-        strip.background = element_rect(colour = "black", fill = "Aliceblue", size = .8)))
+    #annotate("text", label = c("italic(SD-5)", "italic(SD-Mad)", "italic(SD-72)"),
+    #x = c(1.5, 3, 5.2), y = c(80, 90, 88), size = 5, colour = "black", parse = TRUE) +
+    labs(x = "% offspring sired by SD/+ male in the first mating role (P1)",
+         y = "% offspring sired by SD/+ male in the second mating role (P2)") +
+    scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + # labels = c(0, 25, 50, 75, 90)) +
+    theme(panel.border = element_rect(fill = NA, colour = "black", size = .8),
+          strip.background = element_rect(colour = "black", fill = "Aliceblue", size = .8))
+)
 ```
 
-**Figure S8**: predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 5% contour lines). The plot is split into nine panels, with varying levels of _SD/+_ male mating success across the rows and increasing likelihoods of a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the columns. The three orange points in each panel represent males carrying the _SD-5_ (leftmost point), and _SD-72_ and _SD-Mad_ (rightmost points) alleles; these points show where males carrying these alleles fall in the figure’s parameter space, as measured in Experiment 2. In the parameter space presented here, $k$ = 0.944 (our highest estimated value), $P1_{normal}$ = 0.5, _SD_ homozygotes are non-viable and _SD_ heterozygotes suffer no fitness costs outside of mating success and sperm competition.
+**Figure S8**: Predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 10% contour lines). The dashed line shows an equilibrium frequency of 8%, the upper estimate for _SD_ alleles in natural populations. The plot is split into nine panels, with varying levels of _SD/+_ male mating success across the rows and increasing likelihoods of a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the columns. The three orange points (with associated 95% credible intervals) in each panel represent males carrying the _SD-5_ (leftmost point), and _SD-72_ and _SD-Mad_ (rightmost points) alleles; these points show where males carrying these alleles fall in the figure’s parameter space, as measured in Experiment 2. In the parameter space presented here, $k$ = 0.944 (our highest estimated value), $P1_{normal}$ = 0.5, _SD_ homozygotes are non-viable and _SD_ heterozygotes suffer no fitness costs outside of mating success and sperm competition.
