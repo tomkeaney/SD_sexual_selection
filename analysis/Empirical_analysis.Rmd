@@ -310,7 +310,7 @@ posterior_prediction %>%
 
 $~$
 
-From these predictions we can calculate viability corrected estimates of _k_ using the formula presented in [Temin](https://www.ncbi.nlm.nih.gov/pubmed/1906417) (1991, Genetics).
+From these predictions we can calculate viability corrected estimates of _k_ using the formula presented in [Temin (1991, Genetics)](https://www.ncbi.nlm.nih.gov/pubmed/1906417).
 
 _k~c~_ = number of SD progeny / (number of SD progeny + (number of bw progeny / _W_ ))
 
@@ -451,7 +451,7 @@ Rearing_vial: the vial the individual male developed in. This variable is includ
 
 Experiment_start: I started data collection for Experiment 2 on the 10/12/2020 at 09:42 AEDT - lights were turned on at 07:00 AEDT.
 
-Enter_time: the time in seconds after the start of the experiment that a female was introduced into a vial containing a _SD/+_ or control (_w^1118^_) male and a _LBw_ male e.g. a value of 270 indicates that the female was added to the vial 270 seconds after the start of the experiment.
+Enter_time: the time in seconds after the start of the experiment that a female was introduced into a vial containing a _SD/+_ or control (_w^1118^_) male and a _Lbw_ male e.g. a value of 270 indicates that the female was added to the vial 270 seconds after the start of the experiment.
 
 Copulation_latency: the time in seconds from a females entrance to a vial to the onset of copulation (Mating_start_time - Enter_time).
 
@@ -554,7 +554,7 @@ posterior_prediction_precop_success <-
 
 $~$
 
-The estimated percentage of _SD/+_ or control males that successfully mated with a female when competing with a single _LBw_ male.
+The estimated percentage of _SD/+_ or control males that successfully mated with a female when competing with a single _Lbw_ male.
 
 ```{r mating success Bayes table}
 predictions_precop_success %>% 
