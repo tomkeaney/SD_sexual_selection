@@ -14,6 +14,7 @@
 
 <title>Sexual selection and the population genetics of a selfish gene</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -64,6 +65,8 @@ div.section {
   padding-top: 12px;
 }
 </style>
+
+
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -417,7 +420,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-06-02
+<strong>Last updated:</strong> 2021-08-07
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -465,7 +468,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongSeedstrongcodesetseed20200925code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20200925)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20200925)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
@@ -508,16 +511,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree204ad9233d25660bc05fa5f52499c50c06a823c1targetblank204ad92a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/204ad9233d25660bc05fa5f52499c50c06a823c1" target="_blank">204ad92</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree94fc3208e19d5697e4023bfc68702aeb698f5773targetblank94fc320a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/94fc3208e19d5697e4023bfc68702aeb698f5773" target="_blank">94fc320</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree204ad9233d25660bc05fa5f52499c50c06a823c1targetblank204ad92a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree94fc3208e19d5697e4023bfc68702aeb698f5773targetblank94fc320a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/204ad9233d25660bc05fa5f52499c50c06a823c1" target="_blank">204ad92</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/94fc3208e19d5697e4023bfc68702aeb698f5773" target="_blank">94fc320</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -530,13 +533,46 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.Rapp.history
+    Ignored:    simulation_results/.DS_Store
 
 Unstaged changes:
-    Modified:   SD_crossing_scheme.png
     Modified:   Supplementary_material.Rmd
     Modified:   Supplementary_material.pdf
-    Modified:   analysis/_site.yml
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/Supp_methods.Rmd
+    Modified:   simulation_results/output.rds
+    Modified:   simulation_results/output1.rds
+    Modified:   simulation_results/output10.rds
+    Modified:   simulation_results/output11.rds
+    Modified:   simulation_results/output12.rds
+    Modified:   simulation_results/output13.rds
+    Modified:   simulation_results/output14.rds
+    Modified:   simulation_results/output15.rds
+    Modified:   simulation_results/output16.rds
+    Modified:   simulation_results/output17.rds
+    Modified:   simulation_results/output18.rds
+    Modified:   simulation_results/output19.rds
+    Modified:   simulation_results/output2.rds
+    Modified:   simulation_results/output20.rds
+    Modified:   simulation_results/output21.rds
+    Modified:   simulation_results/output22.rds
+    Modified:   simulation_results/output23.rds
+    Modified:   simulation_results/output24.rds
+    Modified:   simulation_results/output25.rds
+    Modified:   simulation_results/output26.rds
+    Modified:   simulation_results/output27.rds
+    Modified:   simulation_results/output28.rds
+    Modified:   simulation_results/output29.rds
+    Modified:   simulation_results/output3.rds
+    Modified:   simulation_results/output30.rds
+    Modified:   simulation_results/output31.rds
+    Modified:   simulation_results/output32.rds
+    Modified:   simulation_results/output33.rds
+    Modified:   simulation_results/output4.rds
+    Modified:   simulation_results/output5.rds
+    Modified:   simulation_results/output6.rds
+    Modified:   simulation_results/output7.rds
+    Modified:   simulation_results/output8.rds
+    Modified:   simulation_results/output9.rds
 
 </code></pre>
 <p>
@@ -575,6 +611,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/94fc3208e19d5697e4023bfc68702aeb698f5773/analysis/Empirical_analysis.Rmd" target="_blank">94fc320</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-07
+</td>
+<td>
+fixes in response to reviewer comments
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tomkeaney/SD_sexual_selection/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/Empirical_analysis.html" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1029,6 +1099,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/diagnostic drive test plot-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/diagnostic drive test plot-1.png" target="_blank">bfbb766</a>
 </td>
 <td>
@@ -1220,6 +1301,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-6-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-6-1.png" target="_blank">bfbb766</a>
 </td>
 <td>
@@ -1235,7 +1327,7 @@ tomkeaney
 </div>
 <p><strong>Figure S2</strong>: The estimated percentage of female offspring that inherited an <em>SD</em> allele from a heterozygous parent, split by the sex of the parent. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. The dotted line indicates 50% inheritance; the expectation in the absence of segregation distortion.</p>
 <p><span class="math inline">\(~\)</span></p>
-<p>From these predictions we can calculate viability corrected estimates of <em>k</em> using the formula presented in <a href="https://www.ncbi.nlm.nih.gov/pubmed/1906417">Temin</a> (1991, Genetics).</p>
+<p>From these predictions we can calculate viability corrected estimates of <em>k</em> using the formula presented in <a href="https://www.ncbi.nlm.nih.gov/pubmed/1906417">Temin (1991, Genetics)</a>.</p>
 <p><em>k<sub>c</sub></em> = number of SD progeny / (number of SD progeny + (number of bw progeny / <em>W</em> ))</p>
 <p>Where <em>W</em> represents the transmission of the <em>SD</em> allele through females and is defined by:</p>
 <p><em>W</em> = number of <em>bw</em> progeny / number of <em>SD</em> progeny</p>
@@ -1397,7 +1489,7 @@ my_data_table(precop_data)</code></pre>
 <p>SD: the variant of the SD allele (or control allele) the experimental individual carried, homologous to the second chromosome carrying the <em>bw</em> mutation.</p>
 <p>Rearing_vial: the vial the individual male developed in. This variable is included to capture variation explained by the rearing environment e.g. small differences in food moisture content or quantity.</p>
 <p>Experiment_start: I started data collection for Experiment 2 on the 10/12/2020 at 09:42 AEDT - lights were turned on at 07:00 AEDT.</p>
-<p>Enter_time: the time in seconds after the start of the experiment that a female was introduced into a vial containing a <em>SD/+</em> or control (<em>w<sup>1118</sup></em>) male and a <em>LBw</em> male e.g. a value of 270 indicates that the female was added to the vial 270 seconds after the start of the experiment.</p>
+<p>Enter_time: the time in seconds after the start of the experiment that a female was introduced into a vial containing a <em>SD/+</em> or control (<em>w<sup>1118</sup></em>) male and a <em>Lbw</em> male e.g. a value of 270 indicates that the female was added to the vial 270 seconds after the start of the experiment.</p>
 <p>Copulation_latency: the time in seconds from a females entrance to a vial to the onset of copulation (Mating_start_time - Enter_time).</p>
 <p>Copulation_duration: the time in seconds that the female mated with one of the two males (Mating_end_time - Mating_start_time).</p>
 <p>Successful_male: the male that successfully mated with the female</p>
@@ -1499,6 +1591,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/diagnostic mating success plot-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/diagnostic mating success plot-1.png" target="_blank">bfbb766</a>
 </td>
 <td>
@@ -1559,7 +1662,7 @@ posterior_prediction_precop_success &lt;-
   mutate(percent_SD_success = prop_SD_success * 100) %&gt;% 
   as_tibble()</code></pre>
 <p><span class="math inline">\(~\)</span></p>
-<p>The estimated percentage of <em>SD/+</em> or control males that successfully mated with a female when competing with a single <em>LBw</em> male.</p>
+<p>The estimated percentage of <em>SD/+</em> or control males that successfully mated with a female when competing with a single <em>Lbw</em> male.</p>
 <pre class="r"><code>predictions_precop_success %&gt;% 
   mutate(`Variant carried` = recode(predictions_precop_success$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;)) %&gt;% 
   select(`Variant carried`, everything(), -SD) %&gt;%
@@ -1790,6 +1893,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/diagnostic mating latency plot-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/diagnostic mating latency plot-1.png" target="_blank">bfbb766</a>
 </td>
 <td>
@@ -2015,6 +2129,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-17-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-17-1.png" target="_blank">bfbb766</a>
 </td>
 <td>
@@ -2120,6 +2245,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/diagnostic copulation duration plot-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/diagnostic copulation duration plot-1.png" target="_blank">bfbb766</a>
@@ -2345,6 +2481,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-23-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-23-1.png" target="_blank">bfbb766</a>
@@ -2595,6 +2742,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/diagnostic P1 plot-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/diagnostic P1 plot-1.png" target="_blank">bfbb766</a>
@@ -2929,6 +3087,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/diagnostic P2 plot-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/diagnostic P2 plot-1.png" target="_blank">bfbb766</a>
 </td>
 <td>
@@ -3251,6 +3420,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/diagnostic remating plot-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/diagnostic remating plot-1.png" target="_blank">bfbb766</a>
@@ -3643,6 +3823,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/diagnostic survival plot-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/diagnostic survival plot-1.png" target="_blank">bfbb766</a>
 </td>
 <td>
@@ -3947,6 +4138,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-45-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-45-1.png" target="_blank">bfbb766</a>
 </td>
 <td>
@@ -4080,6 +4282,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-47-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-47-1.png" target="_blank">bfbb766</a>
@@ -4309,6 +4522,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-54-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-54-1.png" target="_blank">bfbb766</a>
 </td>
 <td>
@@ -4442,6 +4666,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-56-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-56-1.png" target="_blank">bfbb766</a>
@@ -4671,6 +4906,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-63-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-63-1.png" target="_blank">bfbb766</a>
 </td>
 <td>
@@ -4719,6 +4965,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-64-1.png" target="_blank">9a9d650</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/bfbb766ecab13ca6424dc808319c92afb02df293/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-64-1.png" target="_blank">bfbb766</a>
@@ -4835,6 +5092,8 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
+
+
 
 
 </div>
