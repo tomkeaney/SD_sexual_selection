@@ -1161,7 +1161,7 @@ empirical_estimates_0.1 <-
 
 $~$
 
-We measured P1 and P2 with a set interval of four days between matings. While we found that many females did not remate within the three-hour allotted mating period, many studies show that a low % of females will remate much faster than this, and that the interval between matings affects P1 and P2. Matings that occur closer temporally result in higher P1 values (e.g. [Laturney, Eijk and Billeter](https://dx.doi.org/10.1002/evl3.50), 2018, _Evolution Letters_). In addition, many populations/species do not exhibit the extreme second male precedence we observed in our study. Therefore, we also modelled the scenario where there was no effect of mating order on fertilisation success, that is $P1_{normal}$ = 0.5. The results are shown in **Figure S8** below.
+We measured P1 and P2 with a set interval of four days between matings. While we found that many females did not remate within the three-hour allotted mating period, many studies show that a low % of females will remate much faster than this, and that the interval between matings affects P1 and P2. Matings that occur closer temporally result in higher P1 values (e.g. [Laturney, Eijk and Billeter, 2018, _Evolution Letters_](https://dx.doi.org/10.1002/evl3.50). In addition, many populations/species do not exhibit the extreme second male precedence we observed in our study. Therefore, we also modelled the scenario where there was no effect of mating order on fertilisation success, that is $P1_{normal}$ = 0.5. The results are shown in **Figure S8** below.
 
 ```{r fig.height = 10, fig.width = 10, eval=TRUE}
 
