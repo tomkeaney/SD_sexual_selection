@@ -14,6 +14,7 @@
 
 <title>Sexual selection and the population genetics of a selfish gene</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -46,6 +47,8 @@ div.section {
   padding-top: 12px;
 }
 </style>
+
+
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -399,7 +402,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-06-02
+<strong>Last updated:</strong> 2021-08-07
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -447,7 +450,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongSeedstrongcodesetseed20200925code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20200925)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20200925)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
@@ -490,16 +493,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree51d8aeeb704bba08847036dd9c11780f52cf4139targetblank51d8aeea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/51d8aeeb704bba08847036dd9c11780f52cf4139" target="_blank">51d8aee</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontreecb67fd735e209dab0d3c4880c6290898a7369d13targetblankcb67fd7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/cb67fd735e209dab0d3c4880c6290898a7369d13" target="_blank">cb67fd7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontree51d8aeeb704bba08847036dd9c11780f52cf4139targetblank51d8aeea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontreecb67fd735e209dab0d3c4880c6290898a7369d13targetblankcb67fd7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/51d8aeeb704bba08847036dd9c11780f52cf4139" target="_blank">51d8aee</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/cb67fd735e209dab0d3c4880c6290898a7369d13" target="_blank">cb67fd7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -512,10 +515,45 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.Rapp.history
+    Ignored:    simulation_results/.DS_Store
 
 Unstaged changes:
     Modified:   Supplementary_material.Rmd
     Modified:   Supplementary_material.pdf
+    Modified:   simulation_results/output.rds
+    Modified:   simulation_results/output1.rds
+    Modified:   simulation_results/output10.rds
+    Modified:   simulation_results/output11.rds
+    Modified:   simulation_results/output12.rds
+    Modified:   simulation_results/output13.rds
+    Modified:   simulation_results/output14.rds
+    Modified:   simulation_results/output15.rds
+    Modified:   simulation_results/output16.rds
+    Modified:   simulation_results/output17.rds
+    Modified:   simulation_results/output18.rds
+    Modified:   simulation_results/output19.rds
+    Modified:   simulation_results/output2.rds
+    Modified:   simulation_results/output20.rds
+    Modified:   simulation_results/output21.rds
+    Modified:   simulation_results/output22.rds
+    Modified:   simulation_results/output23.rds
+    Modified:   simulation_results/output24.rds
+    Modified:   simulation_results/output25.rds
+    Modified:   simulation_results/output26.rds
+    Modified:   simulation_results/output27.rds
+    Modified:   simulation_results/output28.rds
+    Modified:   simulation_results/output29.rds
+    Modified:   simulation_results/output3.rds
+    Modified:   simulation_results/output30.rds
+    Modified:   simulation_results/output31.rds
+    Modified:   simulation_results/output32.rds
+    Modified:   simulation_results/output33.rds
+    Modified:   simulation_results/output4.rds
+    Modified:   simulation_results/output5.rds
+    Modified:   simulation_results/output6.rds
+    Modified:   simulation_results/output7.rds
+    Modified:   simulation_results/output8.rds
+    Modified:   simulation_results/output9.rds
 
 </code></pre>
 <p>
@@ -554,6 +592,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/cb67fd735e209dab0d3c4880c6290898a7369d13/analysis/Supp_methods.Rmd" target="_blank">cb67fd7</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-07
+</td>
+<td>
+fixes in response to reviewer comments
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tomkeaney/SD_sexual_selection/e16caf90d34a0ecf444935ef545bc91447457c17/docs/Supp_methods.html" target="_blank">e16caf9</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-06-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -652,7 +724,7 @@ library(tidyverse) # for data wrangling and plotting
 library(pander) # for tables</code></pre>
 <p><strong>Pilot experiment: confirming that <em>SD</em> exhibits segregation distortion</strong></p>
 <p>In a pilot experiment, we measured the strength of segregation distortion produced by each of our experimental treatment lines. We crossed females from each of the three <em>SD/+</em> lines and the <em>+/+</em> line to males homozygous for the <em>bw</em> mutation (Figure S1); like <em>SD</em>, <em>bw</em> is located on chromosome 2, so this cross yielded <em>SD/bw</em> or <em>+/bw</em> progeny. We then mated 20 <em>SD/bw</em> (or <em>+/bw</em>) males from each of the four crosses to <em>bw/bw</em> females, and recorded the eye colour (red or brown) of the resulting female offspring to determine the proportion of offspring fertilised by <em>SD</em>- (or +) and <em>bw</em>-bearing sperm. Male progeny were not counted because some of them in the reciprocal cross (see below) expressed a white-eye phenotype (due to male hemizygosity and an X-linked mutation of <em>white</em>), preventing us from determining which copy of chromosome 2 they inherited.</p>
-<p><em>SD</em> alleles are commonly associated with viability costs, which might cause underestimation of the strength of segregation distortion. To correct for any such viability costs, we also performed the reciprocal cross ( <em>SD/+</em> females × <em>bw/bw</em> males) and calculated the proportion of offspring inheriting the <em>SD</em> bearing chromosome as above. Because <em>SD</em> does not affect segregation in females, a shortage of adult offspring carrying <em>SD</em> (relative to the 50% Mendelian expectation) indicates reduced survival of <em>SD</em> progeny to adulthood (relative to bw progeny). We calculated the viability-corrected estimate of segregation distortion, <em>k<sub>c</sub></em>, using the formula in <a href="https://www.ncbi.nlm.nih.gov/pubmed/1906417">Temin</a> (1991, Genetics).</p>
+<p><em>SD</em> alleles are commonly associated with viability costs, which might cause underestimation of the strength of segregation distortion. To correct for any such viability costs, we also performed the reciprocal cross ( <em>SD/+</em> females × <em>bw/bw</em> males) and calculated the proportion of offspring inheriting the <em>SD</em> bearing chromosome as above. Because <em>SD</em> does not affect segregation in females, a shortage of adult offspring carrying <em>SD</em> (relative to the 50% Mendelian expectation) indicates reduced survival of <em>SD</em> progeny to adulthood (relative to bw progeny). We calculated the viability-corrected estimate of segregation distortion, <em>k<sub>c</sub></em>, using the formula in <a href="https://www.ncbi.nlm.nih.gov/pubmed/1906417">Temin (1991, Genetics)</a>.</p>
 <p>To analyse our results, we fit a binomial model, in which red-eye daughters (i.e. the progeny that inherited the <em>SD</em> or <em>+</em> allele from their <em>SD/bw</em> or <em>+/bw</em> father) were treated as ‘successes’ and the brown-eye daughters as ‘failures’. We included the sex of the experimental individual and the variant of <em>SD</em> (or control) as fixed effects (with the control as the reference level), as well as the interaction between these variables. We also included pair ID as a random effect.</p>
 <p><span class="math inline">\(~\)</span></p>
 <p><strong>Table S1</strong>: Recipe for food medium used in our experiment. The provided quantities make ~ 1 litre of food.</p>
@@ -816,6 +888,8 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
+
+
 
 
 </div>
