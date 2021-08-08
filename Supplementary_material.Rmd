@@ -14,9 +14,9 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE, cache = FALSE, warning = FALSE, message = FALSE, fig.align = "center")
 ```
 
-Click **[here](https://tomkeaney.github.io/SD_sexual_selection/)** to view the HTML report, which serves as online supplementary material for the associated manuscript (http://dx.doi.org/10.1098/rspb.2021.1190), submitted to _Proceedings of the Royal Society B_. The report is split into three parts. The first provides the supplementary methods, the second documents our empirical analysis and the third provides an in-depth explanation for how we coded our population genetic model. Together, the report includes all supplementary figures and tables, the R script required to produce the analysis, figures and tables, and the raw data.
+Click **[here](https://tomkeaney.github.io/SD_sexual_selection/)** to view the HTML report, which serves as online supplementary material for the associated manuscript (http://dx.doi.org/10.1098/rspb.2021.1190), published in _Proceedings of the Royal Society B_. The report is split into three parts. The first provides the supplementary methods, the second documents our empirical analysis (you can find raw data here) and the third provides an in-depth explanation for how we coded our population genetic model. Together, the report includes all supplementary figures and tables, the R script required to produce the analysis, figures and tables, and the raw data.
 
-In an attempt to future proof the availability of our supplementary material, we also include the supplementary methods, Table S1-2 and Figures S1-8 in this document. Additionally, our data will be deposited in the Dryad database **[here](...)** (this link will be supplied if the manuscript is accepted).
+In an attempt to future proof the availability of our supplementary material, we also include the supplementary methods, Table S1-2 and Figures S1-8 in this document. Additionally, our data will be deposited in the Dryad database **[here](https://doi.org/10.5061/dryad.pzgmsbcmt)**.
 
 ```{r, include=FALSE}
 library(png) # to load images
