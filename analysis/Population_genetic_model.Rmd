@@ -1134,10 +1134,10 @@ empirical_estimates_0.1 <-
     stat_contour(aes(z = 100 * prop_SD), colour = "black", breaks = 8, linetype = 2) +
     geom_errorbar(data = empirical_estimates_0.1,
                   aes(x = P1_actual, ymin = lower_P2_actual, ymax = upper_P2_actual),
-                  width = 0.25, colour = "grey11", alpha = 0.8) +
+                  width = 0.3, colour = "grey11", alpha = 0.8) +
     geom_errorbarh(data = empirical_estimates_0.1,
                    aes(y = P2_actual, xmin = lower_P1_actual, xmax = upper_P1_actual),
-                   colour = "grey11", alpha = 0.8, height = 4) +
+                   colour = "grey11", alpha = 0.8, height = 3) +
     geom_point(data = empirical_estimates_0.1,
                aes(x = P1_actual, y = P2_actual), 
                pch = 21, fill = "#eb7f86", colour = "grey11", size = 3) +
