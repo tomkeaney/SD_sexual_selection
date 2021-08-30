@@ -295,7 +295,7 @@ posterior_prediction %>%
   
   ggplot(aes(SD, percent_focal_offspring)) + 
   stat_eye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   geom_hline(yintercept = 50, linetype = 2) +
   facet_wrap( ~ SEX) + 
   scale_y_continuous("Estimated inheritance (%)",
@@ -616,7 +616,7 @@ mean_mating_success_plot <-
   
   ggplot(aes(SD, percent_SD_success)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip() +
   ylab("Estimated mating success (%) when competing\n against a single standard competitor") +
   xlab("Variant carried by male") +
@@ -642,7 +642,7 @@ Mating_success_logodds <-
   
   ggplot(aes(parameter, logodds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous(breaks = c(-1, 0, 1, 2, 3)) +
@@ -804,7 +804,7 @@ mean_mating_latency_plot <-
   mutate(SD = recode(posterior_prediction_mating_latency$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
   ggplot(aes(SD, mean_mating_latency)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip(ylim = c(0, 100)) +
   ylab("Estimated time to mating\n (minutes)") +
   xlab("Variant carried by male") +
@@ -816,7 +816,6 @@ mean_mating_latency_plot <-
 Panel b
 
 ```{r}
-
 mating_latency_odds <- 
   post_ml %>% 
   mutate(`SD-Mad` = b_SDMAD,
@@ -829,7 +828,7 @@ mating_latency_odds <-
   
   ggplot(aes(parameter, logodds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Odds difference from w1118",
@@ -838,7 +837,6 @@ mating_latency_odds <-
   theme_bw() + 
   theme(legend.position = "none",
         panel.grid.minor = element_blank())   
-
 ```
 
 Combine panels into a single plot
@@ -997,7 +995,7 @@ mean_copulation_duration_plot <-
   mutate(SD = recode(posterior_prediction_copulation_duration$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
   ggplot(aes(SD, mean_copulation_duration)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip(ylim = c(15, 30)) +
   ylab("Estimated copulation duration\n (minutes)") +
   xlab("Variant carried by male") +
@@ -1009,7 +1007,6 @@ mean_copulation_duration_plot <-
 Panel b
 
 ```{r}
-
 copulation_duration_odds <- 
   post_cd %>% 
   mutate(`SD-Mad` = b_SDMAD,
@@ -1022,7 +1019,7 @@ copulation_duration_odds <-
   
   ggplot(aes(parameter, odds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Odds difference from w1118",
@@ -1031,7 +1028,6 @@ copulation_duration_odds <-
   theme_bw() + 
   theme(legend.position = "none",
         panel.grid.minor = element_blank())   
-
 ```
 
 Combine panels into a single plot
@@ -1300,7 +1296,7 @@ mean_P1_plot <-
   mutate(SD = recode(posterior_prediction_P1$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
   ggplot(aes(SD, percent_focal_offspring)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-5" = "#4c9b82", "SD-72" = "#6cc08b", "SD-Mad" = "#97e196", "W1118" = "#d3f2a3")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip(ylim = c(0, 50)) +
   ylab("Estimated % of offspring sired when mating first (P1)") +
   xlab("Variant carried") +
@@ -1324,7 +1320,7 @@ P1_logodds <-
   
   ggplot(aes(parameter, logodds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) + 
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) + 
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous(breaks = c(-4, -2, 0, 2)) +
@@ -1492,7 +1488,7 @@ mean_P2_plot <-
   mutate(SD = recode(posterior_prediction_P2$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>% 
   ggplot(aes(SD, percent_focal_offspring)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip(ylim = c(70, 100)) +
   ylab("Estimated % of offspring sired when mating second (P2)") +
   xlab("Variant carried by male") +
@@ -1517,7 +1513,7 @@ P2_logodds <-
   
   ggplot(aes(parameter, logodds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) + 
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) + 
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous(breaks = c(-3, -2, -1, 0, 1, 2, 3)) +
@@ -1683,7 +1679,7 @@ mean_remating_plot <-
   filter(Block == "1") %>% # here we select data from the first block to make the plot look nicer - this doesn't affect the differences between each SD variant and the control, it just shrinks the uncertainty that occurs because of differences between blocks
   ggplot(aes(SD, percent_females_remating)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip() +
   ylab("Estimated % of females that mated twice") +
   xlab("Male variant mated to first") +
@@ -1709,7 +1705,7 @@ Remating_logodds <-
   
   ggplot(aes(parameter, logodds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Log-odds difference from w1118",
@@ -1876,7 +1872,7 @@ mean_latency_plot <-
   filter(Block == "1") %>% 
   ggplot(aes(SD, avg_remating_latency)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip(ylim = c(0, 250)) +
   ylab("Estimated time to remating\n (minutes)") +
   xlab("Male variant mated to first") +
@@ -1888,7 +1884,6 @@ mean_latency_plot <-
 Panel b
 
 ```{r}
-
 latency_odds <- 
   post_l %>% 
   mutate(`SD-Mad` = b_SDMAD,
@@ -1902,7 +1897,7 @@ latency_odds <-
   
   ggplot(aes(parameter, logodds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Odds difference from w1118",
@@ -1911,7 +1906,6 @@ latency_odds <-
   theme_bw() + 
   theme(legend.position = "none",
         panel.grid.minor = element_blank())   
-
 ```
 
 Combine panels into a single plot
@@ -2070,7 +2064,7 @@ mean_copulation_duration_plot_1 <-
   mutate(SD = recode(posterior_prediction_copulation_duration_1$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
   ggplot(aes(SD, mean_copulation_duration)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip(ylim = c(10, 35)) +
   ylab("Estimated copulation duration in\nfirst mating role (minutes)") +
   xlab("Variant carried by male") +
@@ -2095,7 +2089,7 @@ copulation_duration_odds_1 <-
   
   ggplot(aes(parameter, odds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Odds difference from w1118",
@@ -2262,7 +2256,7 @@ mean_copulation_duration_plot_2 <-
   mutate(SD = recode(posterior_prediction_copulation_duration_2$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
   ggplot(aes(SD, mean_copulation_duration)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip(ylim = c(10, 35)) +
   ylab("Estimated copulation duration in\nsecond mating role (minutes)") +
   xlab("Variant carried by male") +
@@ -2287,7 +2281,7 @@ copulation_duration_odds_2 <-
   
   ggplot(aes(parameter, odds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Odds difference from w1118",

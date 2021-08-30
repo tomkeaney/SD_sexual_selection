@@ -27,6 +27,7 @@ library(ggpubr) # for combining plots
 library(kableExtra) # scrolling tables
 library(pander) # other nice tables
 library(stickylabeller) # for labelling ggplot facets
+library(ggnewscale) # for multiple scales in a single plot
 ```
 
 # Enter empirical data from present study
@@ -53,7 +54,7 @@ estimated_k_SD5 <- 0.944 # 94.4% of progeny inherit SD
 
 estimated_k_SD72 <- 0.909 # 90.9% of progeny inherit SD 
 
-estimated_k_SDMAD <- 0.868 # 86.8% of progeny inherit SD
+estimated_k_SDMad <- 0.868 # 86.8% of progeny inherit SD
 
 # The relative mating success for each SD variant
 
@@ -61,7 +62,7 @@ estimated_precop_SD5 <- NA # not measured
 
 estimated_precop_SD72 <- 1.24
   
-estimated_precop_SDMAD <- 1.19
+estimated_precop_SDMad <- 1.19
 
 # P1cost and P2cost values, plugged in from Table S7b and Table S8b
 
@@ -73,9 +74,9 @@ P1_SD72 <- 1 - 0.43
 
 P2_SD72 <- 1 - 0.997 
 
-P1_SDMAD <- 1 - 0.39 
+P1_SDMad <- 1 - 0.39 
 
-P2_SDMAD <- 0 # no cost
+P2_SDMad <- 0 # no cost
 
 # We also include 95% credible intervals for P1 and P2 cost, to use in Figure 2 and Figure S8
 
@@ -87,9 +88,9 @@ lower_P1_SD72 <- 1 - 0.05
 
 lower_P2_SD72 <- 1 - 0.969 
 
-lower_P1_SDMAD <-  NA #1 - 0.04 essentially identical to SD-72 so to avoid clutter in our figures we don't include this value
+lower_P1_SDMad <-  NA #1 - 0.04 essentially identical to SD-72 so to avoid clutter in our figures we don't include this value
 
-lower_P2_SDMAD <- 0 # no cost
+lower_P2_SDMad <- 0 # no cost
 
 upper_P1_SD5 <- 1 - 0.6
 
@@ -99,9 +100,9 @@ upper_P1_SD72 <- 0 # no cost
 
 upper_P2_SD72 <- 0 # no cost
 
-upper_P1_SDMAD <- 0 # no cost
+upper_P1_SDMad <- 0 # no cost
 
-upper_P2_SDMAD <- 0 # no cost
+upper_P2_SDMad <- 0 # no cost
 
 # Remating probabilities from Table S9a, using estimates from Block 1
 
@@ -111,21 +112,21 @@ estimated_prob_remating_SD5 = 0.755
 
 estimated_prob_remating_SD72 = 0.425 
 
-estimated_prob_remating_SDMAD = 0.429
+estimated_prob_remating_SDMad = 0.429
 
 # Create a tibble containing empirical estimates
 
 empirical_estimates <-
-  tibble(SD = c("SD-5", "SD-72", "SD-MAD"),
-         kc = c(estimated_k_SD5, estimated_k_SD72, estimated_k_SDMAD),
-         Precop = c(estimated_precop_SD5, estimated_precop_SD72, estimated_precop_SDMAD),
-         P1cost = c(P1_SD5, P1_SD72, P1_SDMAD),
-         lower_P1cost = c(lower_P1_SD5, lower_P1_SD72, lower_P1_SDMAD),
-         upper_P1cost = c(upper_P1_SD5, upper_P1_SD72, upper_P1_SDMAD),
-         P2cost = c(P2_SD5, P2_SD72, P2_SDMAD),
-         lower_P2cost = c(lower_P2_SD5, lower_P2_SD72, lower_P2_SDMAD),
-         upper_P2cost = c(upper_P2_SD5, upper_P2_SD72, upper_P2_SDMAD),
-         remating_prob = c(estimated_prob_remating_SD5, estimated_prob_remating_SD72, estimated_prob_remating_SDMAD))
+  tibble(SD = c("SD-5", "SD-72", "SD-Mad"),
+         kc = c(estimated_k_SD5, estimated_k_SD72, estimated_k_SDMad),
+         Precop = c(estimated_precop_SD5, estimated_precop_SD72, estimated_precop_SDMad),
+         P1cost = c(P1_SD5, P1_SD72, P1_SDMad),
+         lower_P1cost = c(lower_P1_SD5, lower_P1_SD72, lower_P1_SDMad),
+         upper_P1cost = c(upper_P1_SD5, upper_P1_SD72, upper_P1_SDMad),
+         P2cost = c(P2_SD5, P2_SD72, P2_SDMad),
+         lower_P2cost = c(lower_P2_SD5, lower_P2_SD72, lower_P2_SDMad),
+         upper_P2cost = c(upper_P2_SD5, upper_P2_SD72, upper_P2_SDMad),
+         remating_prob = c(estimated_prob_remating_SD5, estimated_prob_remating_SD72, estimated_prob_remating_SDMad))
 
 pander(empirical_estimates, split.cell = 40, split.table = Inf)
 
@@ -737,7 +738,7 @@ initial_freq_SD <- 0.01
 parameters <- rbind(
   expand_grid(
     generations = gen,
-    k = c(estimated_k_SD5, estimated_k_SD72, estimated_k_SDMAD),
+    k = c(estimated_k_SD5, estimated_k_SD72, estimated_k_SDMad),
     normalP1 = c(0.1, 0.5),
     P1cost = seq(0, 1, length = resolution),
     P2cost = seq(0, 1, length = resolution),
@@ -1132,15 +1133,19 @@ empirical_estimates_0.1 <-
     geom_raster(aes(fill = 100 * prop_SD)) + 
     stat_contour(aes(z = 100 * prop_SD), colour = "black", binwidth = 10) +
     stat_contour(aes(z = 100 * prop_SD), colour = "black", breaks = 8, linetype = 2) +
+    scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
     geom_errorbar(data = empirical_estimates_0.1,
                   aes(x = P1_actual, ymin = lower_P2_actual, ymax = upper_P2_actual),
                   width = 0.3, colour = "grey11", alpha = 0.8) +
     geom_errorbarh(data = empirical_estimates_0.1,
                    aes(y = P2_actual, xmin = lower_P1_actual, xmax = upper_P1_actual),
                    colour = "grey11", alpha = 0.8, height = 3) +
-    geom_point(data = empirical_estimates_0.1,
-               aes(x = P1_actual, y = P2_actual), 
-               pch = 21, fill = "#eb7f86", colour = "grey11", size = 3) +
+    new_scale_fill() + # geoms below use a new scale
+    geom_point(data = empirical_estimates_0.1 %>% 
+                 rename(`SD-variant` = SD),
+               aes(x = P1_actual, y = P2_actual, fill = `SD-variant`), 
+               pch = 21, colour = "grey11", size = 3) +
+    scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
     facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
                scales = "free", nrow = 3, strip.position = c("top"),
                labeller = label_glue('({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}')) +
@@ -1148,7 +1153,6 @@ empirical_estimates_0.1 <-
     #x = c(1.5, 3, 5.2), y = c(80, 90, 88), size = 5, colour = "black", parse = TRUE) +
     labs(x = "% offspring sired by SD/+ male in the first mating role (P1)",
          y = "% offspring sired by SD/+ male in the second mating role (P2)") +
-    scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
     scale_x_continuous(expand = c(0, 0)) + 
     scale_y_continuous(expand = c(0, 0)) + # labels = c(0, 25, 50, 75, 90)) +
     theme(panel.border = element_rect(fill = NA, colour = "black", size = .8),
@@ -1157,7 +1161,7 @@ empirical_estimates_0.1 <-
 
 ```
 
-**Figure 2**: Predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 10% contour lines). The dashed line shows an equilibrium frequency of 8%, the upper estimate for _SD_ alleles in natural populations. The plot is split into nine panels, with varying levels of _SD/+_ male mating success ($S_{precop}$) across the columns and an increasing risk of sperm competition caused by a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the rows (values correspond to the risk of sperm competition we estimated in Experiment 2). The three orange points (with associated 95% credible intervals) in each panel represent males carrying _SD-5_ (leftmost point), and _SD-72_ and _SD-Mad_ (rightmost points); these points show where males carrying each _SD_ variant fall in the figure’s parameter space. In the parameter space presented, $k$ = 0.944, $P1_{normal}$ = 0.1, and _SD_ homozygotes are non-viable. 
+**Figure 2**: Predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 10% contour lines). The dashed line shows an equilibrium frequency of 8%, the upper estimate for _SD_ alleles in natural populations. The plot is split into nine panels, with varying levels of _SD/+_ male mating success ($S_{precop}$) across the columns and an increasing risk of sperm competition caused by a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the rows (values correspond to the risk of sperm competition we estimated in Experiment 2). The three points (with associated 95% credible intervals) in each panel show where males carrying each _SD_ variant fall in the figure’s parameter space. In the parameter space presented, $k$ = 0.944, $P1_{normal}$ = 0.1, and _SD_ homozygotes are non-viable. 
 
 $~$
 
@@ -1183,25 +1187,29 @@ empirical_estimates_0.5 <-
 # Make Figure S8
 
 (p2 <-
-  plotting_data %>% 
-  rename(`Wildtype P1` = normalP1,
-         `Relative risk of sperm competition` = remating_ratio,
-         `Relative mating success` = S_precop_WSD_male) %>% 
-  filter(k == 0.944, `Wildtype P1` == 0.5) %>% 
- ggplot(aes(x = P1_actual, y = P2_actual)) +
+    plotting_data %>% 
+    rename(`Wildtype P1` = normalP1,
+           `Relative risk of sperm competition` = remating_ratio,
+           `Relative mating success` = S_precop_WSD_male) %>% 
+    filter(k == 0.944, `Wildtype P1` == 0.5) %>% 
+    ggplot(aes(x = P1_actual, y = P2_actual)) +
     geom_blank() +
     geom_raster(aes(fill = 100 * prop_SD)) + 
     stat_contour(aes(z = 100 * prop_SD), colour = "black", binwidth = 10) +
     stat_contour(aes(z = 100 * prop_SD), colour = "black", breaks = 8, linetype = 2) +
+    scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
     geom_errorbar(data = empirical_estimates_0.5,
                   aes(x = P1_actual, ymin = lower_P2_actual, ymax = upper_P2_actual),
                   width = 2, colour = "grey11", alpha = 0.8) +
     geom_errorbarh(data = empirical_estimates_0.5,
                    aes(y = P2_actual, xmin = lower_P1_actual, xmax = upper_P1_actual),
                    colour = "grey11", alpha = 0.8, height = 2) +
-    geom_point(data = empirical_estimates_0.5,
-               aes(x = P1_actual, y = P2_actual), 
-               pch = 21, fill = "#eb7f86", colour = "grey11", size = 3) +
+    new_scale_fill() + # geoms below use a new scale
+    geom_point(data = empirical_estimates_0.5 %>% 
+                 rename(`SD-variant` = SD),
+               aes(x = P1_actual, y = P2_actual, fill = `SD-variant`), 
+               pch = 21, colour = "grey11", size = 3) +
+    scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
     facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
                scales = "free", nrow = 3, strip.position = c("top"),
                labeller = label_glue('({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}')) +
@@ -1209,7 +1217,6 @@ empirical_estimates_0.5 <-
     #x = c(1.5, 3, 5.2), y = c(80, 90, 88), size = 5, colour = "black", parse = TRUE) +
     labs(x = "% offspring sired by SD/+ male in the first mating role (P1)",
          y = "% offspring sired by SD/+ male in the second mating role (P2)") +
-    scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
     scale_x_continuous(expand = c(0, 0)) + 
     scale_y_continuous(expand = c(0, 0)) + # labels = c(0, 25, 50, 75, 90)) +
     theme(panel.border = element_rect(fill = NA, colour = "black", size = .8),
@@ -1217,4 +1224,4 @@ empirical_estimates_0.5 <-
 )
 ```
 
-**Figure S8**: Predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 10% contour lines). The dashed line shows an equilibrium frequency of 8%, the upper estimate for _SD_ alleles in natural populations. The plot is split into nine panels, with varying levels of _SD/+_ male mating success across the rows and increasing likelihoods of a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the columns. The three orange points (with associated 95% credible intervals) in each panel represent males carrying the _SD-5_ (leftmost point), and _SD-72_ and _SD-Mad_ (rightmost points) alleles; these points show where males carrying these alleles fall in the figure’s parameter space, as measured in Experiment 2. In the parameter space presented here, $k$ = 0.944 (our highest estimated value), $P1_{normal}$ = 0.5, _SD_ homozygotes are non-viable and _SD_ heterozygotes suffer no fitness costs outside of mating success and sperm competition.
+**Figure S8**: Predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 10% contour lines). The dashed line shows an equilibrium frequency of 8%, the upper estimate for _SD_ alleles in natural populations. The plot is split into nine panels, with varying levels of _SD/+_ male mating success across the rows and increasing likelihoods of a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the columns. The three points (with associated 95% credible intervals) in each panel show where males carrying each _SD_ variant fall in the figure’s parameter space. In the parameter space presented here, $k$ = 0.944 (our highest estimated value), $P1_{normal}$ = 0.5, _SD_ homozygotes are non-viable and _SD_ heterozygotes suffer no fitness costs outside of mating success and sperm competition.
