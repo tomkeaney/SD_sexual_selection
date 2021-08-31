@@ -1,5 +1,5 @@
 ---
-title: "Sexual selection and the population genetics of a selfish gene"
+title: "Sexual selection can partly explain low frequencies of segregation distorter alleles"
 author: "Thomas Keaney, Theresa Jones and Luke Holman"
 subtitle: Population genetic model
 output: 
@@ -749,8 +749,8 @@ parameters <- rbind(
     egg_adult_viability_WSD_male = egg_adult_viability_WSD_male,
     egg_adult_viability_SDSD_male = egg_adult_viability_SDSD_male,
     S_precop_WSD_male = c(0.8, 1, 1.2),
-    initial_freq_SD = initial_freq_SD)
-) %>% mutate(parameter_space_ID = row_number())
+    initial_freq_SD = initial_freq_SD)) %>% 
+  mutate(parameter_space_ID = row_number())
 
 ```
 
@@ -1090,6 +1090,73 @@ final_SD_props_among_adults <- sapply(output, function(pop){
 
 $~$
 
+# Run the simulation with just homozygote lethality
+
+$~$
+
+We can find _SD_ allele frequencies for varying levels of segregation distortion if the only fitness cost associated with SD is homozygote lethality. This represents an upper bound for the frequency of _SD_ alleles in our fully parameterised simulation. 
+
+Simplifying the simulation is also a useful exercise for comparing our model with previous models exploring the effect of homozygote lethality on segregation distorter frequencies. We find that our model reproduces the frequencies found using these previous models. 
+
+For example, when $k$ = 0.944, we find that the _SD_ allele increases from a frequency of 0.1% to 37.8% in 1000 generations, which we use to represent the equilibrium frequency.
+
+[Bruck (1957)](http://dx.doi.org/10.1073/pnas.43.1.152) showed that homozygous lethal segregation distorting alleles (that are associated with no other fitness costs) reach an equilibrium frequency in adults at $q = \frac{1}{2} - \frac{\sqrt{k(1 - k)}}{2k}$, where $k$ is the strength of segregation distortion.
+
+To show the equivalence between Bruck's model and ours, let $k$ = 0.944.
+
+The equilibrium frequency is
+
+```{r, echo=TRUE}
+1/2 - sqrt(0.944 * (1- 0.944)) / (2 * 0.944)
+```
+
+$~$
+
+```{r}
+
+parameters_default <- rbind(
+  expand_grid(
+    generations = gen,
+    k = c(0.5, estimated_k_SD5, estimated_k_SD72, estimated_k_SDMad),
+    normalP1 = 0.5,
+    P1cost = 0,
+    P2cost = 0,
+    prob_remating_W = 0,
+    prob_remating_SD = 0,
+    egg_adult_viability_WSD_female = egg_adult_viability_WSD_female,
+    egg_adult_viability_SDSD_female = egg_adult_viability_SDSD_female,
+    egg_adult_viability_WSD_male = egg_adult_viability_WSD_male,
+    egg_adult_viability_SDSD_male = egg_adult_viability_SDSD_male,
+    S_precop_WSD_male = 1,
+    initial_freq_SD = initial_freq_SD)) %>% 
+  mutate(parameter_space_ID = row_number())
+
+
+if(!file.exists("simulation_results/output_defaults.rds")){
+  output_defaults <- lapply(1:nrow(parameters_default), run_simulation, parameters = parameters_default)
+  saveRDS(output_defaults, "simulation_results/output_defaults.rds")
+} else{
+  output_defaults <- read_rds("simulation_results/output_defaults.rds")
+}
+
+default_final_SD_props_among_preselection_zygotes <- sapply(output_defaults, calc_prop_SD)
+
+default_final_SD_props_among_adults <- sapply(output_defaults, function(pop){
+  
+  pop$prop <- pop$prop * pop$egg_adult_viability # apply selection, then calculate allele freq of SD
+  pop$prop <- pop$prop / sum(pop$prop) 
+  calc_prop_SD(pop)
+  
+})
+
+
+parameters_default %>%
+  mutate(prop_SD = round(default_final_SD_props_among_adults, 3)) %>% 
+  select(-c(generations, normalP1, initial_freq_SD, parameter_space_ID)) %>% 
+  pander(split.cell = 40, split.table = Inf)
+```
+
+
 # Create Figures 2 and S8
 
 $~$
@@ -1100,8 +1167,8 @@ $~$
 
 plotting_data <- parameters %>%
   mutate(prop_SD = final_SD_props_among_adults,
-         P1_actual = (normalP1 -  P1cost * normalP1) * 100,
-         P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)) * 100,
+         P1_actual = (normalP1 -  P1cost * normalP1),
+         P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)),
          remating_ratio = prob_remating_SD / prob_remating_W) %>% 
   mutate(remating_ratio = round(remating_ratio, digits = 1))
 
@@ -1111,12 +1178,12 @@ empirical_estimates_0.1 <-
   empirical_estimates %>% 
   mutate(W_remating_prob = 0.304,
          normalP1 = 0.1,
-         P1_actual = (normalP1 -  P1cost * normalP1) * 100,
-         lower_P1_actual = (normalP1 -  lower_P1cost * normalP1) * 100,
-         upper_P1_actual = (normalP1 -  upper_P1cost * normalP1) * 100,
-         P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)) * 100,
-         lower_P2_actual = ((1 - normalP1) - lower_P2cost * (1 - normalP1)) * 100,
-         upper_P2_actual = ((1 - normalP1) - upper_P2cost * (1 - normalP1)) * 100,
+         P1_actual = (normalP1 -  P1cost * normalP1),
+         lower_P1_actual = (normalP1 -  lower_P1cost * normalP1),
+         upper_P1_actual = (normalP1 -  upper_P1cost * normalP1),
+         P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)),
+         lower_P2_actual = ((1 - normalP1) - lower_P2cost * (1 - normalP1)),
+         upper_P2_actual = ((1 - normalP1) - upper_P2cost * (1 - normalP1)),
          remating_ratio = remating_prob / estimated_prob_remating_W) %>% 
   mutate(remating_ratio = round(remating_ratio, digits = 1))
 
@@ -1136,10 +1203,10 @@ empirical_estimates_0.1 <-
     scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
     geom_errorbar(data = empirical_estimates_0.1,
                   aes(x = P1_actual, ymin = lower_P2_actual, ymax = upper_P2_actual),
-                  width = 0.3, colour = "grey11", alpha = 0.8) +
+                  width = 0.003, colour = "grey11", alpha = 0.8) +
     geom_errorbarh(data = empirical_estimates_0.1,
                    aes(y = P2_actual, xmin = lower_P1_actual, xmax = upper_P1_actual),
-                   colour = "grey11", alpha = 0.8, height = 3) +
+                   colour = "grey11", alpha = 0.8, height = 0.03) +
     new_scale_fill() + # geoms below use a new scale
     geom_point(data = empirical_estimates_0.1 %>% 
                  rename(`SD-variant` = SD),
@@ -1149,10 +1216,8 @@ empirical_estimates_0.1 <-
     facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
                scales = "free", nrow = 3, strip.position = c("top"),
                labeller = label_glue('({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}')) +
-    #annotate("text", label = c("italic(SD-5)", "italic(SD-Mad)", "italic(SD-72)"),
-    #x = c(1.5, 3, 5.2), y = c(80, 90, 88), size = 5, colour = "black", parse = TRUE) +
-    labs(x = "% offspring sired by SD/+ male in the first mating role (P1)",
-         y = "% offspring sired by SD/+ male in the second mating role (P2)") +
+    labs(x = "Prop. offspring sired by SD/+ male in the first mating role (P1)",
+         y = "Prop. offspring sired by SD/+ male in the second mating role (P2)") +
     scale_x_continuous(expand = c(0, 0)) + 
     scale_y_continuous(expand = c(0, 0)) + # labels = c(0, 25, 50, 75, 90)) +
     theme(panel.border = element_rect(fill = NA, colour = "black", size = .8),
@@ -1175,12 +1240,12 @@ empirical_estimates_0.5 <-
   empirical_estimates %>% 
   mutate(W_remating_prob = 0.30,
          normalP1 = 0.5,
-         P1_actual = (normalP1 -  P1cost * normalP1) * 100,
-         lower_P1_actual = (normalP1 -  lower_P1cost * normalP1) * 100,
-         upper_P1_actual = (normalP1 -  upper_P1cost * normalP1) * 100,
-         P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)) * 100,
-         lower_P2_actual = ((1 - normalP1) - lower_P2cost * (1 - normalP1)) * 100,
-         upper_P2_actual = ((1 - normalP1) - upper_P2cost * (1 - normalP1)) * 100,
+         P1_actual = (normalP1 -  P1cost * normalP1),
+         lower_P1_actual = (normalP1 -  lower_P1cost * normalP1),
+         upper_P1_actual = (normalP1 -  upper_P1cost * normalP1),
+         P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)),
+         lower_P2_actual = ((1 - normalP1) - lower_P2cost * (1 - normalP1)),
+         upper_P2_actual = ((1 - normalP1) - upper_P2cost * (1 - normalP1)),
          remating_ratio = remating_prob / estimated_prob_remating_W) %>% 
   mutate(remating_ratio = round(remating_ratio, digits = 1))
 
@@ -1200,10 +1265,10 @@ empirical_estimates_0.5 <-
     scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
     geom_errorbar(data = empirical_estimates_0.5,
                   aes(x = P1_actual, ymin = lower_P2_actual, ymax = upper_P2_actual),
-                  width = 2, colour = "grey11", alpha = 0.8) +
+                  width = 0.02, colour = "grey11", alpha = 0.8) +
     geom_errorbarh(data = empirical_estimates_0.5,
                    aes(y = P2_actual, xmin = lower_P1_actual, xmax = upper_P1_actual),
-                   colour = "grey11", alpha = 0.8, height = 2) +
+                   colour = "grey11", alpha = 0.8, height = 0.02) +
     new_scale_fill() + # geoms below use a new scale
     geom_point(data = empirical_estimates_0.5 %>% 
                  rename(`SD-variant` = SD),
@@ -1213,10 +1278,8 @@ empirical_estimates_0.5 <-
     facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
                scales = "free", nrow = 3, strip.position = c("top"),
                labeller = label_glue('({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}')) +
-    #annotate("text", label = c("italic(SD-5)", "italic(SD-Mad)", "italic(SD-72)"),
-    #x = c(1.5, 3, 5.2), y = c(80, 90, 88), size = 5, colour = "black", parse = TRUE) +
-    labs(x = "% offspring sired by SD/+ male in the first mating role (P1)",
-         y = "% offspring sired by SD/+ male in the second mating role (P2)") +
+    labs(x = "Prop. offspring sired by SD/+ male in the first mating role (P1)",
+         y = "Prop. offspring sired by SD/+ male in the second mating role (P2)") +
     scale_x_continuous(expand = c(0, 0)) + 
     scale_y_continuous(expand = c(0, 0)) + # labels = c(0, 25, 50, 75, 90)) +
     theme(panel.border = element_rect(fill = NA, colour = "black", size = .8),

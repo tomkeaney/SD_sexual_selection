@@ -1,5 +1,5 @@
 ---
-title: "Sexual selection and the population genetics of a selfish gene"
+title: "Sexual selection can partly explain low frequencies of segregation distorter alleles"
 author: "Thomas Keaney, Theresa Jones and Luke Holman"
 subtitle: Supplementary methods
 output: 

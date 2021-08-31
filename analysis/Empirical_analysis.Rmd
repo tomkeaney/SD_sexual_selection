@@ -1,5 +1,5 @@
 ---
-title: "Sexual selection and the population genetics of a selfish gene"
+title: "Sexual selection can partly explain low frequencies of segregation distorter alleles"
 author: "Thomas Keaney, Theresa Jones and Luke Holman"
 subtitle: Empirical analysis
 output: 
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, cache = FAL
 # Load packages and the data
 
 ```{r}
-
+library(workflowr) # for website building
 library(tidyverse) # for data wrangling and plotting
 library(reshape2) # for the melt function
 library(brms) # for Bayesian models
@@ -27,9 +27,7 @@ library(kableExtra) # for scrolling tables
 library(lubridate) # working with times and durations
 library(rcartocolor) # for nice colour palettes
 library(patchwork) # for creating figures with multiple panels
-library(workflowr) # for website building
 library(DT) # for search- and saveable tables
-
 ```
 
 $~$
@@ -242,13 +240,13 @@ Get model predictions
 # Define new data for prediction
   
 new <-
-  expand.grid(total_female = 100, SD = unique(drive_test_data$SD), SEX = unique(drive_test_data$SEX)) %>% 
+  expand.grid(total_female = 1, SD = unique(drive_test_data$SD), SEX = unique(drive_test_data$SEX)) %>% 
   mutate(Var1 = 1:8)
 
 # Define new data for prediction with posteriors
 
 new_posterior <-
-  expand.grid(total_female = 100, SD = unique(drive_test_data$SD), SEX = unique(drive_test_data$SEX)) %>% 
+  expand.grid(total_female = 1, SD = unique(drive_test_data$SD), SEX = unique(drive_test_data$SEX)) %>% 
   mutate(id = paste("V", 1:8, sep = "")) %>% 
   as_tibble()
 
@@ -258,16 +256,16 @@ predictions <-
   left_join(
     melt(fitted(drive_model, newdata = new, re_formula = NA)) %>% 
       spread(Var2, value), new, by = "Var1") %>% 
-  rename(Sex = SEX, `k - the estimated inheritance (%)` = Estimate) %>% 
+  rename(Sex = SEX, `k - the estimated inheritance` = Estimate) %>% 
   select(-c(Var1, total_female)) %>% 
-  select(SD, Sex, `k - the estimated inheritance (%)`, Est.Error, Q2.5, Q97.5)
+  select(SD, Sex, `k - the estimated inheritance`, Est.Error, Q2.5, Q97.5)
 
 # Now get the predicted posterior
 
 posterior_prediction <- 
   as_tibble(fitted(drive_model, newdata = new_posterior, re_formula = NA, summary = FALSE)) %>% # 8 cols, 8000ish rows
   mutate(posterior_draw = 1:n()) %>%
-  tidyr::gather(key = id, value = percent_focal_offspring, -posterior_draw) %>%
+  tidyr::gather(key = id, value = prop_focal_offspring, -posterior_draw) %>%
   left_join(new_posterior %>% select(-total_female), by = "id") %>%
   select(-id) %>% 
   as_tibble()
@@ -275,7 +273,7 @@ posterior_prediction <-
 
 $~$
 
-The percentage of female offspring that inherited an _SD_ allele from a heterozygous parent _k_, split by the sex of the parent. _SD_ only drives when present in males. n = 14-15 for all groups.
+The proportion of female offspring that inherited an _SD_ allele from a heterozygous parent _k_, split by the sex of the parent. _SD_ only drives when present in males. n = 14-15 for all groups.
 
 ```{r drive test table}
 
@@ -293,24 +291,24 @@ posterior_prediction %>%
     mutate(SD = recode(posterior_prediction$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5"),
          SEX = recode(posterior_prediction$SEX, "F" = "Females", "M" = "Males")) %>% 
   
-  ggplot(aes(SD, percent_focal_offspring)) + 
+  ggplot(aes(SD, prop_focal_offspring)) + 
   stat_eye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
-  geom_hline(yintercept = 50, linetype = 2) +
+  geom_hline(yintercept = 0.5, linetype = 2) +
   facet_wrap( ~ SEX) + 
-  scale_y_continuous("Estimated inheritance (%)",
-                     breaks = c(40, 50, 60, 70, 80, 90)) +
+  scale_y_continuous("Estimated inheritance",
+                     breaks = c(0.4, 0.5, 0.6, 0.7, 0.8, 0.9)) +
   xlab("Variant carried (homologous to bw chromosome)") +
   theme_bw() + 
   theme(legend.position = "none",
         panel.grid.minor = element_blank())
 ```
 
-**Figure S2**: The estimated percentage of female offspring that inherited an _SD_ allele from a heterozygous parent, split by the sex of the parent. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. The dotted line indicates 50% inheritance; the expectation in the absence of segregation distortion. 
+**Figure S2**: The estimated proportion of female offspring that inherited an _SD_ allele from a heterozygous parent, split by the sex of the parent. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. The dotted line indicates 50% inheritance; the expectation in the absence of segregation distortion. 
 
 $~$
 
-From these predictions we can calculate viability corrected estimates of _k_ using the formula presented in [Temin (1991, Genetics)](https://www.ncbi.nlm.nih.gov/pubmed/1906417).
+From these predictions we can calculate viability corrected estimates of _k_ using the formula presented in [Temin (1991)](https://www.ncbi.nlm.nih.gov/pubmed/1906417).
 
 _k~c~_ = number of SD progeny / (number of SD progeny + (number of bw progeny / _W_ ))
 
@@ -332,11 +330,11 @@ post <- posterior_samples(drive_model) %>%
 k_c_SD5 <-
   post %>% 
   select(b_Intercept, b_SD5, `b_SEXM:SD5`) %>% 
-  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SD5) * 100,
-         Female_bw_progeny = 100 - Female_SD_progeny,
+  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SD5),
+         Female_bw_progeny = 1 - Female_SD_progeny,
          W_SD5 = Female_bw_progeny / Female_SD_progeny,
-         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SD5`) * 100,
-         Male_bw_progeny = 100 - Male_SD_progeny) %>% 
+         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SD5`),
+         Male_bw_progeny = 1 - Male_SD_progeny) %>% 
   select(Male_SD_progeny, Male_bw_progeny, W_SD5) %>% 
   mutate(k_c = Male_SD_progeny / (Male_SD_progeny + (Male_bw_progeny / W_SD5))) %>% 
   summarise(`k corrected for viability costs` = median(k_c),
@@ -349,11 +347,11 @@ k_c_SD5 <-
 k_c_SD72 <-
   post %>% 
   select(b_Intercept, b_SD72, `b_SEXM:SD72`) %>% 
-  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SD72) * 100,
-         Female_bw_progeny = 100 - Female_SD_progeny,
+  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SD72),
+         Female_bw_progeny = 1 - Female_SD_progeny,
          W_SD72 = Female_bw_progeny / Female_SD_progeny,
-         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SD72`) * 100,
-         Male_bw_progeny = 100 - Male_SD_progeny) %>% 
+         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SD72`),
+         Male_bw_progeny = 1 - Male_SD_progeny) %>% 
   select(Male_SD_progeny, Male_bw_progeny, W_SD72) %>% 
   mutate(k_c = Male_SD_progeny / (Male_SD_progeny + (Male_bw_progeny / W_SD72))) %>% 
   summarise(`k corrected for viability costs` = median(k_c),
@@ -365,11 +363,11 @@ k_c_SD72 <-
 k_c_SDMAD <-
   post %>% 
   select(b_Intercept, b_SDMAD, `b_SEXM:SDMAD`) %>% 
-  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SDMAD) * 100,
-         Female_bw_progeny = 100 - Female_SD_progeny,
+  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SDMAD),
+         Female_bw_progeny = 1 - Female_SD_progeny,
          W_SDMAD = Female_bw_progeny / Female_SD_progeny,
-         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SDMAD`) * 100,
-         Male_bw_progeny = 100 - Male_SD_progeny) %>% 
+         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SDMAD`),
+         Male_bw_progeny = 1 - Male_SD_progeny) %>% 
   select(Male_SD_progeny, Male_bw_progeny, W_SDMAD) %>% 
   mutate(k_c = Male_SD_progeny / (Male_SD_progeny + (Male_bw_progeny / W_SDMAD))) %>% 
   summarise(`k corrected for viability costs` = median(k_c),
@@ -381,11 +379,11 @@ k_c_SDMAD <-
 k_c_W1118 <-
   post %>% 
   select(b_Intercept, b_SEXM) %>% 
-  mutate(Female_W1118_progeny = inv_logit_scaled(b_Intercept) * 100,
-         Female_bw_progeny = 100 - Female_W1118_progeny,
+  mutate(Female_W1118_progeny = inv_logit_scaled(b_Intercept),
+         Female_bw_progeny = 1 - Female_W1118_progeny,
          W_W1118 = Female_bw_progeny / Female_W1118_progeny,
-         Male_W1118_progeny = inv_logit_scaled(b_Intercept + b_SEXM) * 100,
-         Male_bw_progeny = 100 - Male_W1118_progeny) %>% 
+         Male_W1118_progeny = inv_logit_scaled(b_Intercept + b_SEXM),
+         Male_bw_progeny = 1 - Male_W1118_progeny) %>% 
   select(Male_W1118_progeny, Male_bw_progeny, W_W1118) %>% 
   mutate(k_c = Male_W1118_progeny / (Male_W1118_progeny + (Male_bw_progeny / W_W1118))) %>% 
   summarise(`k corrected for viability costs` = median(k_c),
@@ -531,12 +529,11 @@ predictions_precop_success <-
   gather(key = id, value = prop_SD_success, -posterior_draw) %>%
   left_join(new_posterior_precop_success, by = "id") %>%
   select(-id) %>% 
-  mutate(percent_SD_success = prop_SD_success * 100) %>% 
   as_tibble() %>% 
   group_by(SD) %>% 
-  summarise(`Estimated % of males mating` = median(percent_SD_success),
-            `2.5%` = quantile(percent_SD_success, probs = 0.025),
-            `97.5%` = quantile(percent_SD_success, probs = 0.975))
+  summarise(`Estimated prop. of males mating` = median(prop_SD_success),
+            `2.5%` = quantile(prop_SD_success, probs = 0.025),
+            `97.5%` = quantile(prop_SD_success, probs = 0.975))
 
 
 # Now get the predicted posterior
@@ -554,7 +551,7 @@ posterior_prediction_precop_success <-
 
 $~$
 
-The estimated percentage of _SD/+_ or control males that successfully mated with a female when competing with a single _Lbw_ male.
+The estimated proportion of _SD/+_ or control males that successfully mated with a female when competing with a single _Lbw_ male.
 
 ```{r mating success Bayes table}
 predictions_precop_success %>% 
@@ -614,11 +611,11 @@ mean_mating_success_plot <-
   posterior_prediction_precop_success %>% 
   mutate(SD = recode(posterior_prediction_precop_success$SD, "MAD" = "SD-Mad", "72" = "SD-72")) %>%
   
-  ggplot(aes(SD, percent_SD_success)) + 
+  ggplot(aes(SD, prop_SD_success)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip() +
-  ylab("Estimated mating success (%) when competing\n against a single standard competitor") +
+  ylab("Estimated prop. of matings when competing\n against a single standard competitor") +
   xlab("Variant carried by male") +
   theme_bw() + 
   theme(legend.position = "none",
@@ -1127,7 +1124,7 @@ Take a glance at how mating order affected fertilisation success
             total = sum(total_offspring),
             `Number of mating trios` = n()) %>% 
   mutate(Mating.Order = if_else(Mating.Order == "first", "SD/+ male mated first", "LHm-UBI male mated first")) %>%
-  mutate(`% offspring sired by first mate` = if_else(Mating.Order == "SD/+ male mated first", total_SD / total * 100, total_GFP / total * 100)) %>% 
+  mutate(`prop. offspring sired by first mate` = if_else(Mating.Order == "SD/+ male mated first", total_SD / total, total_GFP / total)) %>% 
   rename(`Mating Order` = Mating.Order,
          `Offspring sired by SD/+ males` = total_SD,
          `Offspring sired by LHm males` = total_GFP,
@@ -1198,21 +1195,21 @@ Get predictions from the P1 model
 # Define new data for prediction with posteriors
 
 new_posterior_P1 <-
-  expand.grid(total_offspring = 100, SD = c("W1118", "MAD", "72", "5"), Block = unique(sperm_comp_data_P1$Block)) %>% 
+  expand.grid(total_offspring = 1, SD = c("W1118", "MAD", "72", "5"), Block = unique(sperm_comp_data_P1$Block)) %>% 
   mutate(id = paste("V", 1:12, sep = "")) %>% 
   as_tibble()
 
 predictions_P1 <- 
   as.data.frame(fitted(sperm_comp_model_P1, newdata = new_posterior_P1, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
   mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %>%
+  gather(key = id, value = prop_focal_offspring, -posterior_draw) %>%
   left_join(new_posterior_P1, by = "id") %>%
   select(-id) %>% 
   as_tibble() %>% 
   group_by(SD) %>% 
-  summarise(`Estimated % of offspring sired` = median(percent_focal_offspring),
-            `2.5%` = quantile(percent_focal_offspring, probs = 0.025),
-            `97.5%` = quantile(percent_focal_offspring, probs = 0.975))
+  summarise(`Estimated prop. of offspring sired` = median(prop_focal_offspring),
+            `2.5%` = quantile(prop_focal_offspring, probs = 0.025),
+            `97.5%` = quantile(prop_focal_offspring, probs = 0.975))
 
 
 # Now get the predicted posterior but don't summarise
@@ -1220,7 +1217,7 @@ predictions_P1 <-
 posterior_prediction_P1 <- 
   as.data.frame(fitted(sperm_comp_model_P1, newdata = new_posterior_P1, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
   mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %>%
+  gather(key = id, value = prop_focal_offspring, -posterior_draw) %>%
   left_join(new_posterior_P1, by = "id") %>%
   select(-id) %>% 
   as_tibble()
@@ -1229,7 +1226,7 @@ posterior_prediction_P1 <-
 
 $~$
 
-The estimated percentage of offspring sired by _SD/+_ or control males, when they mated first.
+The estimated proportion of offspring sired by _SD/+_ or control males, when they mated first.
 
 ```{r P1 Bayes table}
 
@@ -1294,11 +1291,11 @@ Panel c
 mean_P1_plot <-
   posterior_prediction_P1 %>%
   mutate(SD = recode(posterior_prediction_P1$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
-  ggplot(aes(SD, percent_focal_offspring)) + 
+  ggplot(aes(SD, prop_focal_offspring)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
-  coord_flip(ylim = c(0, 50)) +
-  ylab("Estimated % of offspring sired when mating first (P1)") +
+  coord_flip(ylim = c(0, 0.5)) +
+  ylab("Estimated prop. of offspring sired when mating first (P1)") +
   xlab("Variant carried") +
   theme_bw() + 
   theme(legend.position = "none",
@@ -1392,7 +1389,7 @@ Get predictions from the P2 model
 # Define new data for prediction with posteriors
 
 new_posterior_P2 <-
-  expand.grid(total_offspring = 100, SD = c("W1118", "MAD", "72", "5"), Block = unique(sperm_comp_data_P2$Block)) %>% 
+  expand.grid(total_offspring = 1, SD = c("W1118", "MAD", "72", "5"), Block = unique(sperm_comp_data_P2$Block)) %>% 
   mutate(id = paste("V", 1:12, sep = "")) %>% 
   as_tibble()
 
@@ -1401,14 +1398,14 @@ new_posterior_P2 <-
 predictions_P2 <- 
   as.data.frame(fitted(sperm_comp_model_P2, newdata = new_posterior_P2, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
   mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %>%
+  gather(key = id, value = prop_focal_offspring, -posterior_draw) %>%
   left_join(new_posterior_P2, by = "id") %>%
   select(-id) %>% 
   as_tibble() %>% 
   group_by(SD) %>% 
-  summarise(`Estimated % of offspring sired` = median(percent_focal_offspring),
-            `2.5%` = quantile(percent_focal_offspring, probs = 0.025),
-            `97.5%` = quantile(percent_focal_offspring, probs = 0.975))
+  summarise(`Estimated prop. of offspring sired` = median(prop_focal_offspring),
+            `2.5%` = quantile(prop_focal_offspring, probs = 0.025),
+            `97.5%` = quantile(prop_focal_offspring, probs = 0.975))
 
 
 # Now get the predicted posterior
@@ -1416,7 +1413,7 @@ predictions_P2 <-
 posterior_prediction_P2 <- 
   as.data.frame(fitted(sperm_comp_model_P2, newdata = new_posterior_P2, re_formula = NA, summary = FALSE)) %>% # 12 cols, 8000ish rows
   mutate(posterior_draw = 1:n()) %>%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %>%
+  gather(key = id, value = prop_focal_offspring, -posterior_draw) %>%
   left_join(new_posterior_P2, by = "id") %>%
   select(-id) %>% 
   as_tibble()
@@ -1425,7 +1422,7 @@ posterior_prediction_P2 <-
 
 $~$
 
-The estimated percentage of offspring sired by _SD/+_ or control males, when they mated second.
+The estimated proportion of offspring sired by _SD/+_ or control males, when they mated second.
 
 ```{r P2 Bayes table}
 
@@ -1486,11 +1483,11 @@ Panel e
 mean_P2_plot <-
   posterior_prediction_P2 %>%
   mutate(SD = recode(posterior_prediction_P2$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>% 
-  ggplot(aes(SD, percent_focal_offspring)) + 
+  ggplot(aes(SD, prop_focal_offspring)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
-  coord_flip(ylim = c(70, 100)) +
-  ylab("Estimated % of offspring sired when mating second (P2)") +
+  coord_flip(ylim = c(0.7, 1)) +
+  ylab("Estimated prop. of offspring sired when mating second (P2)") +
   xlab("Variant carried by male") +
   theme_bw() + 
   theme(legend.position = "none",
@@ -1590,12 +1587,11 @@ predictions_remating <-
   gather(key = id, value = prop_females_remating, -posterior_draw) %>%
   left_join(new_posterior_remating, by = "id") %>%
   select(-id) %>% 
-  mutate(percent_females_remating = prop_females_remating * 100) %>% 
   as_tibble() %>% 
   group_by(SD, Block) %>% 
-  summarise(`Estimated % of mates remating` = median(percent_females_remating),
-            `2.5%` = quantile(percent_females_remating, probs = 0.025),
-            `97.5%` = quantile(percent_females_remating, probs = 0.975))
+  summarise(`Estimated prop. of mates remating` = median(prop_females_remating),
+            `2.5%` = quantile(prop_females_remating, probs = 0.025),
+            `97.5%` = quantile(prop_females_remating, probs = 0.975))
 
 
 # Now get the predicted posterior
@@ -1606,14 +1602,13 @@ posterior_prediction_remating <-
   gather(key = id, value = prop_females_remating, -posterior_draw) %>%
   left_join(new_posterior_remating, by = "id") %>%
   select(-id) %>% 
-  mutate(percent_females_remating = prop_females_remating * 100) %>% 
   as_tibble()
 
 ```
 
 $~$
 
-The estimated percentage of females that remated that were first mated to a _SD/+_ or control male.
+The estimated proportion of females that remated that were first mated to a _SD/+_ or control male.
 
 ```{r remating Bayes table}
 predictions_remating %>% 
@@ -1677,11 +1672,11 @@ mean_remating_plot <-
   posterior_prediction_remating %>%
   mutate(SD = recode(posterior_prediction_remating$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
   filter(Block == "1") %>% # here we select data from the first block to make the plot look nicer - this doesn't affect the differences between each SD variant and the control, it just shrinks the uncertainty that occurs because of differences between blocks
-  ggplot(aes(SD, percent_females_remating)) + 
+  ggplot(aes(SD, prop_females_remating)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip() +
-  ylab("Estimated % of females that mated twice") +
+  ylab("Estimated prop. of females that mated twice") +
   xlab("Male variant mated to first") +
   theme_bw() + 
   theme(legend.position = "none",
@@ -2319,12 +2314,3 @@ mean_remating_plot + Remating_logodds +
 **Figure 1**. The effect of _SD_ on male mating success, fertilisation success and female remating propensity. Black points indicate the estimated mean, with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. Panels a, c, e and g show results on the response scale, while panels b, d, f, and h show log-odds differences between the _SD_ variants and the control allele; 95% uncertainty intervals that do not overlap zero indicate a significant effect. 
 
 $~$
-
-```{r session info, include=FALSE}
-
-# R session information
-
-#This section provides information on the operating system and R packages attached during the production of this document, to allow easier replication of the analysis.
-
-sessionInfo() %>% pander
-```
