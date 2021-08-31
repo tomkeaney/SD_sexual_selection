@@ -12,7 +12,7 @@
 <meta name="author" content="Thomas Keaney, Theresa Jones and Luke Holman" />
 
 
-<title>Sexual selection and the population genetics of a selfish gene</title>
+<title>Sexual selection can partly explain low frequencies of segregation distorter alleles</title>
 
 <script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
@@ -393,7 +393,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Sexual selection and the population genetics of a selfish gene</h1>
+<h1 class="title toc-ignore">Sexual selection can partly explain low frequencies of segregation distorter alleles</h1>
 <h3 class="subtitle">Empirical analysis</h3>
 <h4 class="author">Thomas Keaney, Theresa Jones and Luke Holman</h4>
 
@@ -420,7 +420,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-08-30
+<strong>Last updated:</strong> 2021-08-31
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -511,16 +511,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontreea746c87d3967eab37e1e0090cef68d381e5e425dtargetblanka746c87a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/a746c87d3967eab37e1e0090cef68d381e5e425d" target="_blank">a746c87</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontreeefb8797be6192046d9d8f4c0f436e2b4dbb82d04targetblankefb8797a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/efb8797be6192046d9d8f4c0f436e2b4dbb82d04" target="_blank">efb8797</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontreea746c87d3967eab37e1e0090cef68d381e5e425dtargetblanka746c87a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtomkeaneySDsexualselectiontreeefb8797be6192046d9d8f4c0f436e2b4dbb82d04targetblankefb8797a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/a746c87d3967eab37e1e0090cef68d381e5e425d" target="_blank">a746c87</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tomkeaney/SD_sexual_selection/tree/efb8797be6192046d9d8f4c0f436e2b4dbb82d04" target="_blank">efb8797</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -537,12 +537,13 @@ Ignored files:
 
 Untracked files:
     Untracked:  Keaney_et_al_Tables_Figures_data_Rcode_ESM.pdf
-    Untracked:  Supplementary_material.log
-    Untracked:  Supplementary_material.tex
+    Untracked:  simulation_results/output_defaults.rds
 
 Unstaged changes:
+    Modified:   Figure_1.pdf
+    Modified:   Figure_2.pdf
     Modified:   Supplementary_material.Rmd
-    Deleted:    Supplementary_material.pdf
+    Modified:   Supplementary_material.pdf
     Modified:   data/SD_mating_data.csv
 
 </code></pre>
@@ -582,6 +583,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/efb8797be6192046d9d8f4c0f436e2b4dbb82d04/analysis/Empirical_analysis.Rmd" target="_blank">efb8797</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-31
+</td>
+<td>
+final updates
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tomkeaney/SD_sexual_selection/e3450488d1ad43016229ef8790c9679db1896802/docs/Empirical_analysis.html" target="_blank">e345048</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -829,7 +864,8 @@ Publish the initial files for myproject
 </div>
 <div id="load-packages-and-the-data" class="section level1">
 <h1>Load packages and the data</h1>
-<pre class="r"><code>library(tidyverse) # for data wrangling and plotting
+<pre class="r"><code>library(workflowr) # for website building
+library(tidyverse) # for data wrangling and plotting
 library(reshape2) # for the melt function
 library(brms) # for Bayesian models
 library(tidybayes) # pretty Bayesian stuff
@@ -838,7 +874,6 @@ library(kableExtra) # for scrolling tables
 library(lubridate) # working with times and durations
 library(rcartocolor) # for nice colour palettes
 library(patchwork) # for creating figures with multiple panels
-library(workflowr) # for website building
 library(DT) # for search- and saveable tables</code></pre>
 <p><span class="math inline">\(~\)</span></p>
 <p>Load in the data from each of the experiments and prepare for analysis</p>
@@ -1144,13 +1179,13 @@ tkeaney
 <pre class="r"><code># Define new data for prediction
   
 new &lt;-
-  expand.grid(total_female = 100, SD = unique(drive_test_data$SD), SEX = unique(drive_test_data$SEX)) %&gt;% 
+  expand.grid(total_female = 1, SD = unique(drive_test_data$SD), SEX = unique(drive_test_data$SEX)) %&gt;% 
   mutate(Var1 = 1:8)
 
 # Define new data for prediction with posteriors
 
 new_posterior &lt;-
-  expand.grid(total_female = 100, SD = unique(drive_test_data$SD), SEX = unique(drive_test_data$SEX)) %&gt;% 
+  expand.grid(total_female = 1, SD = unique(drive_test_data$SD), SEX = unique(drive_test_data$SEX)) %&gt;% 
   mutate(id = paste(&quot;V&quot;, 1:8, sep = &quot;&quot;)) %&gt;% 
   as_tibble()
 
@@ -1160,21 +1195,21 @@ predictions &lt;-
   left_join(
     melt(fitted(drive_model, newdata = new, re_formula = NA)) %&gt;% 
       spread(Var2, value), new, by = &quot;Var1&quot;) %&gt;% 
-  rename(Sex = SEX, `k - the estimated inheritance (%)` = Estimate) %&gt;% 
+  rename(Sex = SEX, `k - the estimated inheritance` = Estimate) %&gt;% 
   select(-c(Var1, total_female)) %&gt;% 
-  select(SD, Sex, `k - the estimated inheritance (%)`, Est.Error, Q2.5, Q97.5)
+  select(SD, Sex, `k - the estimated inheritance`, Est.Error, Q2.5, Q97.5)
 
 # Now get the predicted posterior
 
 posterior_prediction &lt;- 
   as_tibble(fitted(drive_model, newdata = new_posterior, re_formula = NA, summary = FALSE)) %&gt;% # 8 cols, 8000ish rows
   mutate(posterior_draw = 1:n()) %&gt;%
-  tidyr::gather(key = id, value = percent_focal_offspring, -posterior_draw) %&gt;%
+  tidyr::gather(key = id, value = prop_focal_offspring, -posterior_draw) %&gt;%
   left_join(new_posterior %&gt;% select(-total_female), by = &quot;id&quot;) %&gt;%
   select(-id) %&gt;% 
   as_tibble()</code></pre>
 <p><span class="math inline">\(~\)</span></p>
-<p>The percentage of female offspring that inherited an <em>SD</em> allele from a heterozygous parent <em>k</em>, split by the sex of the parent. <em>SD</em> only drives when present in males. n = 14-15 for all groups.</p>
+<p>The proportion of female offspring that inherited an <em>SD</em> allele from a heterozygous parent <em>k</em>, split by the sex of the parent. <em>SD</em> only drives when present in males. n = 14-15 for all groups.</p>
 <pre class="r"><code>predictions %&gt;% 
   mutate(`Variant carried` = recode(predictions$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;, &quot;5&quot; = &quot;SD-5&quot;),
          Sex = recode(predictions$Sex, &quot;F&quot; = &quot;Female&quot;, &quot;M&quot; = &quot;Male&quot;)) %&gt;% 
@@ -1182,18 +1217,18 @@ posterior_prediction &lt;-
 pander(split.cell = 40, split.table = Inf, round = 2)</code></pre>
 <table>
 <colgroup>
-<col width="19%" />
-<col width="9%" />
-<col width="39%" />
+<col width="20%" />
+<col width="10%" />
+<col width="37%" />
 <col width="13%" />
 <col width="8%" />
-<col width="8%" />
+<col width="9%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="center">Variant carried</th>
 <th align="center">Sex</th>
-<th align="center">k - the estimated inheritance (%)</th>
+<th align="center">k - the estimated inheritance</th>
 <th align="center">Est.Error</th>
 <th align="center">Q2.5</th>
 <th align="center">Q97.5</th>
@@ -1203,66 +1238,66 @@ pander(split.cell = 40, split.table = Inf, round = 2)</code></pre>
 <tr class="odd">
 <td align="center">SD-5</td>
 <td align="center">Female</td>
-<td align="center">47.31</td>
-<td align="center">5.39</td>
-<td align="center">36.99</td>
-<td align="center">58.11</td>
+<td align="center">0.47</td>
+<td align="center">0.05</td>
+<td align="center">0.37</td>
+<td align="center">0.58</td>
 </tr>
 <tr class="even">
 <td align="center">SD-72</td>
 <td align="center">Female</td>
-<td align="center">47.7</td>
-<td align="center">5.47</td>
-<td align="center">36.96</td>
-<td align="center">58.38</td>
+<td align="center">0.48</td>
+<td align="center">0.05</td>
+<td align="center">0.37</td>
+<td align="center">0.58</td>
 </tr>
 <tr class="odd">
 <td align="center">SD-Mad</td>
 <td align="center">Female</td>
-<td align="center">45.78</td>
-<td align="center">5.46</td>
-<td align="center">35.26</td>
-<td align="center">56.7</td>
+<td align="center">0.46</td>
+<td align="center">0.05</td>
+<td align="center">0.35</td>
+<td align="center">0.57</td>
 </tr>
 <tr class="even">
 <td align="center">W1118</td>
 <td align="center">Female</td>
-<td align="center">49.51</td>
-<td align="center">5.25</td>
-<td align="center">39.17</td>
-<td align="center">59.63</td>
+<td align="center">0.5</td>
+<td align="center">0.05</td>
+<td align="center">0.39</td>
+<td align="center">0.6</td>
 </tr>
 <tr class="odd">
 <td align="center">SD-5</td>
 <td align="center">Male</td>
-<td align="center">94.13</td>
-<td align="center">1.47</td>
-<td align="center">90.88</td>
-<td align="center">96.61</td>
+<td align="center">0.94</td>
+<td align="center">0.01</td>
+<td align="center">0.91</td>
+<td align="center">0.97</td>
 </tr>
 <tr class="even">
 <td align="center">SD-72</td>
 <td align="center">Male</td>
-<td align="center">90.72</td>
-<td align="center">2.24</td>
-<td align="center">85.7</td>
-<td align="center">94.54</td>
+<td align="center">0.91</td>
+<td align="center">0.02</td>
+<td align="center">0.86</td>
+<td align="center">0.95</td>
 </tr>
 <tr class="odd">
 <td align="center">SD-Mad</td>
 <td align="center">Male</td>
-<td align="center">84.7</td>
-<td align="center">3.1</td>
-<td align="center">77.96</td>
-<td align="center">90.04</td>
+<td align="center">0.85</td>
+<td align="center">0.03</td>
+<td align="center">0.78</td>
+<td align="center">0.9</td>
 </tr>
 <tr class="even">
 <td align="center">W1118</td>
 <td align="center">Male</td>
-<td align="center">53.65</td>
-<td align="center">5.5</td>
-<td align="center">42.72</td>
-<td align="center">64.28</td>
+<td align="center">0.54</td>
+<td align="center">0.05</td>
+<td align="center">0.43</td>
+<td align="center">0.64</td>
 </tr>
 </tbody>
 </table>
@@ -1270,13 +1305,13 @@ pander(split.cell = 40, split.table = Inf, round = 2)</code></pre>
     mutate(SD = recode(posterior_prediction$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;, &quot;5&quot; = &quot;SD-5&quot;),
          SEX = recode(posterior_prediction$SEX, &quot;F&quot; = &quot;Females&quot;, &quot;M&quot; = &quot;Males&quot;)) %&gt;% 
   
-  ggplot(aes(SD, percent_focal_offspring)) + 
+  ggplot(aes(SD, prop_focal_offspring)) + 
   stat_eye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c(&quot;W1118&quot; = &quot;#38A6A5&quot;, &quot;SD-Mad&quot; = &quot;#EDAD08&quot;, &quot;SD-72&quot; = &quot;#CC503E&quot;, &quot;SD-5&quot; = &quot;#994E95&quot;)) +
-  geom_hline(yintercept = 50, linetype = 2) +
+  geom_hline(yintercept = 0.5, linetype = 2) +
   facet_wrap( ~ SEX) + 
-  scale_y_continuous(&quot;Estimated inheritance (%)&quot;,
-                     breaks = c(40, 50, 60, 70, 80, 90)) +
+  scale_y_continuous(&quot;Estimated inheritance&quot;,
+                     breaks = c(0.4, 0.5, 0.6, 0.7, 0.8, 0.9)) +
   xlab(&quot;Variant carried (homologous to bw chromosome)&quot;) +
   theme_bw() + 
   theme(legend.position = &quot;none&quot;,
@@ -1306,6 +1341,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/e3450488d1ad43016229ef8790c9679db1896802/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-6-1.png" target="_blank">e345048</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-30
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-6-1.png" target="_blank">9a9d650</a>
 </td>
 <td>
@@ -1330,9 +1376,9 @@ tomkeaney
 </table>
 </div>
 </div>
-<p><strong>Figure S2</strong>: The estimated percentage of female offspring that inherited an <em>SD</em> allele from a heterozygous parent, split by the sex of the parent. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. The dotted line indicates 50% inheritance; the expectation in the absence of segregation distortion.</p>
+<p><strong>Figure S2</strong>: The estimated proportion of female offspring that inherited an <em>SD</em> allele from a heterozygous parent, split by the sex of the parent. Black points indicate the estimated mean with associated 66 and 95% uncertainty intervals, while coloured area shows the posterior distribution. The dotted line indicates 50% inheritance; the expectation in the absence of segregation distortion.</p>
 <p><span class="math inline">\(~\)</span></p>
-<p>From these predictions we can calculate viability corrected estimates of <em>k</em> using the formula presented in <a href="https://www.ncbi.nlm.nih.gov/pubmed/1906417">Temin (1991, Genetics)</a>.</p>
+<p>From these predictions we can calculate viability corrected estimates of <em>k</em> using the formula presented in <a href="https://www.ncbi.nlm.nih.gov/pubmed/1906417">Temin (1991)</a>.</p>
 <p><em>k<sub>c</sub></em> = number of SD progeny / (number of SD progeny + (number of bw progeny / <em>W</em> ))</p>
 <p>Where <em>W</em> represents the transmission of the <em>SD</em> allele through females and is defined by:</p>
 <p><em>W</em> = number of <em>bw</em> progeny / number of <em>SD</em> progeny</p>
@@ -1345,11 +1391,11 @@ tomkeaney
 k_c_SD5 &lt;-
   post %&gt;% 
   select(b_Intercept, b_SD5, `b_SEXM:SD5`) %&gt;% 
-  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SD5) * 100,
-         Female_bw_progeny = 100 - Female_SD_progeny,
+  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SD5),
+         Female_bw_progeny = 1 - Female_SD_progeny,
          W_SD5 = Female_bw_progeny / Female_SD_progeny,
-         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SD5`) * 100,
-         Male_bw_progeny = 100 - Male_SD_progeny) %&gt;% 
+         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SD5`),
+         Male_bw_progeny = 1 - Male_SD_progeny) %&gt;% 
   select(Male_SD_progeny, Male_bw_progeny, W_SD5) %&gt;% 
   mutate(k_c = Male_SD_progeny / (Male_SD_progeny + (Male_bw_progeny / W_SD5))) %&gt;% 
   summarise(`k corrected for viability costs` = median(k_c),
@@ -1362,11 +1408,11 @@ k_c_SD5 &lt;-
 k_c_SD72 &lt;-
   post %&gt;% 
   select(b_Intercept, b_SD72, `b_SEXM:SD72`) %&gt;% 
-  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SD72) * 100,
-         Female_bw_progeny = 100 - Female_SD_progeny,
+  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SD72),
+         Female_bw_progeny = 1 - Female_SD_progeny,
          W_SD72 = Female_bw_progeny / Female_SD_progeny,
-         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SD72`) * 100,
-         Male_bw_progeny = 100 - Male_SD_progeny) %&gt;% 
+         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SD72`),
+         Male_bw_progeny = 1 - Male_SD_progeny) %&gt;% 
   select(Male_SD_progeny, Male_bw_progeny, W_SD72) %&gt;% 
   mutate(k_c = Male_SD_progeny / (Male_SD_progeny + (Male_bw_progeny / W_SD72))) %&gt;% 
   summarise(`k corrected for viability costs` = median(k_c),
@@ -1378,11 +1424,11 @@ k_c_SD72 &lt;-
 k_c_SDMAD &lt;-
   post %&gt;% 
   select(b_Intercept, b_SDMAD, `b_SEXM:SDMAD`) %&gt;% 
-  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SDMAD) * 100,
-         Female_bw_progeny = 100 - Female_SD_progeny,
+  mutate(Female_SD_progeny = inv_logit_scaled(b_Intercept + b_SDMAD),
+         Female_bw_progeny = 1 - Female_SD_progeny,
          W_SDMAD = Female_bw_progeny / Female_SD_progeny,
-         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SDMAD`) * 100,
-         Male_bw_progeny = 100 - Male_SD_progeny) %&gt;% 
+         Male_SD_progeny = inv_logit_scaled(b_Intercept + `b_SEXM:SDMAD`),
+         Male_bw_progeny = 1 - Male_SD_progeny) %&gt;% 
   select(Male_SD_progeny, Male_bw_progeny, W_SDMAD) %&gt;% 
   mutate(k_c = Male_SD_progeny / (Male_SD_progeny + (Male_bw_progeny / W_SDMAD))) %&gt;% 
   summarise(`k corrected for viability costs` = median(k_c),
@@ -1394,11 +1440,11 @@ k_c_SDMAD &lt;-
 k_c_W1118 &lt;-
   post %&gt;% 
   select(b_Intercept, b_SEXM) %&gt;% 
-  mutate(Female_W1118_progeny = inv_logit_scaled(b_Intercept) * 100,
-         Female_bw_progeny = 100 - Female_W1118_progeny,
+  mutate(Female_W1118_progeny = inv_logit_scaled(b_Intercept),
+         Female_bw_progeny = 1 - Female_W1118_progeny,
          W_W1118 = Female_bw_progeny / Female_W1118_progeny,
-         Male_W1118_progeny = inv_logit_scaled(b_Intercept + b_SEXM) * 100,
-         Male_bw_progeny = 100 - Male_W1118_progeny) %&gt;% 
+         Male_W1118_progeny = inv_logit_scaled(b_Intercept + b_SEXM),
+         Male_bw_progeny = 1 - Male_W1118_progeny) %&gt;% 
   select(Male_W1118_progeny, Male_bw_progeny, W_W1118) %&gt;% 
   mutate(k_c = Male_W1118_progeny / (Male_W1118_progeny + (Male_bw_progeny / W_W1118))) %&gt;% 
   summarise(`k corrected for viability costs` = median(k_c),
@@ -1648,12 +1694,11 @@ predictions_precop_success &lt;-
   gather(key = id, value = prop_SD_success, -posterior_draw) %&gt;%
   left_join(new_posterior_precop_success, by = &quot;id&quot;) %&gt;%
   select(-id) %&gt;% 
-  mutate(percent_SD_success = prop_SD_success * 100) %&gt;% 
   as_tibble() %&gt;% 
   group_by(SD) %&gt;% 
-  summarise(`Estimated % of males mating` = median(percent_SD_success),
-            `2.5%` = quantile(percent_SD_success, probs = 0.025),
-            `97.5%` = quantile(percent_SD_success, probs = 0.975))
+  summarise(`Estimated prop. of males mating` = median(prop_SD_success),
+            `2.5%` = quantile(prop_SD_success, probs = 0.025),
+            `97.5%` = quantile(prop_SD_success, probs = 0.975))
 
 
 # Now get the predicted posterior
@@ -1667,22 +1712,22 @@ posterior_prediction_precop_success &lt;-
   mutate(percent_SD_success = prop_SD_success * 100) %&gt;% 
   as_tibble()</code></pre>
 <p><span class="math inline">\(~\)</span></p>
-<p>The estimated percentage of <em>SD/+</em> or control males that successfully mated with a female when competing with a single <em>Lbw</em> male.</p>
+<p>The estimated proportion of <em>SD/+</em> or control males that successfully mated with a female when competing with a single <em>Lbw</em> male.</p>
 <pre class="r"><code>predictions_precop_success %&gt;% 
   mutate(`Variant carried` = recode(predictions_precop_success$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;)) %&gt;% 
   select(`Variant carried`, everything(), -SD) %&gt;%
   pander(split.cell = 40, split.table = Inf)</code></pre>
-<table style="width:89%;">
+<table style="width:97%;">
 <colgroup>
 <col width="25%" />
-<col width="41%" />
-<col width="11%" />
-<col width="11%" />
+<col width="47%" />
+<col width="12%" />
+<col width="12%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="center">Variant carried</th>
-<th align="center">Estimated % of males mating</th>
+<th align="center">Estimated prop. of males mating</th>
 <th align="center">2.5%</th>
 <th align="center">97.5%</th>
 </tr>
@@ -1690,21 +1735,21 @@ posterior_prediction_precop_success &lt;-
 <tbody>
 <tr class="odd">
 <td align="center">W1118</td>
-<td align="center">36.6</td>
-<td align="center">21.73</td>
-<td align="center">54.01</td>
+<td align="center">0.366</td>
+<td align="center">0.2173</td>
+<td align="center">0.5401</td>
 </tr>
 <tr class="even">
 <td align="center">SD-Mad</td>
-<td align="center">41.5</td>
-<td align="center">25.18</td>
-<td align="center">58.79</td>
+<td align="center">0.415</td>
+<td align="center">0.2518</td>
+<td align="center">0.5879</td>
 </tr>
 <tr class="odd">
 <td align="center">SD-72</td>
-<td align="center">43.28</td>
-<td align="center">26.04</td>
-<td align="center">62.52</td>
+<td align="center">0.4328</td>
+<td align="center">0.2604</td>
+<td align="center">0.6252</td>
 </tr>
 </tbody>
 </table>
@@ -1772,11 +1817,11 @@ post_diff_ms %&gt;%
   posterior_prediction_precop_success %&gt;% 
   mutate(SD = recode(posterior_prediction_precop_success$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;)) %&gt;%
   
-  ggplot(aes(SD, percent_SD_success)) + 
+  ggplot(aes(SD, prop_SD_success)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c(&quot;W1118&quot; = &quot;#38A6A5&quot;, &quot;SD-Mad&quot; = &quot;#EDAD08&quot;, &quot;SD-72&quot; = &quot;#CC503E&quot;)) +
   coord_flip() +
-  ylab(&quot;Estimated mating success (%) when competing\n against a single standard competitor&quot;) +
+  ylab(&quot;Estimated prop. of matings when competing\n against a single standard competitor&quot;) +
   xlab(&quot;Variant carried by male&quot;) +
   theme_bw() + 
   theme(legend.position = &quot;none&quot;,
@@ -2134,6 +2179,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/e3450488d1ad43016229ef8790c9679db1896802/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-17-1.png" target="_blank">e345048</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-30
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-17-1.png" target="_blank">9a9d650</a>
 </td>
 <td>
@@ -2488,6 +2544,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/e3450488d1ad43016229ef8790c9679db1896802/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-23-1.png" target="_blank">e345048</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-30
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-23-1.png" target="_blank">9a9d650</a>
 </td>
 <td>
@@ -2579,7 +2646,7 @@ my_data_table(postcop_data %&gt;%
             total = sum(total_offspring),
             `Number of mating trios` = n()) %&gt;% 
   mutate(Mating.Order = if_else(Mating.Order == &quot;first&quot;, &quot;SD/+ male mated first&quot;, &quot;LHm-UBI male mated first&quot;)) %&gt;%
-  mutate(`% offspring sired by first mate` = if_else(Mating.Order == &quot;SD/+ male mated first&quot;, total_SD / total * 100, total_GFP / total * 100)) %&gt;% 
+  mutate(`prop. offspring sired by first mate` = if_else(Mating.Order == &quot;SD/+ male mated first&quot;, total_SD / total, total_GFP / total)) %&gt;% 
   rename(`Mating Order` = Mating.Order,
          `Offspring sired by SD/+ males` = total_SD,
          `Offspring sired by LHm males` = total_GFP,
@@ -2593,7 +2660,7 @@ my_data_table(postcop_data %&gt;%
 <col width="18%" />
 <col width="17%" />
 <col width="13%" />
-<col width="19%" />
+<col width="21%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -2602,7 +2669,7 @@ my_data_table(postcop_data %&gt;%
 <th align="center">Offspring sired by SD/+ males</th>
 <th align="center">Offspring sired by LHm males</th>
 <th align="center">Total offspring sired</th>
-<th align="center">% offspring sired by first mate</th>
+<th align="center">prop. offspring sired by first mate</th>
 </tr>
 </thead>
 <tbody>
@@ -2612,7 +2679,7 @@ my_data_table(postcop_data %&gt;%
 <td align="center">294</td>
 <td align="center">2545</td>
 <td align="center">2839</td>
-<td align="center">10.36</td>
+<td align="center">0.1036</td>
 </tr>
 <tr class="even">
 <td align="center">LHm-UBI male mated first</td>
@@ -2620,7 +2687,7 @@ my_data_table(postcop_data %&gt;%
 <td align="center">4011</td>
 <td align="center">308</td>
 <td align="center">4319</td>
-<td align="center">7.131</td>
+<td align="center">0.07131</td>
 </tr>
 </tbody>
 </table>
@@ -2789,21 +2856,21 @@ tkeaney
 <pre class="r"><code># Define new data for prediction with posteriors
 
 new_posterior_P1 &lt;-
-  expand.grid(total_offspring = 100, SD = c(&quot;W1118&quot;, &quot;MAD&quot;, &quot;72&quot;, &quot;5&quot;), Block = unique(sperm_comp_data_P1$Block)) %&gt;% 
+  expand.grid(total_offspring = 1, SD = c(&quot;W1118&quot;, &quot;MAD&quot;, &quot;72&quot;, &quot;5&quot;), Block = unique(sperm_comp_data_P1$Block)) %&gt;% 
   mutate(id = paste(&quot;V&quot;, 1:12, sep = &quot;&quot;)) %&gt;% 
   as_tibble()
 
 predictions_P1 &lt;- 
   as.data.frame(fitted(sperm_comp_model_P1, newdata = new_posterior_P1, re_formula = NA, summary = FALSE)) %&gt;% # 12 cols, 8000ish rows
   mutate(posterior_draw = 1:n()) %&gt;%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %&gt;%
+  gather(key = id, value = prop_focal_offspring, -posterior_draw) %&gt;%
   left_join(new_posterior_P1, by = &quot;id&quot;) %&gt;%
   select(-id) %&gt;% 
   as_tibble() %&gt;% 
   group_by(SD) %&gt;% 
-  summarise(`Estimated % of offspring sired` = median(percent_focal_offspring),
-            `2.5%` = quantile(percent_focal_offspring, probs = 0.025),
-            `97.5%` = quantile(percent_focal_offspring, probs = 0.975))
+  summarise(`Estimated prop. of offspring sired` = median(prop_focal_offspring),
+            `2.5%` = quantile(prop_focal_offspring, probs = 0.025),
+            `97.5%` = quantile(prop_focal_offspring, probs = 0.975))
 
 
 # Now get the predicted posterior but don&#39;t summarise
@@ -2811,27 +2878,27 @@ predictions_P1 &lt;-
 posterior_prediction_P1 &lt;- 
   as.data.frame(fitted(sperm_comp_model_P1, newdata = new_posterior_P1, re_formula = NA, summary = FALSE)) %&gt;% # 12 cols, 8000ish rows
   mutate(posterior_draw = 1:n()) %&gt;%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %&gt;%
+  gather(key = id, value = prop_focal_offspring, -posterior_draw) %&gt;%
   left_join(new_posterior_P1, by = &quot;id&quot;) %&gt;%
   select(-id) %&gt;% 
   as_tibble()</code></pre>
 <p><span class="math inline">\(~\)</span></p>
-<p>The estimated percentage of offspring sired by <em>SD/+</em> or control males, when they mated first.</p>
+<p>The estimated proportion of offspring sired by <em>SD/+</em> or control males, when they mated first.</p>
 <pre class="r"><code>predictions_P1 %&gt;% 
   mutate(`Variant carried` = recode(predictions_P1$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;, &quot;5&quot; = &quot;SD-5&quot;)) %&gt;% 
   select(`Variant carried`, everything(), -SD) %&gt;% 
   pander(split.cell = 40, split.table = Inf, round = 2)</code></pre>
-<table style="width:92%;">
+<table style="width:97%;">
 <colgroup>
 <col width="25%" />
-<col width="45%" />
+<col width="51%" />
 <col width="9%" />
 <col width="11%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="center">Variant carried</th>
-<th align="center">Estimated % of offspring sired</th>
+<th align="center">Estimated prop. of offspring sired</th>
 <th align="center">2.5%</th>
 <th align="center">97.5%</th>
 </tr>
@@ -2839,27 +2906,27 @@ posterior_prediction_P1 &lt;-
 <tbody>
 <tr class="odd">
 <td align="center">W1118</td>
-<td align="center">8.17</td>
-<td align="center">0.99</td>
-<td align="center">44.4</td>
+<td align="center">0.08</td>
+<td align="center">0.01</td>
+<td align="center">0.44</td>
 </tr>
 <tr class="even">
 <td align="center">SD-Mad</td>
-<td align="center">1.83</td>
-<td align="center">0.17</td>
-<td align="center">16.28</td>
+<td align="center">0.02</td>
+<td align="center">0</td>
+<td align="center">0.16</td>
 </tr>
 <tr class="odd">
 <td align="center">SD-72</td>
-<td align="center">2.15</td>
-<td align="center">0.21</td>
-<td align="center">16.97</td>
+<td align="center">0.02</td>
+<td align="center">0</td>
+<td align="center">0.17</td>
 </tr>
 <tr class="even">
 <td align="center">SD-5</td>
-<td align="center">0.78</td>
-<td align="center">0.08</td>
-<td align="center">5.79</td>
+<td align="center">0.01</td>
+<td align="center">0</td>
+<td align="center">0.06</td>
 </tr>
 </tbody>
 </table>
@@ -2937,11 +3004,11 @@ post_diff_P1 %&gt;%
 <pre class="r"><code>mean_P1_plot &lt;-
   posterior_prediction_P1 %&gt;%
   mutate(SD = recode(posterior_prediction_P1$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;, &quot;5&quot; = &quot;SD-5&quot;)) %&gt;%
-  ggplot(aes(SD, percent_focal_offspring)) + 
+  ggplot(aes(SD, prop_focal_offspring)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c(&quot;W1118&quot; = &quot;#38A6A5&quot;, &quot;SD-Mad&quot; = &quot;#EDAD08&quot;, &quot;SD-72&quot; = &quot;#CC503E&quot;, &quot;SD-5&quot; = &quot;#994E95&quot;)) +
-  coord_flip(ylim = c(0, 50)) +
-  ylab(&quot;Estimated % of offspring sired when mating first (P1)&quot;) +
+  coord_flip(ylim = c(0, 0.5)) +
+  ylab(&quot;Estimated prop. of offspring sired when mating first (P1)&quot;) +
   xlab(&quot;Variant carried&quot;) +
   theme_bw() + 
   theme(legend.position = &quot;none&quot;,
@@ -3132,7 +3199,7 @@ tkeaney
 <pre class="r"><code># Define new data for prediction with posteriors
 
 new_posterior_P2 &lt;-
-  expand.grid(total_offspring = 100, SD = c(&quot;W1118&quot;, &quot;MAD&quot;, &quot;72&quot;, &quot;5&quot;), Block = unique(sperm_comp_data_P2$Block)) %&gt;% 
+  expand.grid(total_offspring = 1, SD = c(&quot;W1118&quot;, &quot;MAD&quot;, &quot;72&quot;, &quot;5&quot;), Block = unique(sperm_comp_data_P2$Block)) %&gt;% 
   mutate(id = paste(&quot;V&quot;, 1:12, sep = &quot;&quot;)) %&gt;% 
   as_tibble()
 
@@ -3141,14 +3208,14 @@ new_posterior_P2 &lt;-
 predictions_P2 &lt;- 
   as.data.frame(fitted(sperm_comp_model_P2, newdata = new_posterior_P2, re_formula = NA, summary = FALSE)) %&gt;% # 12 cols, 8000ish rows
   mutate(posterior_draw = 1:n()) %&gt;%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %&gt;%
+  gather(key = id, value = prop_focal_offspring, -posterior_draw) %&gt;%
   left_join(new_posterior_P2, by = &quot;id&quot;) %&gt;%
   select(-id) %&gt;% 
   as_tibble() %&gt;% 
   group_by(SD) %&gt;% 
-  summarise(`Estimated % of offspring sired` = median(percent_focal_offspring),
-            `2.5%` = quantile(percent_focal_offspring, probs = 0.025),
-            `97.5%` = quantile(percent_focal_offspring, probs = 0.975))
+  summarise(`Estimated prop. of offspring sired` = median(prop_focal_offspring),
+            `2.5%` = quantile(prop_focal_offspring, probs = 0.025),
+            `97.5%` = quantile(prop_focal_offspring, probs = 0.975))
 
 
 # Now get the predicted posterior
@@ -3156,27 +3223,27 @@ predictions_P2 &lt;-
 posterior_prediction_P2 &lt;- 
   as.data.frame(fitted(sperm_comp_model_P2, newdata = new_posterior_P2, re_formula = NA, summary = FALSE)) %&gt;% # 12 cols, 8000ish rows
   mutate(posterior_draw = 1:n()) %&gt;%
-  gather(key = id, value = percent_focal_offspring, -posterior_draw) %&gt;%
+  gather(key = id, value = prop_focal_offspring, -posterior_draw) %&gt;%
   left_join(new_posterior_P2, by = &quot;id&quot;) %&gt;%
   select(-id) %&gt;% 
   as_tibble()</code></pre>
 <p><span class="math inline">\(~\)</span></p>
-<p>The estimated percentage of offspring sired by <em>SD/+</em> or control males, when they mated second.</p>
+<p>The estimated proportion of offspring sired by <em>SD/+</em> or control males, when they mated second.</p>
 <pre class="r"><code>predictions_P2 %&gt;% 
   mutate(`Variant carried` = recode(predictions_P2$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;, &quot;5&quot; = &quot;SD-5&quot;)) %&gt;% 
   select(`Variant carried`, everything(), -SD) %&gt;% 
   pander(split.cell = 40, split.table = Inf, round = 2)</code></pre>
-<table style="width:93%;">
+<table style="width:97%;">
 <colgroup>
 <col width="25%" />
-<col width="45%" />
-<col width="11%" />
+<col width="51%" />
+<col width="9%" />
 <col width="11%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="center">Variant carried</th>
-<th align="center">Estimated % of offspring sired</th>
+<th align="center">Estimated prop. of offspring sired</th>
 <th align="center">2.5%</th>
 <th align="center">97.5%</th>
 </tr>
@@ -3184,27 +3251,27 @@ posterior_prediction_P2 &lt;-
 <tbody>
 <tr class="odd">
 <td align="center">W1118</td>
-<td align="center">97.9</td>
-<td align="center">91.61</td>
-<td align="center">99.7</td>
+<td align="center">0.98</td>
+<td align="center">0.92</td>
+<td align="center">1</td>
 </tr>
 <tr class="even">
 <td align="center">SD-Mad</td>
-<td align="center">99.52</td>
-<td align="center">97.61</td>
-<td align="center">99.94</td>
+<td align="center">1</td>
+<td align="center">0.98</td>
+<td align="center">1</td>
 </tr>
 <tr class="odd">
 <td align="center">SD-72</td>
-<td align="center">97.63</td>
-<td align="center">90.34</td>
-<td align="center">99.65</td>
+<td align="center">0.98</td>
+<td align="center">0.9</td>
+<td align="center">1</td>
 </tr>
 <tr class="even">
 <td align="center">SD-5</td>
-<td align="center">93.16</td>
-<td align="center">74.51</td>
-<td align="center">98.91</td>
+<td align="center">0.93</td>
+<td align="center">0.75</td>
+<td align="center">0.99</td>
 </tr>
 </tbody>
 </table>
@@ -3280,11 +3347,11 @@ post_diff_P2 %&gt;%
 <pre class="r"><code>mean_P2_plot &lt;-
   posterior_prediction_P2 %&gt;%
   mutate(SD = recode(posterior_prediction_P2$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;, &quot;5&quot; = &quot;SD-5&quot;)) %&gt;% 
-  ggplot(aes(SD, percent_focal_offspring)) + 
+  ggplot(aes(SD, prop_focal_offspring)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c(&quot;W1118&quot; = &quot;#38A6A5&quot;, &quot;SD-Mad&quot; = &quot;#EDAD08&quot;, &quot;SD-72&quot; = &quot;#CC503E&quot;, &quot;SD-5&quot; = &quot;#994E95&quot;)) +
-  coord_flip(ylim = c(70, 100)) +
-  ylab(&quot;Estimated % of offspring sired when mating second (P2)&quot;) +
+  coord_flip(ylim = c(0.7, 1)) +
+  ylab(&quot;Estimated prop. of offspring sired when mating second (P2)&quot;) +
   xlab(&quot;Variant carried by male&quot;) +
   theme_bw() + 
   theme(legend.position = &quot;none&quot;,
@@ -3479,12 +3546,11 @@ predictions_remating &lt;-
   gather(key = id, value = prop_females_remating, -posterior_draw) %&gt;%
   left_join(new_posterior_remating, by = &quot;id&quot;) %&gt;%
   select(-id) %&gt;% 
-  mutate(percent_females_remating = prop_females_remating * 100) %&gt;% 
   as_tibble() %&gt;% 
   group_by(SD, Block) %&gt;% 
-  summarise(`Estimated % of mates remating` = median(percent_females_remating),
-            `2.5%` = quantile(percent_females_remating, probs = 0.025),
-            `97.5%` = quantile(percent_females_remating, probs = 0.975))
+  summarise(`Estimated prop. of mates remating` = median(prop_females_remating),
+            `2.5%` = quantile(prop_females_remating, probs = 0.025),
+            `97.5%` = quantile(prop_females_remating, probs = 0.975))
 
 
 # Now get the predicted posterior
@@ -3495,10 +3561,9 @@ posterior_prediction_remating &lt;-
   gather(key = id, value = prop_females_remating, -posterior_draw) %&gt;%
   left_join(new_posterior_remating, by = &quot;id&quot;) %&gt;%
   select(-id) %&gt;% 
-  mutate(percent_females_remating = prop_females_remating * 100) %&gt;% 
   as_tibble()</code></pre>
 <p><span class="math inline">\(~\)</span></p>
-<p>The estimated percentage of females that remated that were first mated to a <em>SD/+</em> or control male.</p>
+<p>The estimated proportion of females that remated that were first mated to a <em>SD/+</em> or control male.</p>
 <pre class="r"><code>predictions_remating %&gt;% 
   mutate(`Variant carried` = SD) %&gt;% 
   mutate(`Variant carried` = recode(SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;, &quot;5&quot; = &quot;SD-5&quot;)) %&gt;% 
@@ -3507,17 +3572,17 @@ posterior_prediction_remating &lt;-
   pander(split.cell = 40, split.table = Inf)</code></pre>
 <table>
 <colgroup>
-<col width="24%" />
-<col width="10%" />
+<col width="21%" />
+<col width="9%" />
 <col width="43%" />
-<col width="10%" />
-<col width="10%" />
+<col width="12%" />
+<col width="12%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="center">Variant carried</th>
 <th align="center">Block</th>
-<th align="center">Estimated % of mates remating</th>
+<th align="center">Estimated prop. of mates remating</th>
 <th align="center">2.5%</th>
 <th align="center">97.5%</th>
 </tr>
@@ -3526,86 +3591,86 @@ posterior_prediction_remating &lt;-
 <tr class="odd">
 <td align="center">W1118</td>
 <td align="center">1</td>
-<td align="center">30.36</td>
-<td align="center">14.97</td>
-<td align="center">51.05</td>
+<td align="center">0.3036</td>
+<td align="center">0.1497</td>
+<td align="center">0.5105</td>
 </tr>
 <tr class="even">
 <td align="center">W1118</td>
 <td align="center">2</td>
-<td align="center">16.22</td>
-<td align="center">7.473</td>
-<td align="center">29.98</td>
+<td align="center">0.1622</td>
+<td align="center">0.07473</td>
+<td align="center">0.2998</td>
 </tr>
 <tr class="odd">
 <td align="center">W1118</td>
 <td align="center">3</td>
-<td align="center">48.62</td>
-<td align="center">30.85</td>
-<td align="center">66.63</td>
+<td align="center">0.4862</td>
+<td align="center">0.3085</td>
+<td align="center">0.6663</td>
 </tr>
 <tr class="even">
 <td align="center">SD-Mad</td>
 <td align="center">1</td>
-<td align="center">42.93</td>
-<td align="center">22.99</td>
-<td align="center">65.09</td>
+<td align="center">0.4293</td>
+<td align="center">0.2299</td>
+<td align="center">0.6509</td>
 </tr>
 <tr class="odd">
 <td align="center">SD-Mad</td>
 <td align="center">2</td>
-<td align="center">24.9</td>
-<td align="center">11.75</td>
-<td align="center">43.87</td>
+<td align="center">0.249</td>
+<td align="center">0.1175</td>
+<td align="center">0.4387</td>
 </tr>
 <tr class="even">
 <td align="center">SD-Mad</td>
 <td align="center">3</td>
-<td align="center">61.8</td>
-<td align="center">41.97</td>
-<td align="center">78.74</td>
+<td align="center">0.618</td>
+<td align="center">0.4197</td>
+<td align="center">0.7874</td>
 </tr>
 <tr class="odd">
 <td align="center">SD-72</td>
 <td align="center">1</td>
-<td align="center">42.54</td>
-<td align="center">23.09</td>
-<td align="center">64.14</td>
+<td align="center">0.4254</td>
+<td align="center">0.2309</td>
+<td align="center">0.6414</td>
 </tr>
 <tr class="even">
 <td align="center">SD-72</td>
 <td align="center">2</td>
-<td align="center">24.72</td>
-<td align="center">11.72</td>
-<td align="center">43.59</td>
+<td align="center">0.2472</td>
+<td align="center">0.1172</td>
+<td align="center">0.4359</td>
 </tr>
 <tr class="odd">
 <td align="center">SD-72</td>
 <td align="center">3</td>
-<td align="center">61.53</td>
-<td align="center">41.95</td>
-<td align="center">78.84</td>
+<td align="center">0.6153</td>
+<td align="center">0.4195</td>
+<td align="center">0.7884</td>
 </tr>
 <tr class="even">
 <td align="center">SD-5</td>
 <td align="center">1</td>
-<td align="center">75.46</td>
-<td align="center">55.54</td>
-<td align="center">89.24</td>
+<td align="center">0.7546</td>
+<td align="center">0.5554</td>
+<td align="center">0.8924</td>
 </tr>
 <tr class="odd">
 <td align="center">SD-5</td>
 <td align="center">2</td>
-<td align="center">57.68</td>
-<td align="center">39.09</td>
-<td align="center">75.63</td>
+<td align="center">0.5768</td>
+<td align="center">0.3909</td>
+<td align="center">0.7563</td>
 </tr>
 <tr class="even">
 <td align="center">SD-5</td>
 <td align="center">3</td>
-<td align="center">86.97</td>
-<td align="center">74.02</td>
-<td align="center">94.58</td>
+<td align="center">0.8697</td>
+<td align="center">0.7402</td>
+<td align="center">0.9458</td>
 </tr>
 </tbody>
 </table>
@@ -3681,11 +3746,11 @@ post_diff_r %&gt;%
   posterior_prediction_remating %&gt;%
   mutate(SD = recode(posterior_prediction_remating$SD, &quot;MAD&quot; = &quot;SD-Mad&quot;, &quot;72&quot; = &quot;SD-72&quot;, &quot;5&quot; = &quot;SD-5&quot;)) %&gt;%
   filter(Block == &quot;1&quot;) %&gt;% # here we select data from the first block to make the plot look nicer - this doesn&#39;t affect the differences between each SD variant and the control, it just shrinks the uncertainty that occurs because of differences between blocks
-  ggplot(aes(SD, percent_females_remating)) + 
+  ggplot(aes(SD, prop_females_remating)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
   scale_fill_manual(values = c(&quot;W1118&quot; = &quot;#38A6A5&quot;, &quot;SD-Mad&quot; = &quot;#EDAD08&quot;, &quot;SD-72&quot; = &quot;#CC503E&quot;, &quot;SD-5&quot; = &quot;#994E95&quot;)) +
   coord_flip() +
-  ylab(&quot;Estimated % of females that mated twice&quot;) +
+  ylab(&quot;Estimated prop. of females that mated twice&quot;) +
   xlab(&quot;Male variant mated to first&quot;) +
   theme_bw() + 
   theme(legend.position = &quot;none&quot;,
@@ -4143,6 +4208,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/e3450488d1ad43016229ef8790c9679db1896802/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-45-1.png" target="_blank">e345048</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-30
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-45-1.png" target="_blank">9a9d650</a>
 </td>
 <td>
@@ -4525,6 +4601,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/e3450488d1ad43016229ef8790c9679db1896802/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-54-1.png" target="_blank">e345048</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-30
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-54-1.png" target="_blank">9a9d650</a>
@@ -4911,6 +4998,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/e3450488d1ad43016229ef8790c9679db1896802/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-63-1.png" target="_blank">e345048</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-30
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-63-1.png" target="_blank">9a9d650</a>
 </td>
 <td>
@@ -4970,6 +5068,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/tomkeaney/SD_sexual_selection/blob/e3450488d1ad43016229ef8790c9679db1896802/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-64-1.png" target="_blank">e345048</a>
+</td>
+<td>
+tkeaney
+</td>
+<td>
+2021-08-30
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/tomkeaney/SD_sexual_selection/blob/9a9d65072ed3515f10cd5932e282b3befedf81d1/docs/figure/Empirical_analysis.Rmd/unnamed-chunk-64-1.png" target="_blank">9a9d650</a>
