@@ -1,5 +1,5 @@
 ---
-title: "Sexual selection can partly explain low frequencies of segregation distorter alleles"
+title: "Sexual selection can partly explain low frequencies of Segregation Distorter alleles"
 author: "Thomas Keaney, Theresa Jones and Luke Holman"
 subtitle: Empirical analysis
 output: 

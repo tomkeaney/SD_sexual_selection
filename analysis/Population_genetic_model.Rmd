@@ -1,5 +1,5 @@
 ---
-title: "Sexual selection can partly explain low frequencies of segregation distorter alleles"
+title: "Sexual selection can partly explain low frequencies of Segregation Distorter alleles"
 author: "Thomas Keaney, Theresa Jones and Luke Holman"
 subtitle: Population genetic model
 output: 
@@ -756,6 +756,65 @@ parameters <- rbind(
 
 $~$
 
+**Checking that our simulation codes are consistent with previous analytical models**
+
+We can find _SD_ allele frequencies for varying levels of segregation distortion if the only fitness cost associated with _SD_ is homozygote lethality. This represents an upper bound for the frequency of _SD_ alleles in our fully parameterised simulation. 
+
+Simplifying the simulation is also a useful exercise for comparing our model with previous models exploring the effect of homozygote lethality on segregation distorter frequencies. We find that our model reproduces the frequencies found using these previous models. 
+
+[Bruck (1957)](http://dx.doi.org/10.1073/pnas.43.1.152) showed that homozygous lethal segregation distorting alleles (assuming no other fitness costs) reach an equilibrium frequency in adults at  $q = \frac{1}{2} - \frac{\sqrt{k(1 - k)}}{2k}$, where $k$ is the strength of segregation distortion. We plug the three _k_ values we observed in our pilot experiment into this equation and contrast the results with our simplified simulation results in Table S2 below.
+
+$~$
+
+**Table S2**: _SD_ equilibrium frequencies calculated assuming varying levels of segregation distortion ($k$) and no fitness cost other than homozygote lethality associated with _SD_ alleles. The table shows the equivalence between using our simulation code and the difference equation presented in [Bruck (1957)](http://dx.doi.org/10.1073/pnas.43.1.152). 
+
+```{r}
+
+parameters_default <- rbind(
+  expand_grid(
+    generations = gen,
+    k = c(0.5, estimated_k_SD5, estimated_k_SD72, estimated_k_SDMad),
+    normalP1 = 0.5,
+    P1cost = 0,
+    P2cost = 0,
+    prob_remating_W = 0,
+    prob_remating_SD = 0,
+    egg_adult_viability_WSD_female = egg_adult_viability_WSD_female,
+    egg_adult_viability_SDSD_female = egg_adult_viability_SDSD_female,
+    egg_adult_viability_WSD_male = egg_adult_viability_WSD_male,
+    egg_adult_viability_SDSD_male = egg_adult_viability_SDSD_male,
+    S_precop_WSD_male = 1,
+    initial_freq_SD = initial_freq_SD)) %>% 
+  mutate(parameter_space_ID = row_number())
+
+
+if(!file.exists("simulation_results/output_defaults.rds")){
+  output_defaults <- lapply(1:nrow(parameters_default), run_simulation, parameters = parameters_default)
+  saveRDS(output_defaults, "simulation_results/output_defaults.rds")
+} else{
+  output_defaults <- read_rds("simulation_results/output_defaults.rds")
+}
+
+default_final_SD_props_among_preselection_zygotes <- sapply(output_defaults, calc_prop_SD)
+
+default_final_SD_props_among_adults <- sapply(output_defaults, function(pop){
+  
+  pop$prop <- pop$prop * pop$egg_adult_viability # apply selection, then calculate allele freq of SD
+  pop$prop <- pop$prop / sum(pop$prop) 
+  calc_prop_SD(pop)
+  
+})
+
+
+parameters_default %>%
+  mutate(`Simulation SD equilibrium freq` = round(default_final_SD_props_among_adults, 3),
+         `Bruck SD equilibrium freq` = round(1/2 - sqrt(k * (1- k)) / (2 * k), 3)) %>% 
+  select(k, `Simulation SD equilibrium freq`, `Bruck SD equilibrium freq`) %>% 
+  pander(split.cell = 40, split.table = Inf)
+```
+
+$~$
+
 # Run the simulation
 
 $~$
@@ -1089,73 +1148,6 @@ final_SD_props_among_adults <- sapply(output, function(pop){
 ```
 
 $~$
-
-# Run the simulation with just homozygote lethality
-
-$~$
-
-We can find _SD_ allele frequencies for varying levels of segregation distortion if the only fitness cost associated with SD is homozygote lethality. This represents an upper bound for the frequency of _SD_ alleles in our fully parameterised simulation. 
-
-Simplifying the simulation is also a useful exercise for comparing our model with previous models exploring the effect of homozygote lethality on segregation distorter frequencies. We find that our model reproduces the frequencies found using these previous models. 
-
-For example, when $k$ = 0.944, we find that the _SD_ allele increases from a frequency of 0.1% to 37.8% in 1000 generations, which we use to represent the equilibrium frequency.
-
-[Bruck (1957)](http://dx.doi.org/10.1073/pnas.43.1.152) showed that homozygous lethal segregation distorting alleles (that are associated with no other fitness costs) reach an equilibrium frequency in adults at $q = \frac{1}{2} - \frac{\sqrt{k(1 - k)}}{2k}$, where $k$ is the strength of segregation distortion.
-
-To show the equivalence between Bruck's model and ours, let $k$ = 0.944.
-
-The equilibrium frequency is
-
-```{r, echo=TRUE}
-1/2 - sqrt(0.944 * (1- 0.944)) / (2 * 0.944)
-```
-
-$~$
-
-```{r}
-
-parameters_default <- rbind(
-  expand_grid(
-    generations = gen,
-    k = c(0.5, estimated_k_SD5, estimated_k_SD72, estimated_k_SDMad),
-    normalP1 = 0.5,
-    P1cost = 0,
-    P2cost = 0,
-    prob_remating_W = 0,
-    prob_remating_SD = 0,
-    egg_adult_viability_WSD_female = egg_adult_viability_WSD_female,
-    egg_adult_viability_SDSD_female = egg_adult_viability_SDSD_female,
-    egg_adult_viability_WSD_male = egg_adult_viability_WSD_male,
-    egg_adult_viability_SDSD_male = egg_adult_viability_SDSD_male,
-    S_precop_WSD_male = 1,
-    initial_freq_SD = initial_freq_SD)) %>% 
-  mutate(parameter_space_ID = row_number())
-
-
-if(!file.exists("simulation_results/output_defaults.rds")){
-  output_defaults <- lapply(1:nrow(parameters_default), run_simulation, parameters = parameters_default)
-  saveRDS(output_defaults, "simulation_results/output_defaults.rds")
-} else{
-  output_defaults <- read_rds("simulation_results/output_defaults.rds")
-}
-
-default_final_SD_props_among_preselection_zygotes <- sapply(output_defaults, calc_prop_SD)
-
-default_final_SD_props_among_adults <- sapply(output_defaults, function(pop){
-  
-  pop$prop <- pop$prop * pop$egg_adult_viability # apply selection, then calculate allele freq of SD
-  pop$prop <- pop$prop / sum(pop$prop) 
-  calc_prop_SD(pop)
-  
-})
-
-
-parameters_default %>%
-  mutate(prop_SD = round(default_final_SD_props_among_adults, 3)) %>% 
-  select(-c(generations, normalP1, initial_freq_SD, parameter_space_ID)) %>% 
-  pander(split.cell = 40, split.table = Inf)
-```
-
 
 # Create Figures 2 and S8
 
