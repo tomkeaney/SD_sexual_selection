@@ -1,7 +1,7 @@
-name: Sexual selection & the population genetics of a selfish gene
+name: Sexual selection can partly explain low frequencies of Segregation Distorter alleles
 output_dir: ../docs
 navbar:
-  title: Sexual selection & the population genetics of a selfish gene
+  title: Sexual selection can partly explain low frequencies of Segregation Distorter alleles
   left:
   - text: Home
     href: index.html
