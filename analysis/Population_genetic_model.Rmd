@@ -756,7 +756,9 @@ parameters <- rbind(
 
 $~$
 
-**Checking that our simulation codes are consistent with previous analytical models**
+# Checking that our simulation codes are consistent with previous analytical models
+
+$~$
 
 We can find _SD_ allele frequencies for varying levels of segregation distortion if the only fitness cost associated with _SD_ is homozygote lethality. This represents an upper bound for the frequency of _SD_ alleles in our fully parameterised simulation. 
 
