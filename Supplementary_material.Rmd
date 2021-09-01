@@ -1,5 +1,5 @@
 ---
-title: "Sexual selection and the population genetics of a selfish gene"  
+title: "Sexual selection can partly explain low frequencies of Segregation Distorter alleles"  
 author: "Thomas A Keaney, Therésa M Jones and Luke Holman"
 subtitle: Supplementary material
 output:
@@ -31,7 +31,7 @@ library(lubridate) # working with times and durations
 library(rcartocolor) # for nice colour palettes
 library(patchwork) # for creating figures with multiple panels
 library(stickylabeller) # for adding annotations to facets
-
+library(ggnewscale) # for multiple scales in a single plot
 ```
 
 $~$
@@ -229,7 +229,7 @@ posterior_prediction %>%
   
   ggplot(aes(SD, percent_focal_offspring)) + 
   stat_eye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   geom_hline(yintercept = 50, linetype = 2) +
   facet_wrap( ~ SEX) + 
   scale_y_continuous("Estimated inheritance (%)",
@@ -425,7 +425,7 @@ mean_mating_latency_plot <-
   mutate(SD = recode(posterior_prediction_mating_latency$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
   ggplot(aes(SD, mean_mating_latency)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip(ylim = c(0, 100)) +
   ylab("Estimated time to mating\n (minutes)") +
   xlab("Variant carried by male") +
@@ -435,7 +435,6 @@ mean_mating_latency_plot <-
 ```
 
 ```{r, include=FALSE}
-
 mating_latency_odds <- 
   post_ml %>% 
   mutate(`SD-Mad` = b_SDMAD,
@@ -448,7 +447,7 @@ mating_latency_odds <-
   
   ggplot(aes(parameter, logodds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Odds difference from w1118",
@@ -456,8 +455,7 @@ mating_latency_odds <-
   xlab("Variant carried by male") +
   theme_bw() + 
   theme(legend.position = "none",
-        panel.grid.minor = element_blank())   
-
+        panel.grid.minor = element_blank()) 
 ```
 
 $~$
@@ -572,7 +570,7 @@ mean_copulation_duration_plot <-
   mutate(SD = recode(posterior_prediction_copulation_duration$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
   ggplot(aes(SD, mean_copulation_duration)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip(ylim = c(15, 30)) +
   ylab("Estimated copulation duration\n (minutes)") +
   xlab("Variant carried by male") +
@@ -582,7 +580,6 @@ mean_copulation_duration_plot <-
 ```
 
 ```{r}
-
 copulation_duration_odds <- 
   post_cd %>% 
   mutate(`SD-Mad` = b_SDMAD,
@@ -595,7 +592,7 @@ copulation_duration_odds <-
   
   ggplot(aes(parameter, odds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Odds difference from w1118",
@@ -603,8 +600,7 @@ copulation_duration_odds <-
   xlab("Variant carried by male") +
   theme_bw() + 
   theme(legend.position = "none",
-        panel.grid.minor = element_blank())   
-
+        panel.grid.minor = element_blank())
 ```
 
 ```{r}
@@ -702,17 +698,16 @@ mean_latency_plot <-
   filter(Block == "1") %>% 
   ggplot(aes(SD, avg_remating_latency)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip(ylim = c(0, 250)) +
   ylab("Estimated time to remating\n (minutes)") +
-  xlab("Variant mated to first") +
+  xlab("Male variant mated to first") +
   theme_bw() + 
   theme(legend.position = "none",
         panel.grid.minor = element_blank())
 ```
 
 ```{r}
-
 latency_odds <- 
   post_l %>% 
   mutate(`SD-Mad` = b_SDMAD,
@@ -726,16 +721,15 @@ latency_odds <-
   
   ggplot(aes(parameter, logodds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Odds difference from w1118",
                      breaks = c(-2, -1, 0, 1)) +
-  xlab("Variant mated to first") +
+  xlab("Male variant mated to first") +
   theme_bw() + 
   theme(legend.position = "none",
         panel.grid.minor = element_blank())   
-
 ```
 
 $~$
@@ -833,7 +827,7 @@ mean_copulation_duration_plot_1 <-
   mutate(SD = recode(posterior_prediction_copulation_duration_1$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
   ggplot(aes(SD, mean_copulation_duration)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip(ylim = c(10, 35)) +
   ylab("Estimated copulation duration in\nfirst mating role (minutes)") +
   xlab("Variant carried by male") +
@@ -856,7 +850,7 @@ copulation_duration_odds_1 <-
   
   ggplot(aes(parameter, odds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Odds difference from w1118",
@@ -960,7 +954,7 @@ mean_copulation_duration_plot_2 <-
   mutate(SD = recode(posterior_prediction_copulation_duration_2$SD, "MAD" = "SD-Mad", "72" = "SD-72", "5" = "SD-5")) %>%
   ggplot(aes(SD, mean_copulation_duration)) + 
   stat_halfeye(aes(fill = SD), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("W1118" = "#d3f2a3", "SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("W1118" = "#38A6A5", "SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip(ylim = c(10, 35)) +
   ylab("Estimated copulation duration in\nsecond mating role (minutes)") +
   xlab("Variant carried by male") +
@@ -983,7 +977,7 @@ copulation_duration_odds_2 <-
   
   ggplot(aes(parameter, odds)) + 
   stat_halfeye(aes(fill = parameter), .width = c(0.66, 0.95)) + # width indicates the uncertainty intervals: here we have 66% and 95% intervals
-  scale_fill_manual(values = c("SD-Mad" = "#97e196", "SD-72" = "#6cc08b", "SD-5" = "#4c9b82")) +
+  scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
   coord_flip() +
   geom_hline(yintercept = 0, linetype = 2) +
   scale_y_continuous("Odds difference from w1118",
@@ -991,7 +985,7 @@ copulation_duration_odds_2 <-
   xlab("Variant carried by male") +
   theme_bw() + 
   theme(legend.position = "none",
-        panel.grid.minor = element_blank())  
+        panel.grid.minor = element_blank())   
 ```
 
 ```{r}
@@ -1011,7 +1005,7 @@ estimated_k_SD5 <- 0.944 # 94.4% of progeny inherit SD
 
 estimated_k_SD72 <- 0.909 # 90.9% of progeny inherit SD 
 
-estimated_k_SDMAD <- 0.868 # 86.8% of progeny inherit SD
+estimated_k_SDMad <- 0.868 # 86.8% of progeny inherit SD
 
 # The relative mating success for each SD variant
 
@@ -1019,7 +1013,7 @@ estimated_precop_SD5 <- NA # not measured
 
 estimated_precop_SD72 <- 1.24
   
-estimated_precop_SDMAD <- 1.19
+estimated_precop_SDMad <- 1.19
 
 # P1cost and P2cost values, plugged in from Table S7b and Table S8b
 
@@ -1031,9 +1025,9 @@ P1_SD72 <- 1 - 0.43
 
 P2_SD72 <- 1 - 0.997 
 
-P1_SDMAD <- 1 - 0.39 
+P1_SDMad <- 1 - 0.39 
 
-P2_SDMAD <- 0 # no cost
+P2_SDMad <- 0 # no cost
 
 # We also include 95% credible intervals for P1 and P2 cost, to use in Figure 2 and Figure S8
 
@@ -1045,9 +1039,9 @@ lower_P1_SD72 <- 1 - 0.05
 
 lower_P2_SD72 <- 1 - 0.969 
 
-lower_P1_SDMAD <-  NA #1 - 0.04 essentially identical to SD-72 so to avoid clutter in our figures we don't include this value
+lower_P1_SDMad <-  NA #1 - 0.04 essentially identical to SD-72 so to avoid clutter in our figures we don't include this value
 
-lower_P2_SDMAD <- 0 # no cost
+lower_P2_SDMad <- 0 # no cost
 
 upper_P1_SD5 <- 1 - 0.6
 
@@ -1057,9 +1051,9 @@ upper_P1_SD72 <- 0 # no cost
 
 upper_P2_SD72 <- 0 # no cost
 
-upper_P1_SDMAD <- 0 # no cost
+upper_P1_SDMad <- 0 # no cost
 
-upper_P2_SDMAD <- 0 # no cost
+upper_P2_SDMad <- 0 # no cost
 
 # Remating probabilities from Table S9a, using estimates from Block 1
 
@@ -1069,21 +1063,21 @@ estimated_prob_remating_SD5 = 0.755
 
 estimated_prob_remating_SD72 = 0.425 
 
-estimated_prob_remating_SDMAD = 0.429
+estimated_prob_remating_SDMad = 0.429
 
 # Create a tibble containing empirical estimates
 
 empirical_estimates <-
-  tibble(SD = c("SD-5", "SD-72", "SD-MAD"),
-         kc = c(estimated_k_SD5, estimated_k_SD72, estimated_k_SDMAD),
-         Precop = c(estimated_precop_SD5, estimated_precop_SD72, estimated_precop_SDMAD),
-         P1cost = c(P1_SD5, P1_SD72, P1_SDMAD),
-         lower_P1cost = c(lower_P1_SD5, lower_P1_SD72, lower_P1_SDMAD),
-         upper_P1cost = c(upper_P1_SD5, upper_P1_SD72, upper_P1_SDMAD),
-         P2cost = c(P2_SD5, P2_SD72, P2_SDMAD),
-         lower_P2cost = c(lower_P2_SD5, lower_P2_SD72, lower_P2_SDMAD),
-         upper_P2cost = c(upper_P2_SD5, upper_P2_SD72, upper_P2_SDMAD),
-         remating_prob = c(estimated_prob_remating_SD5, estimated_prob_remating_SD72, estimated_prob_remating_SDMAD))
+  tibble(SD = c("SD-5", "SD-72", "SD-Mad"),
+         kc = c(estimated_k_SD5, estimated_k_SD72, estimated_k_SDMad),
+         Precop = c(estimated_precop_SD5, estimated_precop_SD72, estimated_precop_SDMad),
+         P1cost = c(P1_SD5, P1_SD72, P1_SDMad),
+         lower_P1cost = c(lower_P1_SD5, lower_P1_SD72, lower_P1_SDMad),
+         upper_P1cost = c(upper_P1_SD5, upper_P1_SD72, upper_P1_SDMad),
+         P2cost = c(P2_SD5, P2_SD72, P2_SDMad),
+         lower_P2cost = c(lower_P2_SD5, lower_P2_SD72, lower_P2_SDMad),
+         upper_P2cost = c(upper_P2_SD5, upper_P2_SD72, upper_P2_SDMad),
+         remating_prob = c(estimated_prob_remating_SD5, estimated_prob_remating_SD72, estimated_prob_remating_SDMad))
 
 
 egg_adult_viability_WSD_female <- 1
@@ -1128,6 +1122,94 @@ final_SD_props_among_adults <- sapply(output, function(pop){
 })
 ```
 
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+$~$
+
+**Checking that our simulation codes are consistent with previous analytical models**
+
+We can find _SD_ allele frequencies for varying levels of segregation distortion if the only fitness cost associated with _SD_ is homozygote lethality. This represents an upper bound for the frequency of _SD_ alleles in our fully parameterised simulation. 
+
+Simplifying the simulation is also a useful exercise for comparing our model with previous models exploring the effect of homozygote lethality on segregation distorter frequencies. We find that our model reproduces the frequencies found using these previous models. 
+
+[Bruck (1957)](http://dx.doi.org/10.1073/pnas.43.1.152) showed that homozygous lethal segregation distorting alleles (assuming no other fitness costs) reach an equilibrium frequency in adults at  $q = \frac{1}{2} - \frac{\sqrt{k(1 - k)}}{2k}$, where $k$ is the strength of segregation distortion. We plug the three _k_ values we observed in our pilot experiment into this equation and contrast the results with our simplified simulation results in Table S2 below.
+
+$~$
+
+**Table S2**: _SD_ equilibrium frequencies calculated assuming varying levels of segregation distortion ($k$) and no fitness cost other than homozygote lethality associated with _SD_ alleles. The table shows the equivalence between using our simulation code and the difference equation presented in [Bruck (1957)](http://dx.doi.org/10.1073/pnas.43.1.152). 
+
+```{r}
+
+initial_freq_SD <- 0.01
+
+resolution <- 25
+
+gen <- 1000
+
+parameters_default <- rbind(
+  expand_grid(
+    generations = gen,
+    k = c(0.5, estimated_k_SD5, estimated_k_SD72, estimated_k_SDMad),
+    normalP1 = 0.5,
+    P1cost = 0,
+    P2cost = 0,
+    prob_remating_W = 0,
+    prob_remating_SD = 0,
+    egg_adult_viability_WSD_female = egg_adult_viability_WSD_female,
+    egg_adult_viability_SDSD_female = egg_adult_viability_SDSD_female,
+    egg_adult_viability_WSD_male = egg_adult_viability_WSD_male,
+    egg_adult_viability_SDSD_male = egg_adult_viability_SDSD_male,
+    S_precop_WSD_male = 1,
+    initial_freq_SD = initial_freq_SD)) %>% 
+  mutate(parameter_space_ID = row_number())
+
+
+if(!file.exists("simulation_results/output_defaults.rds")){
+  output_defaults <- lapply(1:nrow(parameters_default), run_simulation, parameters = parameters_default)
+  saveRDS(output_defaults, "simulation_results/output_defaults.rds")
+} else{
+  output_defaults <- read_rds("simulation_results/output_defaults.rds")
+}
+
+default_final_SD_props_among_preselection_zygotes <- sapply(output_defaults, calc_prop_SD)
+
+default_final_SD_props_among_adults <- sapply(output_defaults, function(pop){
+  
+  pop$prop <- pop$prop * pop$egg_adult_viability # apply selection, then calculate allele freq of SD
+  pop$prop <- pop$prop / sum(pop$prop) 
+  calc_prop_SD(pop)
+  
+})
+
+
+parameters_default %>%
+  mutate(`Simulation SD equilibrium freq` = round(default_final_SD_props_among_adults, 3),
+         `Bruck SD equilibrium freq` = round(1/2 - sqrt(k * (1- k)) / (2 * k), 3)) %>% 
+  select(k, `Simulation SD equilibrium freq`, `Bruck SD equilibrium freq`) %>% 
+  pander(split.cell = 40, split.table = Inf)
+```
+
+
 ```{r fig.height = 10, fig.width = 10, eval=TRUE}
 
 # make the initial pop
@@ -1145,7 +1227,7 @@ gen <- 1000
 parameters <- rbind(
   expand_grid(
     generations = gen,
-    k = c(estimated_k_SD5, estimated_k_SD72, estimated_k_SDMAD),
+    k = c(estimated_k_SD5, estimated_k_SD72, estimated_k_SDMad),
     normalP1 = c(0.1, 0.5),
     P1cost = seq(0, 1, length = resolution),
     P2cost = seq(0, 1, length = resolution),
@@ -1164,11 +1246,10 @@ parameters <- rbind(
 
 plotting_data <- parameters %>%
   mutate(prop_SD = final_SD_props_among_adults,
-         P1_actual = (normalP1 -  P1cost * normalP1) * 100,
-         P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)) * 100,
+         P1_actual = (normalP1 -  P1cost * normalP1),
+         P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)),
          remating_ratio = prob_remating_SD / prob_remating_W) %>% 
   mutate(remating_ratio = round(remating_ratio, digits = 1))
-
 
 # Transform our empirical estimates to match the plotting data  
 
@@ -1176,45 +1257,46 @@ empirical_estimates_0.5 <-
   empirical_estimates %>% 
   mutate(W_remating_prob = 0.30,
          normalP1 = 0.5,
-         P1_actual = (normalP1 -  P1cost * normalP1) * 100,
-         lower_P1_actual = (normalP1 -  lower_P1cost * normalP1) * 100,
-         upper_P1_actual = (normalP1 -  upper_P1cost * normalP1) * 100,
-         P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)) * 100,
-         lower_P2_actual = ((1 - normalP1) - lower_P2cost * (1 - normalP1)) * 100,
-         upper_P2_actual = ((1 - normalP1) - upper_P2cost * (1 - normalP1)) * 100,
+         P1_actual = (normalP1 -  P1cost * normalP1),
+         lower_P1_actual = (normalP1 -  lower_P1cost * normalP1),
+         upper_P1_actual = (normalP1 -  upper_P1cost * normalP1),
+         P2_actual = ((1 - normalP1) - P2cost * (1 - normalP1)),
+         lower_P2_actual = ((1 - normalP1) - lower_P2cost * (1 - normalP1)),
+         upper_P2_actual = ((1 - normalP1) - upper_P2cost * (1 - normalP1)),
          remating_ratio = remating_prob / estimated_prob_remating_W) %>% 
   mutate(remating_ratio = round(remating_ratio, digits = 1))
 
 # Make Figure S8
 
 (p2 <-
-  plotting_data %>% 
-  rename(`Wildtype P1` = normalP1,
-         `Relative risk of sperm competition` = remating_ratio,
-         `Relative mating success` = S_precop_WSD_male) %>% 
-  filter(k == 0.944, `Wildtype P1` == 0.5) %>% 
- ggplot(aes(x = P1_actual, y = P2_actual)) +
+    plotting_data %>% 
+    rename(`Wildtype P1` = normalP1,
+           `Relative risk of sperm competition` = remating_ratio,
+           `Relative mating success` = S_precop_WSD_male) %>% 
+    filter(k == 0.944, `Wildtype P1` == 0.5) %>% 
+    ggplot(aes(x = P1_actual, y = P2_actual)) +
     geom_blank() +
     geom_raster(aes(fill = 100 * prop_SD)) + 
     stat_contour(aes(z = 100 * prop_SD), colour = "black", binwidth = 10) +
     stat_contour(aes(z = 100 * prop_SD), colour = "black", breaks = 8, linetype = 2) +
+    scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
     geom_errorbar(data = empirical_estimates_0.5,
                   aes(x = P1_actual, ymin = lower_P2_actual, ymax = upper_P2_actual),
-                  width = 2, colour = "grey11", alpha = 0.8) +
+                  width = 0.02, colour = "grey11", alpha = 0.8) +
     geom_errorbarh(data = empirical_estimates_0.5,
                    aes(y = P2_actual, xmin = lower_P1_actual, xmax = upper_P1_actual),
-                   colour = "grey11", alpha = 0.8, height = 2) +
-    geom_point(data = empirical_estimates_0.5,
-               aes(x = P1_actual, y = P2_actual), 
-               pch = 21, fill = "#eb7f86", colour = "grey11", size = 3) +
+                   colour = "grey11", alpha = 0.8, height = 0.02) +
+    new_scale_fill() + # geoms below use a new scale
+    geom_point(data = empirical_estimates_0.5 %>% 
+                 rename(`SD-variant` = SD),
+               aes(x = P1_actual, y = P2_actual, fill = `SD-variant`), 
+               pch = 21, colour = "grey11", size = 3) +
+    scale_fill_manual(values = c("SD-Mad" = "#EDAD08", "SD-72" = "#CC503E", "SD-5" = "#994E95")) +
     facet_wrap(`Relative risk of sperm competition` ~ `Relative mating success`, 
                scales = "free", nrow = 3, strip.position = c("top"),
                labeller = label_glue('({.l}) Relative risk of sperm competition: {`Relative risk of sperm competition`}\nRelative mating success: {`Relative mating success`}')) +
-    #annotate("text", label = c("italic(SD-5)", "italic(SD-Mad)", "italic(SD-72)"),
-    #x = c(1.5, 3, 5.2), y = c(80, 90, 88), size = 5, colour = "black", parse = TRUE) +
-    labs(x = "% offspring sired by SD/+ male in the first mating role (P1)",
-         y = "% offspring sired by SD/+ male in the second mating role (P2)") +
-    scale_fill_carto_c(type = "sequential", palette = "BluYl", direction = 1, name = "% SD at equilibrium") +
+    labs(x = "Prop. offspring sired by SD/+ male in the first mating role (P1)",
+         y = "Prop. offspring sired by SD/+ male in the second mating role (P2)") +
     scale_x_continuous(expand = c(0, 0)) + 
     scale_y_continuous(expand = c(0, 0)) + # labels = c(0, 25, 50, 75, 90)) +
     theme(panel.border = element_rect(fill = NA, colour = "black", size = .8),
@@ -1222,4 +1304,4 @@ empirical_estimates_0.5 <-
 )
 ```
 
-**Figure S8**: Predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 10% contour lines). The dashed line shows an equilibrium frequency of 8%, the upper estimate for _SD_ alleles in natural populations. The plot is split into nine panels, with varying levels of _SD/+_ male mating success across the rows and increasing likelihoods of a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the columns. The three orange points (with associated 95% credible intervals) in each panel represent males carrying the _SD-5_ (leftmost point), and _SD-72_ and _SD-Mad_ (rightmost points) alleles; these points show where males carrying these alleles fall in the figure’s parameter space, as measured in Experiment 2. In the parameter space presented here, $k$ = 0.944 (our highest estimated value), $P1_{normal}$ = 0.5, _SD_ homozygotes are non-viable and _SD_ heterozygotes suffer no fitness costs outside of mating success and sperm competition.
+**Figure S8**: Predicted equilibrium frequency of the _SD_ allele, calculated from the population genetic model. The plot depicts the interaction between the P1 (x-axis) and P2 (y-axis) costs suffered by _SD/+_ males in their effects on the equilibrium frequency of _SD_ (shown by the colour scale and 10% contour lines). The dashed line shows an equilibrium frequency of 8%, the upper estimate for _SD_ alleles in natural populations. The plot is split into nine panels, with varying levels of _SD/+_ male mating success across the rows and increasing likelihoods of a female remating after first mating to an _SD/+_ male, $p_{SD/+}$, down the columns. The three points (with associated 95% credible intervals) in each panel show where males carrying each _SD_ variant fall in the figure’s parameter space. In the parameter space presented here, $k$ = 0.944 (our highest estimated value), $P1_{normal}$ = 0.5, _SD_ homozygotes are non-viable and _SD_ heterozygotes suffer no fitness costs outside of mating success and sperm competition.
