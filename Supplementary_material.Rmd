@@ -14,9 +14,9 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE, cache = FALSE, warning = FALSE, message = FALSE, fig.align = "center")
 ```
 
-Click **[here](https://tomkeaney.github.io/SD_sexual_selection/)** to view the HTML report, which serves as online supplementary material for the associated manuscript (http://dx.doi.org/10.1098/rspb.2021.1190), published in _Proceedings of the Royal Society B_. The report is split into three parts. The first provides the supplementary methods, the second documents our empirical analysis (you can find raw data here) and the third provides an in-depth explanation for how we coded our population genetic model. Together, the report includes all supplementary figures and tables, the R script required to produce the analysis, figures and tables, and the raw data.
+Click **[here](https://tomkeaney.github.io/SD_sexual_selection/)** to view the HTML report, which serves as online supplementary material for the associated manuscript (http://dx.doi.org/10.1098/rspb.2021.1190), published in _Proceedings of the Royal Society B_. The report is split into three parts. The first provides the supplementary methods, the second documents our empirical analysis (contains raw data) and the third provides an in-depth explanation for how we coded our population genetic model. Together, the report includes all supplementary figures and tables, the R script required to produce the analysis, figures and tables, and the raw data.
 
-In an attempt to future proof the availability of our supplementary material, we also include the supplementary methods, Table S1-2 and Figures S1-8 in this document. Additionally, our data will be deposited in the Dryad database **[here](https://doi.org/10.5061/dryad.pzgmsbcmt)**.
+In an attempt to future proof the availability of our supplementary material, we also include the supplementary methods, Table S1-3 and Figures S1-8 in this document. Additionally, our raw data is deposited in the Dryad database **[here](https://doi.org/10.5061/dryad.pzgmsbcmt)**.
 
 ```{r, include=FALSE}
 library(png) # to load images
@@ -1152,11 +1152,11 @@ We can find _SD_ allele frequencies for varying levels of segregation distortion
 
 Simplifying the simulation is also a useful exercise for comparing our model with previous models exploring the effect of homozygote lethality on segregation distorter frequencies. We find that our model reproduces the frequencies found using these previous models. 
 
-[Bruck (1957)](http://dx.doi.org/10.1073/pnas.43.1.152) showed that homozygous lethal segregation distorting alleles (assuming no other fitness costs) reach an equilibrium frequency in adults at  $q = \frac{1}{2} - \frac{\sqrt{k(1 - k)}}{2k}$, where $k$ is the strength of segregation distortion. We plug the three _k_ values we observed in our pilot experiment into this equation and contrast the results with our simplified simulation results in Table S2 below.
+[Bruck (1957)](http://dx.doi.org/10.1073/pnas.43.1.152) showed that homozygous lethal segregation distorting alleles (assuming no other fitness costs) reach an equilibrium frequency in adults at  $q = \frac{1}{2} - \frac{\sqrt{k(1 - k)}}{2k}$, where $k$ is the strength of segregation distortion. We plug the three _k_ values we observed in our pilot experiment into this equation and contrast the results with our simplified simulation results in Table S3 below. The code used to produce this table can be found **[here](https://tomkeaney.github.io/SD_sexual_selection/Population_genetic_model)**.
 
 $~$
 
-**Table S2**: _SD_ equilibrium frequencies calculated assuming varying levels of segregation distortion ($k$) and no fitness cost other than homozygote lethality associated with _SD_ alleles. The table shows the equivalence between using our simulation code and the difference equation presented in [Bruck (1957)](http://dx.doi.org/10.1073/pnas.43.1.152). 
+**Table S3**: _SD_ equilibrium frequencies calculated assuming varying levels of segregation distortion ($k$) and no fitness cost other than homozygote lethality associated with _SD_ alleles. The table shows the equivalence between using our simulation code and the difference equation presented in [Bruck (1957)](http://dx.doi.org/10.1073/pnas.43.1.152). 
 
 ```{r}
 
